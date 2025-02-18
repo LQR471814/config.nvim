@@ -221,10 +221,10 @@ return {
     s({ trig = "sqrt", snippetType = "autosnippet" }, fmta("\\sqrt{<>}", { i(1) })),
 
     -- emphasis
-    s({ trig = "*E", snippetType = "autosnippet" }, fmta("\\emph{<>}", { i(1) })),
+    s({ trig = "*E", wordTrig = false, snippetType = "autosnippet" }, fmta("\\emph{<>}", { i(1) })),
 
     -- math double bold
-    s({ trig = "*B", snippetType = "autosnippet" }, fmta("\\mathbb{<>}", { i(1) })),
+    s({ trig = "*B", wordTrig = false, snippetType = "autosnippet" }, fmta("\\mathbb{<>}", { i(1) })),
 
     -- del
     s({ trig = "del" }, t("\\nabla")),
