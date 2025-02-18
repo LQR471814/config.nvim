@@ -28,6 +28,20 @@ return {
         i(3),
     })),
 
+    -- {, [, (
+    s({ trig = "{", wordTrig = false, snippetType = "autosnippet" }, fmta(
+        "{<>}",
+        { i(1) }
+    )),
+    s({ trig = "[", wordTrig = false, snippetType = "autosnippet" }, fmta(
+        "[<>]",
+        { i(1) }
+    )),
+    s({ trig = "(", wordTrig = false, snippetType = "autosnippet" }, fmta(
+        "(<>)",
+        { i(1) }
+    )),
+
     -- \begin \end
     s({ trig = "beg", snippetType = "autosnippet" }, fmta(
         [[
@@ -231,7 +245,7 @@ return {
                     return nil
                 end
 
-                local prev = string.sub(line_to_cursor, len-1, len-1)
+                local prev = string.sub(line_to_cursor, len - 1, len - 1)
                 if
                     prev ~= "$" and
                     prev ~= "}"
