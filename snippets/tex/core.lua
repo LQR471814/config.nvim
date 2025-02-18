@@ -28,6 +28,12 @@ return {
         i(3),
     })),
 
+    -- set notation {}
+    s({ trig = "\\{", wordTrig = false, snippetType = "autosnippet" }, fmta(
+        "\\{<>\\}",
+        { i(1) }
+    )),
+
     -- {, [, (
     s({ trig = "{", wordTrig = false, snippetType = "autosnippet" }, fmta(
         "{<>}",
@@ -216,6 +222,9 @@ return {
 
     -- emphasis
     s({ trig = "*E", snippetType = "autosnippet" }, fmta("\\emph{<>}", { i(1) })),
+
+    -- math double bold
+    s({ trig = "*B", snippetType = "autosnippet" }, fmta("\\mathbb{<>}", { i(1) })),
 
     -- del
     s({ trig = "del" }, t("\\nabla")),
