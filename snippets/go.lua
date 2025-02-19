@@ -9,6 +9,6 @@ return {
             <>
         }
     ]], {
-        i(1, "return nil")
+        i(1, "return err")
     })),
 }
