@@ -6,9 +6,9 @@ local fmta = require('luasnip.extras.fmt').fmta
 return {
     s({ trig = "iferr", snippetType = "autosnippet" }, fmta([[
         if err != nil {
-            <>
+            return <>
         }
     ]], {
-        i(1, "return err")
+        i(1, "err")
     })),
 }
