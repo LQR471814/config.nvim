@@ -12,7 +12,7 @@ local function setIndent(files, size, tabs)
                 vim.opt.shiftwidth = size
                 vim.opt.expandtab = false
             else
-                vim.opt.tabstop = 4
+                vim.opt.tabstop = 8
                 vim.opt.softtabstop = size
                 vim.opt.shiftwidth = size
                 vim.opt.expandtab = true
@@ -37,7 +37,7 @@ setIndent({
     "*.java",
     "*.toml",
 }, 4)
-setIndent({ "*.css", "*.go", "*.templ", "Makefile*", "*.json5", "*.cu", "*.cpp", "*.hpp", "*.c", "*.h" }, 4, true)
+setIndent({ "*.css", "*.go", "*.templ", "Makefile*", "*.json5", "*.cu", "*.cpp", "*.hpp", "*.c", "*.h", "*.conf" }, 4, true)
 
 vim.opt.smartindent = true
 
