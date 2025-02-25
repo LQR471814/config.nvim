@@ -91,8 +91,7 @@ vim.g.vimtex_compiler_latexmk = {
     },
 }
 
--- use alt+s to save
-vim.api.nvim_set_keymap('n', '<M-s>', ':w<CR>', { noremap = true, silent = true })
+vim.api.nvim_create_user_command('W', 'w', {})
 vim.api.nvim_set_keymap('i', '<M-s>', '<Esc>:w<CR>a', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<M-s>', '<Esc>:w<CR>gv', { noremap = true, silent = true })
 
