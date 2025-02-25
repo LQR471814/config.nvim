@@ -3,7 +3,6 @@ local s = ls.snippet
 local t = ls.text_node
 
 local mapping = {
-    i = "item",
     fa = "forall",
     t = "therefore",
     u = "underset"

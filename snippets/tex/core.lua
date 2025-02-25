@@ -283,5 +283,8 @@ return {
                 return current, { current }
             end
         end
-    }, f(function(_, snip) return " " .. snip.captures[1] end))
+    }, f(function(_, snip) return " " .. snip.captures[1] end)),
+
+    -- item
+    s({ trig = "--", snippetType = "autosnippet" }, t("\\item")),
 }
