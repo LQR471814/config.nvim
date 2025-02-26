@@ -37,7 +37,8 @@ setIndent({
     "*.java",
     "*.toml",
 }, 4)
-setIndent({ "*.css", "*.go", "*.templ", "Makefile*", "*.json5", "*.cu", "*.cpp", "*.hpp", "*.c", "*.h", "*.conf" }, 4, true)
+setIndent({ "*.css", "*.go", "*.templ", "Makefile*", "*.json5", "*.cu", "*.cpp", "*.hpp", "*.c", "*.h", "*.conf" }, 4,
+    true)
 
 vim.opt.smartindent = true
 
@@ -82,14 +83,10 @@ vim.opt.conceallevel = 1
 vim.opt.title = true
 vim.g.tex_conceal = "abdmg"
 vim.g.vimtex_compiler_latexmk = {
-    options = {
-        "-shell-escape",
-        "-verbose",
-        "-file-line-error",
-        "-synctex=1",
-        "-interaction=nonstopmode",
-    },
+    aux_dir = ".vimtex",
 }
+vim.g.vimtex_doc_enabled = false
+vim.g.vimtex_imaps_enabled = false
 
 vim.api.nvim_create_user_command('W', 'w', {})
 vim.api.nvim_set_keymap('i', '<M-s>', '<Esc>:w<CR>a', { noremap = true, silent = true })
@@ -100,7 +97,6 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         vim.opt_local.spell = true
         vim.opt_local.spelllang = "en"
-        vim.keymap.set({"n", "i"}, "<C-;>", "<ESC>[s1z=`]a")
+        vim.keymap.set({ "n", "i" }, "<C-;>", "<ESC>[s1z=`]a")
     end
 })
-
