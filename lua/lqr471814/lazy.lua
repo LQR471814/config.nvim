@@ -92,6 +92,4 @@ require("lazy").setup({
     require("lqr471814.plugins.treesitter"),
     -- language server
     require("lqr471814.plugins.lsp"),
-    -- flash.nvim
-    require("lqr471814.plugins.flash"),
 })
