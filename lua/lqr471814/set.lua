@@ -83,7 +83,7 @@ vim.opt.conceallevel = 1
 vim.opt.title = true
 vim.g.tex_conceal = "abdmg"
 vim.g.vimtex_compiler_latexmk = {
-    aux_dir = ".vimtex",
+    out_dir = "",
 }
 vim.g.vimtex_doc_enabled = false
 vim.g.vimtex_imaps_enabled = false
