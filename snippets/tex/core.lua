@@ -234,7 +234,7 @@ return {
 
     s({ trig = "\\*", snippetType = "autosnippet" }, t("\\cdot ")),
 
-    -- ensure space exists after closing }, $, % or any common operations
+    -- ensure space exists after closing }, $, %, = or any common operations
     s({
         trig = "",
         snippetType = "autosnippet",
@@ -258,7 +258,8 @@ return {
                 if
                     prev ~= "$" and
                     prev ~= "}" and
-                    prev ~= "%"
+                    prev ~= "%" and
+                    prev ~= "="
                 then
                     return nil
                 end
@@ -291,4 +292,7 @@ return {
 
     -- %
     s({ trig = "%", wordTrig = false, snippetType = "autosnippet" }, t("\\%")),
+
+    -- &=
+    s({ trig = "==", snippetType = "autosnippet" }, t("&=")),
 }
