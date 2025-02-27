@@ -6,27 +6,38 @@ local mapping = {
     a = "alpha",
     b = "beta",
     g = "gamma",
+    G = "Gamma",
     d = "delta",
+    D = "Delta",
     e = "epsilon",
     z = "zeta",
     h = "eta",
     th = "theta",
+    TH = "Theta",
     i = "iota",
     k = "kappa",
     l = "lambda",
+    L = "Lambda",
     m = "mu",
     n = "nu",
     x = "xi",
+    X = "Xi",
     oi = "omicron",
     pi = "pi",
+    PI = "Pi",
     ph = "phi",
+    PH = "Phi",
     r = "rho",
     s = "sigma",
+    S = "Sigma",
     ta = "tau",
     u = "upsilon",
+    U = "Upsilon",
     c = "chi",
     ps = "psi",
+    PS = "Psi",
     om = "omega",
+    OM = "Omega",
 }
 local result = {}
 
@@ -39,16 +50,6 @@ for key, value in pairs(mapping) do
         },
         {
             t("\\" .. value)
-        }
-    )
-    i = i + 1
-    result[i] = s(
-        {
-            trig = "'" .. string.upper(key),
-            snippetType = "autosnippet"
-        },
-        {
-            t("\\" .. string.upper(string.sub(value, 0, 1)) .. string.sub(value, 2))
         }
     )
     i = i + 1
