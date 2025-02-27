@@ -234,7 +234,7 @@ return {
 
     s({ trig = "\\*", snippetType = "autosnippet" }, t("\\cdot ")),
 
-    -- ensure space exists after closing }, $ or any common operations
+    -- ensure space exists after closing }, $, % or any common operations
     s({
         trig = "",
         snippetType = "autosnippet",
@@ -257,7 +257,8 @@ return {
                 local prev = string.sub(line_to_cursor, len - 1, len - 1)
                 if
                     prev ~= "$" and
-                    prev ~= "}"
+                    prev ~= "}" and
+                    prev ~= "%"
                 then
                     return nil
                 end
@@ -287,4 +288,7 @@ return {
 
     -- item
     s({ trig = "--", snippetType = "autosnippet" }, t("\\item")),
+
+    -- %
+    s({ trig = "%", wordTrig = false, snippetType = "autosnippet" }, t("\\%")),
 }
