@@ -152,6 +152,19 @@ return {
                 while idx >= 1 do
                     local c = string.sub(line_to_cursor, idx, idx)
 
+                    -- ensure that fraction numerators don't end up consuming the inline math delimiter
+                    if c == "$" then
+                        if idx == 1 then
+                            break
+                        end
+
+                        local before = string.sub(line_to_cursor, idx - 1, idx - 1)
+                        -- don't break if $ is escaped
+                        if before ~= "\\" then
+                            break
+                        end
+                    end
+
                     -- ensure stopping at whitespace doesn't break any parenthesis
                     if c == " " and opened_parens == 0 then
                         break
