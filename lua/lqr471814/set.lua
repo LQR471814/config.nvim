@@ -21,7 +21,7 @@ local function setIndent(files, size, tabs)
     })
 end
 
-setIndent({ "*.js", "*.svelte", "*.ts", "*.tsx", "*.jsx", "*.json", "*.yaml", "*.dart", "*.proto", "*.nix", "*.tex" }, 2)
+setIndent({ "*.js", "*.svelte", "*.ts", "*.tsx", "*.jsx", "*.json", "*.yaml", "*.dart", "*.proto", "*.nix", "*.tex", "*.sty" }, 2)
 setIndent({ "*.md" }, 3)
 setIndent({
     "*.rs",

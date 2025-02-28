@@ -67,11 +67,31 @@ return {
         "\\section{<>}",
         { i(1) }
     )),
+    s({ trig = "~!@", snippetType = "autosnippet" }, fmta(
+        [[
+            \stdbox{
+              \subsection{<>}
+              \vspace{1mm}
+              <>
+            }
+        ]],
+        { i(1), i(2) }
+    )),
     s({ trig = "!@", snippetType = "autosnippet" }, fmta(
         "\\subsection{<>}",
         { i(1) }
     )),
-    s({ trig = "!~", snippetType = "autosnippet" }, fmta(
+    s({ trig = "~!#", snippetType = "autosnippet" }, fmta(
+        [[
+            \stdbox{
+              \subsubsection{<>}
+              \vspace{1mm}
+              <>
+            }
+        ]],
+        { i(1), i(2) }
+    )),
+    s({ trig = "!#", snippetType = "autosnippet" }, fmta(
         "\\subsubsection{<>}",
         { i(1) }
     )),
