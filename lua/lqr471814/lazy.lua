@@ -58,6 +58,8 @@ require("lazy").setup({
             require("telescope").load_extension("textcase")
         end
     },
+    -- nice markdown rendering
+    "MeanderingProgrammer/render-markdown.nvim",
     -- browser text editor
     "subnut/nvim-ghost.nvim",
     -- pcre syntax
