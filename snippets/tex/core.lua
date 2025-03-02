@@ -190,9 +190,9 @@ return {
                         break
                     end
 
-                    if c == "}" then
+                    if c == "}" or c == ")" then
                         opened_parens = opened_parens + 1
-                    elseif c == "{" then
+                    elseif c == "{" or c == "(" then
                         opened_parens = opened_parens - 1
                     end
 
