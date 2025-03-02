@@ -18,6 +18,7 @@ return {
         \title{<>}
         \author{<>}
         \maketitle
+        \tableofcontents
 
         <>
 
@@ -328,4 +329,10 @@ return {
 
     -- &=
     s({ trig = "==", snippetType = "autosnippet" }, t("&=")),
+
+    -- overline
+    s(
+        { trig = "^_", wordTrig = false, snippetType = "autosnippet" },
+        fmta("\\overline{<>}", { i(1) })
+    )
 }
