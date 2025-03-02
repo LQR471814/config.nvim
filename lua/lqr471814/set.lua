@@ -73,7 +73,7 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set({ "n", "v", "i", "x" }, "<C-z>", "<nop>")
 
 vim.keymap.set("n", "<leader>pv", "<CMD>Oil<CR>")
-vim.keymap.set("n", "<leader>z", "<CMD>Limelight<CR><CMD>SoftWrapMode<CR>")
+vim.keymap.set("n", "<leader>z", "<CMD>Limelight!!<CR><CMD>SoftWrapMode<CR>")
 
 vim.g.vimtex_view_method = "zathura"
 vim.g.tex_flavor = "latex"
