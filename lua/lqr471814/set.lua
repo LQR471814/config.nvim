@@ -73,8 +73,7 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set({ "n", "v", "i", "x" }, "<C-z>", "<nop>")
 
 vim.keymap.set("n", "<leader>pv", "<CMD>Oil<CR>")
-vim.keymap.set("n", "<leader>ni", "<CMD>Neorg index<CR>")
-vim.keymap.set("n", "<leader>no", "<CMD>Neorg return<CR>")
+vim.keymap.set("n", "<leader>z", "<CMD>Limelight<CR><CMD>SoftWrapMode<CR>")
 
 vim.g.vimtex_view_method = "zathura"
 vim.g.tex_flavor = "latex"
@@ -86,6 +85,7 @@ vim.g.vimtex_compiler_latexmk = {
 }
 vim.g.vimtex_doc_enabled = false
 vim.g.vimtex_imaps_enabled = false
+vim.o.breakindent = true
 
 vim.api.nvim_create_user_command('W', 'w', {})
 vim.api.nvim_set_keymap('i', '<M-s>', '<Esc>:w<CR>a', { noremap = true, silent = true })

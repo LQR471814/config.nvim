@@ -41,7 +41,7 @@ require("lazy").setup({
             }
         },
         dependencies = {
-            {"echasnovski/mini.icons", opts = {}}
+            { "echasnovski/mini.icons", opts = {} }
         },
     },
     -- line wrap
@@ -58,6 +58,8 @@ require("lazy").setup({
             require("telescope").load_extension("textcase")
         end
     },
+    -- focused writing
+    "junegunn/limelight.vim",
     -- nice markdown rendering
     "MeanderingProgrammer/render-markdown.nvim",
     -- browser text editor
