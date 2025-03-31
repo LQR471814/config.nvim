@@ -29,6 +29,22 @@ return {
         i(3),
     })),
 
+    s({ trig = "standalone" }, fmta([[
+        \documentclass[border=1pt]{standalone}
+
+        \usepackage{myconfig}
+
+        \begin{document}
+
+        \begin{equation}
+          <>
+        \end{equation}
+
+        \end{document}
+    ]], {
+        i(1)
+    })),
+
     -- set notation {}
     s({ trig = "\\{", wordTrig = false, snippetType = "autosnippet" }, fmta(
         "\\{<>\\}",
