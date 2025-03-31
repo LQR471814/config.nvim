@@ -8,7 +8,7 @@ local rep = require('luasnip.extras').rep
 
 return {
     -- \documentclass
-    s({ trig = "latex", snippetType = "autosnippet" }, fmta([[
+    s({ trig = "article" }, fmta([[
         \documentclass[a4paper, 12pt]{article}
 
         \usepackage{myconfig}
