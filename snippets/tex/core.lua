@@ -15,7 +15,7 @@ return {
 
         \begin{document}
 
-        \title{<>}
+        \title{<>
         \author{<>}
         \maketitle
         \tableofcontents
