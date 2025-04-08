@@ -97,22 +97,28 @@ vim.keymap.set("v", "gp", "\"+p")
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set({ "n", "v", "i", "x" }, "<C-z>", "<nop>")
 
+vim.keymap.set("n", "<leader>w", "vapgq")
 vim.keymap.set("n", "<leader>pv", function() vim.cmd("Oil") end)
+
+local writing_enabled = false
+
 vim.keymap.set("n", "<leader>z", function()
-    if vim.opt.textwidth:get() == 0 then
+    if writing_enabled then
+        writing_enabled = false
+    else
+        writing_enabled = true
+    end
+
+    if writing_enabled then
         vim.opt.textwidth = 66
+        vim.opt.colorcolumn = "68"
+        vim.cmd("Limelight")
+        print("writing enabled!")
     else
         vim.opt.textwidth = 0
-    end
-
-    if vim.opt.colorcolumn:get()[1] == nil then
-        vim.opt.colorcolumn = "68"
-    else
         vim.opt.colorcolumn = ""
+        vim.cmd("Limelight!")
     end
-
-    vim.cmd("Limelight!!")
-    vim.cmd("SoftWrapMode")
 end)
 
 vim.g.vimtex_view_method = "zathura"
