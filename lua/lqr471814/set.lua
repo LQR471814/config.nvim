@@ -40,7 +40,6 @@ setIndent({
     "*.c",
     "*.xml",
     "*.sql",
-    "*.java",
     "*.toml",
 }, 4)
 setIndent({
@@ -61,7 +60,8 @@ setIndent({
     "*.c",
     "*.h",
     "*.conf",
-    "*.md"
+    "*.md",
+    "*.java",
 }, 4, true)
 
 vim.opt.smartindent = true
