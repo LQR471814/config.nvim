@@ -248,6 +248,12 @@ return {
         { i(1) }
     )),
 
+    -- vector variable
+    s({ trig = "([a-zA-Z])>", regTrig = true, wordTrig = false, snippetType = "autosnippet" }, fmta(
+        "\\vec{<>}<>",
+        { f(function(_, snip) return snip.captures[1] end), i(1) }
+    )),
+
     -- vector component form
     s({ trig = "<>", snippetType = "autosnippet" }, fmta(
         "\\langle <> \\rangle",
