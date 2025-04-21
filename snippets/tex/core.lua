@@ -265,11 +265,11 @@ return {
         "<>^{\\circ}",
         { f(function(_, snip) return snip.captures[1] end) }
     )),
-    s({ trig = "unit" }, fmta("\\; {<>}", { i(1) })),
-    s({ trig = "sec" }, t("\\; s")),
-    s({ trig = "meters" }, t("\\; m")),
-    s({ trig = "velocity" }, t("\\; {m/s}")),
-    s({ trig = "acceleration" }, t("\\; {m/s}^2")),
+    s({ trig = "unit" }, fmta("\\; \\text{<>", { i(1) })),
+    s({ trig = "sec" }, t("\\; \\text{s}")),
+    s({ trig = "meters" }, t("\\; \\text{m}")),
+    s({ trig = "velocity" }, t("\\; \\text{m/s}")),
+    s({ trig = "acceleration" }, t("\\; \\text{m/s}^2")),
 
     -- vertical spacing
     s({ trig = "vsp", snippetType = "autosnippet" }, fmta("\\vspace{<>}", { i(1) })),
