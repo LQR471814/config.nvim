@@ -71,7 +71,12 @@ require("lazy").setup({
     -- support .fountain files
     "kblin/vim-fountain",
     -- guess indentation config of a file
-    "NMAC427/guess-indent.nvim",
+    {
+        "NMAC427/guess-indent.nvim",
+        config = function()
+            require("guess-indent").setup {}
+        end
+    },
     -- make editing big files faster
     "LunarVim/bigfile.nvim",
     -- latex support

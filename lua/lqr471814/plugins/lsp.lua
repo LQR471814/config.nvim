@@ -42,6 +42,7 @@ return {
             require("mason").setup()
             require("mason-lspconfig").setup()
 
+            require("lspconfig").clangd.setup {}
             require("lspconfig").tailwindcss.setup {}
             require("lspconfig").svelte.setup {}
             require("lspconfig").templ.setup {}

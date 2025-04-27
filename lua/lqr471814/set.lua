@@ -3,68 +3,70 @@ vim.g.mapleader = " "
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
-local function setIndent(files, size, tabs)
-    vim.api.nvim_create_autocmd("BufEnter", {
-        pattern = files,
-        callback = function()
-            if tabs then
-                vim.opt.tabstop = size
-                vim.opt.shiftwidth = size
-                vim.opt.expandtab = false
-            else
-                vim.opt.tabstop = 8
-                vim.opt.softtabstop = size
-                vim.opt.shiftwidth = size
-                vim.opt.expandtab = true
-            end
-        end
-    })
-end
-
-setIndent({
-    "*.yaml",
-    "*.dart",
-    "*.proto",
-    "*.nix",
-    "*.tex",
-    "*.sty"
-}, 2)
-setIndent({
-    "*.rs",
-    "*.py",
-    "*.lua",
-    "*.sh",
-    "Dockerfile*",
-    "*.html",
-    "*.cpp",
-    "*.c",
-    "*.xml",
-    "*.sql",
-    "*.toml",
-}, 4)
-setIndent({
-    "*.json",
-    "*.jsx",
-    "*.ts",
-    "*.tsx",
-    "*.svelte",
-    "*.js",
-    "*.css",
-    "*.go",
-    "*.templ",
-    "Makefile*",
-    "*.json5",
-    "*.cu",
-    "*.cpp",
-    "*.hpp",
-    "*.c",
-    "*.h",
-    "*.conf",
-    "*.md",
-    "*.java",
-}, 4, true)
-
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
+
+-- local function setIndent(files, size, tabs)
+--     vim.api.nvim_create_autocmd("BufEnter", {
+--         pattern = files,
+--         callback = function()
+--             if tabs then
+--                 vim.opt.tabstop = size
+--                 vim.opt.shiftwidth = size
+--                 vim.opt.expandtab = false
+--             else
+--                 vim.opt.tabstop = 8
+--                 vim.opt.softtabstop = size
+--                 vim.opt.shiftwidth = size
+--                 vim.opt.expandtab = true
+--             end
+--         end
+--     })
+-- end
+--
+-- setIndent({
+--     "*.yaml",
+--     "*.dart",
+--     "*.proto",
+--     "*.nix",
+--     "*.tex",
+--     "*.sty"
+-- }, 2)
+-- setIndent({
+--     "*.rs",
+--     "*.py",
+--     "*.lua",
+--     "*.sh",
+--     "Dockerfile*",
+--     "*.html",
+--     "*.cpp",
+--     "*.c",
+--     "*.xml",
+--     "*.sql",
+--     "*.toml",
+-- }, 4)
+-- setIndent({
+--     "*.json",
+--     "*.jsx",
+--     "*.ts",
+--     "*.tsx",
+--     "*.svelte",
+--     "*.js",
+--     "*.css",
+--     "*.go",
+--     "*.templ",
+--     "Makefile*",
+--     "*.json5",
+--     "*.cu",
+--     "*.cpp",
+--     "*.hpp",
+--     "*.c",
+--     "*.h",
+--     "*.conf",
+--     "*.md",
+--     "*.java",
+-- }, 4, true)
 
 vim.opt.wrap = false
 
