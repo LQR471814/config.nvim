@@ -62,8 +62,6 @@ require("lazy").setup({
     "junegunn/limelight.vim",
     -- nice markdown rendering
     "MeanderingProgrammer/render-markdown.nvim",
-    -- browser text editor
-    "subnut/nvim-ghost.nvim",
     -- pcre syntax
     "othree/eregex.vim",
     -- activitywatch

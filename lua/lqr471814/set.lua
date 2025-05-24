@@ -7,67 +7,6 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
 
--- local function setIndent(files, size, tabs)
---     vim.api.nvim_create_autocmd("BufEnter", {
---         pattern = files,
---         callback = function()
---             if tabs then
---                 vim.opt.tabstop = size
---                 vim.opt.shiftwidth = size
---                 vim.opt.expandtab = false
---             else
---                 vim.opt.tabstop = 8
---                 vim.opt.softtabstop = size
---                 vim.opt.shiftwidth = size
---                 vim.opt.expandtab = true
---             end
---         end
---     })
--- end
---
--- setIndent({
---     "*.yaml",
---     "*.dart",
---     "*.proto",
---     "*.nix",
---     "*.tex",
---     "*.sty"
--- }, 2)
--- setIndent({
---     "*.rs",
---     "*.py",
---     "*.lua",
---     "*.sh",
---     "Dockerfile*",
---     "*.html",
---     "*.cpp",
---     "*.c",
---     "*.xml",
---     "*.sql",
---     "*.toml",
--- }, 4)
--- setIndent({
---     "*.json",
---     "*.jsx",
---     "*.ts",
---     "*.tsx",
---     "*.svelte",
---     "*.js",
---     "*.css",
---     "*.go",
---     "*.templ",
---     "Makefile*",
---     "*.json5",
---     "*.cu",
---     "*.cpp",
---     "*.hpp",
---     "*.c",
---     "*.h",
---     "*.conf",
---     "*.md",
---     "*.java",
--- }, 4, true)
-
 vim.opt.wrap = false
 
 vim.opt.swapfile = false
@@ -146,4 +85,18 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt_local.spelllang = "en"
         vim.keymap.set({ "n", "i" }, "<C-;>", "<ESC>[s1z=`]a")
     end
+})
+
+-- remove trailing whitespace on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function()
+    local save_cursor = vim.api.nvim_win_get_cursor(0)
+    local view = vim.fn.winsaveview()
+
+    vim.cmd([[%s/\s\+$//e]])
+
+    vim.fn.winrestview(view)
+    vim.api.nvim_win_set_cursor(0, save_cursor)
+  end,
 })
