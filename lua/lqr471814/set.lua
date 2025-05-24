@@ -89,14 +89,23 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- remove trailing whitespace on save
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*",
-  callback = function()
-    local save_cursor = vim.api.nvim_win_get_cursor(0)
-    local view = vim.fn.winsaveview()
+    pattern = "*",
+    callback = function()
+        local save_cursor = vim.api.nvim_win_get_cursor(0)
+        local view = vim.fn.winsaveview()
 
-    vim.cmd([[%s/\s\+$//e]])
+        vim.cmd([[%s/\s\+$//e]])
 
-    vim.fn.winrestview(view)
-    vim.api.nvim_win_set_cursor(0, save_cursor)
-  end,
+        vim.fn.winrestview(view)
+        vim.api.nvim_win_set_cursor(0, save_cursor)
+    end,
 })
+
+-- cancel snippet on escape
+vim.keymap.set('i', '<Esc>', function()
+    local luasnip = require('luasnip')
+    if luasnip.session.current_nodes[vim.api.nvim_get_current_buf()] then
+        luasnip.unlink_current()
+    end
+    return '<Esc>'
+end, { expr = true })
