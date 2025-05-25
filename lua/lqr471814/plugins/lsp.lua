@@ -72,7 +72,9 @@ return {
         },
         opts = {
             servers = {
-                clangd = {},
+                clangd = {
+                    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }
+                },
                 tailwindcss = {},
                 svelte = {},
                 templ = {},
