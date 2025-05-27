@@ -76,7 +76,12 @@ require("lazy").setup({
         end
     },
     -- make editing big files faster
-    "LunarVim/bigfile.nvim",
+	{
+		"mireq/large_file",
+		config = function()
+			require("large_file").setup()
+		end
+	},
     -- latex support
     "lervag/vimtex",
     -- luasnip
