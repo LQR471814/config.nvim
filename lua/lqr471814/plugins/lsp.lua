@@ -167,6 +167,10 @@ return {
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),
                 callback = function(ev)
+                    vim.keymap.set('n', 'gq', 'gw', { noremap = true })
+                    vim.keymap.set('n', 'gqq', 'gww', { noremap = true })
+                    vim.keymap.set('v', 'gq', 'gw', { noremap = true })
+
                     local options = { buffer = ev.buf }
                     vim.keymap.set("n", "ge", function() vim.diagnostic.open_float() end, options)
                     vim.keymap.set("n", "gd", vim.lsp.buf.definition, options)
