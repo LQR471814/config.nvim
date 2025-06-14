@@ -38,7 +38,6 @@ vim.keymap.set("v", "gp", "\"+p")
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set({ "n", "v", "i", "x" }, "<C-z>", "<nop>")
 
-vim.keymap.set("n", "<leader>w", "vapgw")
 vim.keymap.set("n", "<leader>pv", function() vim.cmd("Oil") end)
 
 local writing_enabled = false

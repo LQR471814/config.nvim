@@ -15,10 +15,11 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Actual plugin definition
 
-require("lazy").setup({
+---@type LazySpec
+local commonConfig = {
     -- rename html tags
     "windwp/nvim-ts-autotag",
-    -- -- theme
+    -- theme
     {
         "sho-87/kanagawa-paper.nvim",
         config = function()
@@ -48,6 +49,7 @@ require("lazy").setup({
     {
         "andrewferrier/wrapping.nvim",
         config = function()
+            ---@diagnostic disable-next-line: missing-parameter
             require("wrapping").setup()
         end
     },
@@ -58,16 +60,19 @@ require("lazy").setup({
             require("telescope").load_extension("textcase")
         end
     },
-    -- focused writing
-    "junegunn/limelight.vim",
     -- nice markdown rendering
     "MeanderingProgrammer/render-markdown.nvim",
     -- pcre syntax
     "othree/eregex.vim",
-    -- activitywatch
-    "ActivityWatch/aw-watcher-vim",
-    -- support .fountain files
-    "kblin/vim-fountain",
+    -- focused writing
+    "junegunn/limelight.vim",
+    -- make editing big files faster
+    {
+        "mireq/large_file",
+        config = function()
+            require("large_file").setup()
+        end
+    },
     -- guess indentation config of a file
     {
         "NMAC427/guess-indent.nvim",
@@ -75,33 +80,53 @@ require("lazy").setup({
             require("guess-indent").setup {}
         end
     },
-    -- make editing big files faster
-	{
-		"mireq/large_file",
-		config = function()
-			require("large_file").setup()
-		end
-	},
-    -- latex support
-    "lervag/vimtex",
-    -- luasnip
-    require('lqr471814.plugins.luasnip'),
-    -- switch between files
-    require("lqr471814.plugins.harpoon"),
-    -- fuzzy find
-    require("lqr471814.plugins.telescope"),
-    -- search and replace
-    require("lqr471814.plugins.spectre"),
-    -- multi-cursors
-    require("lqr471814.plugins.multicursors"),
-    -- auto close brackets
-    require("lqr471814.plugins.autoclose"),
-    -- comments
-    require("lqr471814.plugins.comment"),
-    -- manipulate brackets
-    require("lqr471814.plugins.surround"),
-    -- AST parsing/syntax highlighting
-    require("lqr471814.plugins.treesitter"),
-    -- language server
-    require("lqr471814.plugins.lsp"),
-})
+}
+
+---@param config { slim: boolean }
+local function init(config)
+    local modules = {
+        -- activitywatch
+        {
+            "ActivityWatch/aw-watcher-vim",
+            enabled = not config.slim
+        },
+        -- support .fountain files
+        {
+            "kblin/vim-fountain",
+            enabled = not config.slim
+        },
+        -- latex support
+        {
+            "lervag/vimtex",
+            enabled = not config.slim
+        },
+        -- switch between files
+        require("lqr471814.plugins.harpoon"),
+        -- search and replace
+        require("lqr471814.plugins.spectre"),
+        -- luasnip
+        require('lqr471814.plugins.luasnip'),
+        -- fuzzy find
+        require("lqr471814.plugins.telescope"),
+        -- multi-cursors
+        require("lqr471814.plugins.multicursors"),
+        -- auto close brackets
+        require("lqr471814.plugins.autoclose"),
+        -- manipulate brackets
+        require("lqr471814.plugins.surround"),
+        -- comments
+        require("lqr471814.plugins.comment"),
+        -- AST parsing/syntax highlighting
+        require("lqr471814.plugins.treesitter"),
+        -- language server
+        require("lqr471814.plugins.lsp")(config),
+    }
+
+    for i = 1, #commonConfig do
+        table.insert(modules, commonConfig[i])
+    end
+
+    require("lazy").setup(modules)
+end
+
+return init
