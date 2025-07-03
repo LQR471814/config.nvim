@@ -27,6 +27,18 @@ vim.g.maplocalleader = "'"
 
 vim.opt.autoread = true
 
+vim.g.clipboard = {
+  name = "wl-clipboard",
+  copy = {
+    ["+"] = "wl-copy",
+    ["*"] = "wl-copy",
+  },
+  paste = {
+    ["+"] = "wl-paste",
+    ["*"] = "wl-paste",
+  },
+  cache_enabled = 0,
+}
 vim.keymap.set("n", "gy", "\"+y")
 vim.keymap.set("v", "gy", "\"+y")
 vim.keymap.set("n", "gyy", "\"+Y")
