@@ -28,16 +28,16 @@ vim.g.maplocalleader = "'"
 vim.opt.autoread = true
 
 vim.g.clipboard = {
-  name = "wl-clipboard",
-  copy = {
-    ["+"] = "wl-copy",
-    ["*"] = "wl-copy",
-  },
-  paste = {
-    ["+"] = "wl-paste",
-    ["*"] = "wl-paste",
-  },
-  cache_enabled = 0,
+    name = "wl-clipboard",
+    copy = {
+        ["+"] = "wl-copy",
+        ["*"] = "wl-copy",
+    },
+    paste = {
+        ["+"] = "wl-paste",
+        ["*"] = "wl-paste",
+    },
+    cache_enabled = 0,
 }
 vim.keymap.set("n", "gy", "\"+y")
 vim.keymap.set("v", "gy", "\"+y")
@@ -62,12 +62,15 @@ vim.keymap.set("n", "<leader>z", function()
     end
 
     if writing_enabled then
-        vim.opt.textwidth = 66
-        vim.opt.colorcolumn = "68"
+        -- vim.opt.textwidth = 66
+        -- vim.opt.colorcolumn = "68"
+        require("wrapping").soft_wrap_mode()
         vim.cmd("Limelight")
     else
-        vim.opt.textwidth = 0
-        vim.opt.colorcolumn = ""
+        -- vim.opt.textwidth = 0
+        -- vim.opt.colorcolumn = ""
+
+        require("wrapping").hard_wrap_mode()
         vim.cmd("Limelight!")
         require("blink.cmp").hide()
     end
