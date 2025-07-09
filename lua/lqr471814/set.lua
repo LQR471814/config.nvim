@@ -65,12 +65,14 @@ vim.keymap.set("n", "<leader>z", function()
         vim.opt.textwidth = 66
         vim.opt.colorcolumn = "68"
         vim.cmd("Limelight")
-        print("writing enabled!")
     else
         vim.opt.textwidth = 0
         vim.opt.colorcolumn = ""
         vim.cmd("Limelight!")
+        require("blink.cmp").hide()
     end
+
+    vim.b.completion = not writing_enabled
 end)
 
 vim.g.vimtex_view_method = "zathura"
