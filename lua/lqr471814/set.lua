@@ -78,6 +78,29 @@ vim.keymap.set("n", "<leader>z", function()
     vim.b.completion = not writing_enabled
 end)
 
+vim.keymap.set("n", "<leader>Z", function()
+    if writing_enabled then
+        writing_enabled = false
+    else
+        writing_enabled = true
+    end
+
+    if writing_enabled then
+        vim.opt.textwidth = 66
+        vim.opt.colorcolumn = "68"
+        vim.cmd("Limelight")
+    else
+        vim.opt.textwidth = 0
+        vim.opt.colorcolumn = ""
+
+        require("wrapping").hard_wrap_mode()
+        vim.cmd("Limelight!")
+        require("blink.cmp").hide()
+    end
+
+    vim.b.completion = not writing_enabled
+end)
+
 vim.g.vimtex_view_method = "zathura"
 vim.g.tex_flavor = "latex"
 vim.opt.conceallevel = 1
