@@ -85,11 +85,6 @@ local commonConfig = {
 ---@param config { slim: boolean }
 local function init(config)
     local modules = {
-        -- activitywatch
-        {
-            "ActivityWatch/aw-watcher-vim",
-            enabled = not config.slim
-        },
         -- support .fountain files
         {
             "kblin/vim-fountain",
