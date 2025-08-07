@@ -39,6 +39,9 @@ local commonConfig = {
         opts = {
             view_options = {
                 show_hidden = true
+            },
+            keymaps = {
+                ["go"] = "actions.open_external";
             }
         },
         dependencies = {
