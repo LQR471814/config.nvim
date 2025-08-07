@@ -60,8 +60,15 @@ local commonConfig = {
             require("telescope").load_extension("textcase")
         end
     },
-    -- nice markdown rendering
-    "MeanderingProgrammer/render-markdown.nvim",
+    -- markdown viewer
+    {
+        "OXY2DEV/markview.nvim",
+        lazy = false,
+        priority = 49,
+        dependencies = {
+            "saghen/blink.cmp"
+        }
+    },
     -- pcre syntax
     "othree/eregex.vim",
     -- focused writing

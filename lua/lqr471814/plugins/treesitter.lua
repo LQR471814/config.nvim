@@ -1,10 +1,12 @@
 return {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = { "OXY2DEV/markview.nvim" },
+    lazy = false,
     build = ":TSUpdate",
     config = function()
         require("nvim-treesitter.configs").setup {
             -- A list of parser names, or "all" (the five listed parsers should always be installed)
-            ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "typescript", "templ", "svelte" },
+            ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "typescript", "templ", "svelte", "latex" },
 
             ignore_install = {},
             modules = {},
