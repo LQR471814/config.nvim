@@ -1,6 +1,9 @@
 return {
     {
         "L3MON4D3/LuaSnip",
+        dependencies = {
+            "iurimateus/luasnip-latex-snippets.nvim"
+        },
         tag = "v2.3.0",
         build = "make install_jsregexp",
         config = function()

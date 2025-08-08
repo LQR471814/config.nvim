@@ -41,7 +41,7 @@ local commonConfig = {
                 show_hidden = true
             },
             keymaps = {
-                ["go"] = "actions.open_external";
+                ["go"] = "actions.open_external",
             }
         },
         dependencies = {
@@ -89,6 +89,14 @@ local commonConfig = {
         config = function()
             require("guess-indent").setup {}
         end
+    },
+    {
+        "iurimateus/luasnip-latex-snippets.nvim",
+        config = function()
+            require("luasnip-latex-snippets").setup({
+                use_treesitter = true
+            })
+        end,
     },
 }
 
