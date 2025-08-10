@@ -63,6 +63,16 @@ local commonConfig = {
             require("telescope").load_extension("textcase")
         end
     },
+    -- notifications
+    {
+        "folke/snacks.nvim",
+        priority = 1000,
+        ---@type snacks.Config
+        opts = {
+            notifier = {},
+            image = {}
+        }
+    },
     -- markdown viewer
     {
         "OXY2DEV/markview.nvim",
@@ -70,7 +80,12 @@ local commonConfig = {
         priority = 49,
         dependencies = {
             "saghen/blink.cmp"
-        }
+        },
+        config = function()
+            require("markview").setup({
+                latex = { enable = false }
+            })
+        end
     },
     -- pcre syntax
     "othree/eregex.vim",
@@ -112,6 +127,17 @@ local function init(config)
         {
             "lervag/vimtex",
             enabled = not config.slim
+        },
+        -- support images
+        {
+            "3rd/image.nvim",
+            build = false,
+            config = function()
+                require("image").setup({
+                    backend = "kitty",
+                    processor = "magick_cli",
+                })
+            end
         },
         -- switch between files
         require("lqr471814.plugins.harpoon"),

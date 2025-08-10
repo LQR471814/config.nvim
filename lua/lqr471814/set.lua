@@ -148,3 +148,8 @@ vim.keymap.set('i', '<Esc>', function()
     end
     return '<Esc>'
 end, { expr = true })
+
+-- show notification history
+vim.keymap.set('n', '<leader>h', function ()
+    Snacks.notifier.show_history()
+end)
