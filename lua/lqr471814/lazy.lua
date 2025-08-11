@@ -71,7 +71,8 @@ local commonConfig = {
         opts = {
             notifier = {},
             image = {},
-            lazygit = {}
+            lazygit = {},
+            quickfile = {}
         }
     },
     -- pcre syntax
@@ -114,17 +115,6 @@ local function init(config)
         {
             "lervag/vimtex",
             enabled = not config.slim
-        },
-        -- support images
-        {
-            "3rd/image.nvim",
-            build = false,
-            config = function()
-                require("image").setup({
-                    backend = "kitty",
-                    processor = "magick_cli",
-                })
-            end
         },
         -- switch between files
         require("lqr471814.plugins.harpoon"),
