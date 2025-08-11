@@ -70,22 +70,9 @@ local commonConfig = {
         ---@type snacks.Config
         opts = {
             notifier = {},
-            image = {}
+            image = {},
+            lazygit = {}
         }
-    },
-    -- markdown viewer
-    {
-        "OXY2DEV/markview.nvim",
-        lazy = false,
-        priority = 49,
-        dependencies = {
-            "saghen/blink.cmp"
-        },
-        config = function()
-            require("markview").setup({
-                latex = { enable = false }
-            })
-        end
     },
     -- pcre syntax
     "othree/eregex.vim",

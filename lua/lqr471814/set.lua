@@ -60,21 +60,7 @@ vim.keymap.set("n", "<leader>z", function()
     else
         writing_enabled = true
     end
-
-    if writing_enabled then
-        -- vim.opt.textwidth = 66
-        -- vim.opt.colorcolumn = "68"
-        require("wrapping").soft_wrap_mode()
-        vim.cmd("Limelight")
-    else
-        -- vim.opt.textwidth = 0
-        -- vim.opt.colorcolumn = ""
-
-        require("wrapping").hard_wrap_mode()
-        vim.cmd("Limelight!")
-        require("blink.cmp").hide()
-    end
-
+    require("wrapping").soft_wrap_mode()
     vim.b.completion = not writing_enabled
 end)
 
@@ -84,22 +70,23 @@ vim.keymap.set("n", "<leader>Z", function()
     else
         writing_enabled = true
     end
-
+    require("wrapping").hard_wrap_mode()
     if writing_enabled then
         vim.opt.textwidth = 66
-        vim.opt.colorcolumn = "68"
-        vim.cmd("Limelight")
     else
         vim.opt.textwidth = 0
-        vim.opt.colorcolumn = ""
-
-        require("wrapping").hard_wrap_mode()
-        vim.cmd("Limelight!")
-        require("blink.cmp").hide()
     end
-
-    vim.b.completion = not writing_enabled
 end)
+
+-- enable hard wrap on markdown files
+vim.api.nvim_create_autocmd("BufRead", {
+    pattern = { "*.md", "*.tex" },
+    callback = function()
+        vim.opt.textwidth = 66
+        require("wrapping").hard_wrap_mode()
+        vim.b.completion = false
+    end
+})
 
 vim.g.vimtex_view_method = "zathura"
 vim.g.tex_flavor = "latex"
@@ -150,6 +137,11 @@ vim.keymap.set('i', '<Esc>', function()
 end, { expr = true })
 
 -- show notification history
-vim.keymap.set('n', '<leader>h', function ()
+vim.keymap.set('n', '<leader>h', function()
     Snacks.notifier.show_history()
+end)
+
+-- show lazygit
+vim.keymap.set('n', "<leader>l", function()
+    Snacks.lazygit.open()
 end)
