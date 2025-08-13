@@ -6,6 +6,7 @@ return function(cfg) return {
         enabled = not cfg.slim,
         version = '1.*',
         dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },
+        event = "VeryLazy",
 
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
@@ -71,6 +72,7 @@ return function(cfg) return {
     {
         "neovim/nvim-lspconfig",
         enabled = not cfg.slim,
+        event = "VeryLazy",
         dependencies = {
             "b0o/schemastore.nvim",
             "saghen/blink.cmp",

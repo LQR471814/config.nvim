@@ -1,5 +1,6 @@
 return {
     "nvim-pack/nvim-spectre",
+    event = "VeryLazy",
     dependencies = { "nvim-lua/plenary.nvim" },
     build = "cd ~/.local/share/nvim/lazy/nvim-spectre/ && sh build.sh",
     config = function()

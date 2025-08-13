@@ -1,6 +1,7 @@
 return {
     {
         "L3MON4D3/LuaSnip",
+        event = "VeryLazy",
         dependencies = {
             "iurimateus/luasnip-latex-snippets.nvim"
         },
