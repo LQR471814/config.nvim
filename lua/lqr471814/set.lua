@@ -85,6 +85,10 @@ vim.api.nvim_create_autocmd("BufRead", {
         vim.opt.textwidth = 66
         require("wrapping").hard_wrap_mode()
         vim.b.completion = false
+
+        -- italic / bold
+        vim.keymap.set('v', "<C-b>", "2<Plug>(nvim-surround-visual)*")
+        vim.keymap.set('v', "<C-k>", "<Plug>(nvim-surround-visual)*")
     end
 })
 
