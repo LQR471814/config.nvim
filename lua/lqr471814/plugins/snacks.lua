@@ -4,7 +4,9 @@ return {
 	---@type snacks.Config
 	opts = {
 		notifier = {},
-		image = {},
+		image = {
+			math = { enabled = false },
+		},
 		lazygit = {},
 		quickfile = {}
 	}

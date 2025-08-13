@@ -61,7 +61,7 @@ local coreConfig = {
     -- rename html tags
     {
         "windwp/nvim-ts-autotag",
-        event = "VeryLazy",
+        event = { "BufReadPre", "BufNewFile" },
     },
     -- text case modifications
     -- {

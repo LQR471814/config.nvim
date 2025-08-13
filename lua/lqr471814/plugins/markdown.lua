@@ -42,19 +42,27 @@ return {
 		config = function()
 			require("autolist").setup()
 		end
-	}
-    -- sc-im support
-    -- {
-    --     "DAmesberger/sc-im.nvim",
-    --     event = "VeryLazy",
-    --     config = function()
-    --         local scim = require("sc-im")
-    --         vim.keymap.set("n", "<leader>to", function()
-    --             scim.open_in_scim()
-    --         end, { noremap = true, silent = true })
-    --         vim.keymap.set("n", "<leader>tr", function()
-    --             scim.rename()
-    --         end, { noremap = true, silent = true })
-    --     end
-    -- },
+	},
+	{
+		"Thiago4532/mdmath.nvim",
+		dependencies = {
+			'nvim-treesitter/nvim-treesitter',
+		},
+		ft = "markdown",
+		opts = {}
+	},
+	-- sc-im support
+	-- {
+	--     "DAmesberger/sc-im.nvim",
+	--     event = "VeryLazy",
+	--     config = function()
+	--         local scim = require("sc-im")
+	--         vim.keymap.set("n", "<leader>to", function()
+	--             scim.open_in_scim()
+	--         end, { noremap = true, silent = true })
+	--         vim.keymap.set("n", "<leader>tr", function()
+	--             scim.rename()
+	--         end, { noremap = true, silent = true })
+	--     end
+	-- },
 }
