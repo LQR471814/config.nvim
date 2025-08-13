@@ -16,12 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Actual plugin definition
 
 ---@type LazySpec
-local commonConfig = {
-    -- rename html tags
-    {
-        "windwp/nvim-ts-autotag",
-        event = "VeryLazy",
-    },
+local coreConfig = {
     -- theme
     {
         "sho-87/kanagawa-paper.nvim",
@@ -63,49 +58,28 @@ local commonConfig = {
             })
         end
     },
-    -- text case modifications
+    -- rename html tags
     {
-        "johmsalas/text-case.nvim",
+        "windwp/nvim-ts-autotag",
         event = "VeryLazy",
-        dependencies = {
-            "nvim-telescope/telescope.nvim"
-        },
-        config = function()
-            require("textcase").setup({})
-            require("telescope").load_extension("textcase")
-        end
     },
-    -- notifications & other things
-    {
-        "folke/snacks.nvim",
-        priority = 1000,
-        ---@type snacks.Config
-        opts = {
-            notifier = {},
-            image = {},
-            lazygit = {},
-            quickfile = {}
-        }
-    },
+    -- text case modifications
+    -- {
+    --     "johmsalas/text-case.nvim",
+    --     event = "VeryLazy",
+    --     dependencies = {
+    --         "nvim-telescope/telescope.nvim"
+    --     },
+    --     config = function()
+    --         require("textcase").setup({})
+    --         require("telescope").load_extension("textcase")
+    --     end
+    -- },
     -- pcre syntax
     {
         "othree/eregex.vim",
         event = "VeryLazy"
     },
-    -- sc-im support
-    -- {
-    --     "DAmesberger/sc-im.nvim",
-    --     event = "VeryLazy",
-    --     config = function()
-    --         local scim = require("sc-im")
-    --         vim.keymap.set("n", "<leader>to", function()
-    --             scim.open_in_scim()
-    --         end, { noremap = true, silent = true })
-    --         vim.keymap.set("n", "<leader>tr", function()
-    --             scim.rename()
-    --         end, { noremap = true, silent = true })
-    --     end
-    -- },
     -- make editing big files faster
     {
         "mireq/large_file",
@@ -121,51 +95,6 @@ local commonConfig = {
             require("guess-indent").setup {}
         end
     },
-    -- markdown stuff
-    {
-        "iurimateus/luasnip-latex-snippets.nvim",
-        ft = { "markdown", "tex", "norg" },
-        config = function()
-            require("luasnip-latex-snippets").setup({
-                use_treesitter = true
-            })
-
-            local ls = require("luasnip")
-            local utils = require("luasnip-latex-snippets.util.utils")
-            local fmta = require("luasnip.extras.fmt").fmta
-
-            local snip = ls.snippet({ trig = "dm", snippetType = "autosnippet" }, fmta([[
-            $$
-            <>
-            $$
-            ]], { ls.insert_node(1) }))
-
-            local not_math = utils.pipe({ utils.with_opts(utils.not_math, true) })
-            snip.condition = not_math
-            snip.priority = 10
-
-            ls.add_snippets("markdown", { snip }, {
-                type = "autosnippets",
-            })
-        end,
-    },
-    {
-        "dhruvasagar/vim-table-mode",
-        ft = "markdown",
-    },
-    {
-        "gaoDean/autolist.nvim",
-        ft = {
-            "markdown",
-            "text",
-            "tex",
-            "plaintex",
-            "norg",
-        },
-        config = function()
-            require("autolist").setup()
-        end
-    }
 }
 
 ---@param config { slim: boolean }
@@ -183,6 +112,10 @@ local function init(config)
             event = "VeryLazy",
             enabled = not config.slim
         },
+        -- markdown editing
+        require("lqr471814.plugins.markdown"),
+        -- notifications / image viewing / etc...
+        require("lqr471814.plugins.snacks"),
         -- switch between files
         require("lqr471814.plugins.harpoon"),
         -- search and replace
@@ -205,8 +138,8 @@ local function init(config)
         require("lqr471814.plugins.lsp")(config),
     }
 
-    for i = 1, #commonConfig do
-        table.insert(modules, commonConfig[i])
+    for i = 1, #coreConfig do
+        table.insert(modules, coreConfig[i])
     end
 
     require("lazy").setup(modules)
