@@ -97,10 +97,10 @@ local commonConfig = {
         event = "VeryLazy",
         config = function()
             local scim = require("sc-im")
-            vim.keymap.set("n", "<leader>to", function ()
+            vim.keymap.set("n", "<leader>to", function()
                 scim.open_in_scim()
             end, { noremap = true, silent = true })
-            vim.keymap.set("n", "<leader>tr", function ()
+            vim.keymap.set("n", "<leader>tr", function()
                 scim.rename()
             end, { noremap = true, silent = true })
         end
@@ -129,6 +129,19 @@ local commonConfig = {
             })
         end,
     },
+    {
+        "gaoDean/autolist.nvim",
+        ft = {
+            "markdown",
+            "text",
+            "tex",
+            "plaintex",
+            "norg",
+        },
+        config = function()
+            require("autolist").setup()
+        end
+    }
 }
 
 ---@param config { slim: boolean }
