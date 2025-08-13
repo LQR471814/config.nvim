@@ -92,6 +92,7 @@ vim.api.nvim_create_autocmd("BufRead", {
         vim.keymap.set('v', "<C-b>", "2<Plug>(nvim-surround-visual)*", opts)
         vim.keymap.set('v', "<C-k>", "<Plug>(nvim-surround-visual)*", opts)
 
+        -- autolist
         vim.keymap.set("i", "<tab>", "<cmd>AutolistTab<cr>", opts)
         vim.keymap.set("i", "<s-tab>", "<cmd>AutolistShiftTab<cr>", opts)
         vim.keymap.set("i", "<CR>", "<CR><cmd>AutolistNewBullet<cr>", opts)
