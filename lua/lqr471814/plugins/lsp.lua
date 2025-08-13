@@ -12,13 +12,11 @@ return function(cfg) return {
         opts = {
             keymap = { preset = 'enter' },
             snippets = { preset = 'luasnip' },
-
-            -- appearance = {
-            --   nerd_font_variant = 'mono'
-            -- },
-
             sources = {
                 default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+                per_filetype = {
+                    markdown = { "path", "snippets" },
+                },
                 providers = {
                     lazydev = {
                         name = "LazyDev",

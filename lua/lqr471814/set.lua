@@ -84,7 +84,6 @@ vim.api.nvim_create_autocmd("BufRead", {
     callback = function()
         vim.opt.textwidth = 66
         require("wrapping").hard_wrap_mode()
-        vim.b.completion = false
 
         local opts = { buffer = true }
 
@@ -99,10 +98,9 @@ vim.api.nvim_create_autocmd("BufRead", {
         vim.keymap.set("n", "o", "o<cmd>AutolistNewBullet<cr>", opts)
         vim.keymap.set("n", "O", "O<cmd>AutolistNewBulletBefore<cr>", opts)
         vim.keymap.set("n", "<CR>", "<cmd>AutolistToggleCheckbox<cr><CR>", opts)
-        vim.keymap.set("n", "<C-r>", "<cmd>AutolistRecalculate<cr>", opts)
 
         -- cycle list types with dot-repeat
-        vim.keymap.set("n", "<leader>cn", require("autolist").cycle_next_dr, { expr = true, buffer = true})
+        vim.keymap.set("n", "<leader>cn", require("autolist").cycle_next_dr, { expr = true, buffer = true })
         vim.keymap.set("n", "<leader>cp", require("autolist").cycle_prev_dr, { expr = true, buffer = true })
 
         -- functions to recalculate list on edit
@@ -112,6 +110,21 @@ vim.api.nvim_create_autocmd("BufRead", {
         vim.keymap.set("v", "d", "d<cmd>AutolistRecalculate<cr>", opts)
     end
 })
+
+vim.keymap.set("n", "<leader>z", function()
+    local wrapping = require('wrapping')
+    wrapping.toggle_wrap_mode()
+    vim.notify("Toggled wrap mode. Current: " .. wrapping.get_current_mode())
+end)
+vim.keymap.set("n", "<leader>Z", function()
+    if vim.opt.textwidth:get() > 0 then
+        vim.opt.textwidth = 0
+        vim.notify("Hard wrapping off.")
+    else
+        vim.opt.textwidth = 66
+        vim.notify("Hard wrapping on.")
+    end
+end)
 
 vim.g.vimtex_view_method = "zathura"
 vim.g.tex_flavor = "latex"
