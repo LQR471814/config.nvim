@@ -2,7 +2,6 @@
 return function(cfg) return {
     {
         'saghen/blink.cmp',
-
         enabled = not cfg.slim,
         version = '1.*',
         dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },
@@ -34,6 +33,7 @@ return function(cfg) return {
     {
         "ray-x/go.nvim",
         enabled = not cfg.slim,
+        ft = { "go", "gomod" },
         dependencies = {
             "neovim/nvim-lspconfig",
             "nvim-treesitter/nvim-treesitter",
@@ -51,7 +51,6 @@ return function(cfg) return {
             })
         end,
         event = { "CmdlineEnter" },
-        ft = { "go", 'gomod' },
         build = ':lua require("go.install").update_all_sync()'
     },
     {

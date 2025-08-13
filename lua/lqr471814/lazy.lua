@@ -32,6 +32,7 @@ local commonConfig = {
     -- fancy undos
     {
         "mbbill/undotree",
+        event = "VeryLazy",
         config = function()
             vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
         end,
@@ -54,9 +55,12 @@ local commonConfig = {
     -- line wrap
     {
         "andrewferrier/wrapping.nvim",
+        event = "VeryLazy",
         config = function()
             ---@diagnostic disable-next-line: missing-parameter
-            require("wrapping").setup()
+            require("wrapping").setup({
+                notify_on_switch = false
+            })
         end
     },
     {
@@ -83,17 +87,22 @@ local commonConfig = {
         }
     },
     -- pcre syntax
-    "othree/eregex.vim",
+    {
+        "othree/eregex.vim",
+        event = "VeryLazy"
+    },
     -- sc-im support
     {
         "DAmesberger/sc-im.nvim",
         event = "VeryLazy",
         config = function()
-            require("sc-im").setup({
-                ft = "scim",
-                include_sc_file = true,
-                update_sc_from_md = true,
-            })
+            local scim = require("sc-im")
+            vim.keymap.set("n", "<leader>to", function ()
+                scim.open_in_scim()
+            end, { noremap = true, silent = true })
+            vim.keymap.set("n", "<leader>tr", function ()
+                scim.rename()
+            end, { noremap = true, silent = true })
         end
     },
     -- make editing big files faster
@@ -106,12 +115,14 @@ local commonConfig = {
     -- guess indentation config of a file
     {
         "NMAC427/guess-indent.nvim",
+        event = "VeryLazy",
         config = function()
             require("guess-indent").setup {}
         end
     },
     {
         "iurimateus/luasnip-latex-snippets.nvim",
+        event = "VeryLazy",
         config = function()
             require("luasnip-latex-snippets").setup({
                 use_treesitter = true
@@ -140,7 +151,7 @@ local function init(config)
         -- search and replace
         require("lqr471814.plugins.spectre"),
         -- luasnip
-        require('lqr471814.plugins.luasnip'),
+        require("lqr471814.plugins.luasnip"),
         -- fuzzy find
         require("lqr471814.plugins.telescope"),
         -- multi-cursors
