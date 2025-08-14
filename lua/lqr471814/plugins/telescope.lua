@@ -33,7 +33,7 @@ return {
             vim.keymap.set("n", "<leader>pb", builtin.buffers)
             vim.keymap.set("n", "<leader>pl", builtin.live_grep)
             vim.keymap.set("n", "<leader>pe", "<CMD>Telescope diagnostics<CR>")
-            vim.keymap.set("n", "<leader>pc", "<CMD>Telescope commands<CR>")
+            vim.keymap.set({ "n", "v" }, "<leader>pc", "<CMD>Telescope commands<CR>")
             vim.keymap.set("n", "<leader>ph", "<CMD>Telescope help_tags<CR>")
 
             local oil = require("oil")

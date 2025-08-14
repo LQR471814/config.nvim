@@ -88,26 +88,11 @@ vim.api.nvim_create_autocmd("BufRead", {
         local opts = { buffer = true }
 
         -- italic / bold
-        vim.keymap.set('v', "<C-b>", "2<Plug>(nvim-surround-visual)*", opts)
-        vim.keymap.set('v', "<C-k>", "<Plug>(nvim-surround-visual)*", opts)
+        vim.keymap.set("v", "<C-b>", "2<Plug>(nvim-surround-visual)*", opts)
+        vim.keymap.set("v", "<C-k>", "<Plug>(nvim-surround-visual)*", opts)
 
-        -- autolist
-        vim.keymap.set("i", "<tab>", "<cmd>AutolistTab<cr>", opts)
-        vim.keymap.set("i", "<s-tab>", "<cmd>AutolistShiftTab<cr>", opts)
-        vim.keymap.set("i", "<CR>", "<CR><cmd>AutolistNewBullet<cr>", opts)
-        vim.keymap.set("n", "o", "o<cmd>AutolistNewBullet<cr>", opts)
-        vim.keymap.set("n", "O", "O<cmd>AutolistNewBulletBefore<cr>", opts)
-        vim.keymap.set("n", "<CR>", "<cmd>AutolistToggleCheckbox<cr><CR>", opts)
-
-        -- cycle list types with dot-repeat
-        vim.keymap.set("n", "<leader>cn", require("autolist").cycle_next_dr, { expr = true, buffer = true })
-        vim.keymap.set("n", "<leader>cp", require("autolist").cycle_prev_dr, { expr = true, buffer = true })
-
-        -- functions to recalculate list on edit
-        vim.keymap.set("n", ">>", ">><cmd>AutolistRecalculate<cr>", opts)
-        vim.keymap.set("n", "<<", "<<<cmd>AutolistRecalculate<cr>", opts)
-        vim.keymap.set("n", "dd", "dd<cmd>AutolistRecalculate<cr>", opts)
-        vim.keymap.set("v", "d", "d<cmd>AutolistRecalculate<cr>", opts)
+        -- renumber list
+        vim.keymap.set("n", "<leader>rl", "<cmd>RenumberList<cr>", opts)
     end
 })
 

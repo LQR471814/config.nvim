@@ -31,7 +31,7 @@ return {
 		ft = "markdown",
 	},
 	{
-		"gaoDean/autolist.nvim",
+		"kaymmm/bullets.nvim",
 		ft = {
 			"markdown",
 			"text",
@@ -39,9 +39,7 @@ return {
 			"plaintex",
 			"norg",
 		},
-		config = function()
-			require("autolist").setup()
-		end
+		opts = {}
 	},
 	{
 		"Thiago4532/mdmath.nvim",
