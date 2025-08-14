@@ -1,8 +1,6 @@
----@param cfg { slim: boolean }
-return function(cfg) return {
+return {
     {
         'saghen/blink.cmp',
-        enabled = not cfg.slim,
         version = '1.*',
         dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },
         event = "VeryLazy",
@@ -30,7 +28,6 @@ return function(cfg) return {
     },
     {
         "ray-x/go.nvim",
-        enabled = not cfg.slim,
         ft = { "go", "gomod" },
         dependencies = {
             "neovim/nvim-lspconfig",
@@ -53,7 +50,6 @@ return function(cfg) return {
     },
     {
         "folke/lazydev.nvim",
-        enabled = not cfg.slim,
         ft = "lua",
         opts = {
             library = {
@@ -68,7 +64,6 @@ return function(cfg) return {
     },
     {
         "neovim/nvim-lspconfig",
-        enabled = not cfg.slim,
         event = "VeryLazy",
         dependencies = {
             "b0o/schemastore.nvim",
@@ -214,4 +209,4 @@ return function(cfg) return {
             })
         end
     },
-} end
+}
