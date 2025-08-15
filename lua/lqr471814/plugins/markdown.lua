@@ -47,7 +47,9 @@ return {
 			'nvim-treesitter/nvim-treesitter',
 		},
 		ft = "markdown",
-		opts = {}
+		opts = {
+			hide_on_insert = false
+		}
 	},
 	-- sc-im support
 	-- {
