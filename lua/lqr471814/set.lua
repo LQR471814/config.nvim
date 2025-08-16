@@ -93,6 +93,9 @@ vim.api.nvim_create_autocmd("BufRead", {
 
         -- renumber list
         vim.keymap.set("n", "<leader>rl", "<cmd>RenumberList<cr>", opts)
+
+        -- enable table mode by default
+        vim.cmd("TableModeEnable")
     end
 })
 

@@ -26,10 +26,9 @@ return {
 			})
 		end,
 	},
-	{
-		"dhruvasagar/vim-table-mode",
-		ft = "markdown",
-	},
+	-- this plugin already does lazy-loading by default, lazy-loading tends to
+	-- interfere with its functioning
+	"dhruvasagar/vim-table-mode",
 	{
 		"kaymmm/bullets.nvim",
 		ft = {
