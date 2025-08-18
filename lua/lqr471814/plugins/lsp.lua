@@ -13,7 +13,7 @@ return {
             sources = {
                 default = { "lazydev", "lsp", "path", "snippets", "buffer" },
                 per_filetype = {
-                    markdown = { "path", "snippets" },
+                    markdown = { "lsp", "path", "snippets" },
                 },
                 providers = {
                     lazydev = {
