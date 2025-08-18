@@ -80,6 +80,7 @@ return {
                 ruff = {},
                 gopls = {},
                 texlab = {},
+                marksman = {},
 
                 nixd = {
                     cmd = { "nixd" },
