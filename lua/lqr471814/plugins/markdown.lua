@@ -38,7 +38,9 @@ return {
 			"plaintex",
 			"norg",
 		},
-		opts = {}
+		opts = {
+			outline_levels = { 'num', 'std-' },
+		}
 	},
 	{
 		"Thiago4532/mdmath.nvim",
