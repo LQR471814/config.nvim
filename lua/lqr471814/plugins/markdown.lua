@@ -40,7 +40,8 @@ return {
 		},
 		opts = {
 			outline_levels = { 'num', 'std-' },
-		}
+			mappings = false,
+		},
 	},
 	{
 		"Thiago4532/mdmath.nvim",
