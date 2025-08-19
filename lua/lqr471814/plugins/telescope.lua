@@ -54,14 +54,14 @@ return {
                 builtin.find_files({
                     prompt_title = "Projects",
                     cwd = "./Projects",
-                    find_command = { 'fd', '--type', 'd', '--max-depth', '2', '--exclude', 'Archive' },
+                    find_command = { 'fd', '--type', 'd', '--exclude', 'Archive' },
                 })
             end, { desc = "Find projects" })
             vim.keymap.set("n", "<leader>pi", function()
                 builtin.find_files({
                     prompt_title = "Information",
                     cwd = "./Information",
-                    find_command = { 'fd', '--type', 'd', '--max-depth', '1' },
+                    find_command = { 'fd', '--type', 'd' },
                 })
             end, { desc = "Find information" })
         end
