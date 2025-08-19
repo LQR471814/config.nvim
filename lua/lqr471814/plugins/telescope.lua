@@ -17,7 +17,7 @@ return {
 
             vim.keymap.set("n", "<leader>pf", function()
                 builtin.find_files({
-                    find_command = { 'fd', '--type', 'file', '--hidden', '-E', '.git' },
+                    find_command = { 'fd', '--type', 'file', '--hidden', '-E', '.git', '-E', '.treesitter' },
                 })
             end, {})
 
@@ -25,7 +25,7 @@ return {
                 local target = vim.fn.input("grep > ")
                 builtin.grep_string({
                     search = target,
-                    additional_args = { "--iglob", "!.git", "--hidden" }
+                    additional_args = { "--iglob", "!.{git,treesitter}", "--hidden" }
                 })
             end, {})
 
