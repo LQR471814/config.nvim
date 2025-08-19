@@ -54,7 +54,7 @@ return {
                 builtin.find_files({
                     prompt_title = "Projects",
                     cwd = "./Projects",
-                    find_command = { 'fd', '--type', 'd', '--exclude', 'Archive' },
+                    find_command = { 'fd', '--type', 'f', '--exclude', 'Archive', 'Project: ' },
                 })
             end, { desc = "Find projects" })
             vim.keymap.set("n", "<leader>pi", function()
