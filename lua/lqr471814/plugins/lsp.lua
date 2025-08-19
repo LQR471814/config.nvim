@@ -81,6 +81,7 @@ return {
                 gopls = {},
                 texlab = {},
                 marksman = {},
+                nushell = {},
 
                 nixd = {
                     cmd = { "nixd" },

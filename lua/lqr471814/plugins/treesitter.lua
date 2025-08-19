@@ -24,6 +24,7 @@ return {
                 "gotmpl",
                 "json",
                 "comment",
+                "nu"
             },
 
             ignore_install = {},
