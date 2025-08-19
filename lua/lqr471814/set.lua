@@ -100,6 +100,15 @@ vim.api.nvim_create_autocmd("BufRead", {
         vim.keymap.set("n", "<leader>d", "<Plug>(bullets-toggle-checkbox)", opts)
         vim.keymap.set("i", "<Tab>", "<C-o><Plug>(bullets-demote)", opts)
         vim.keymap.set("i", "<S-Tab>", "<C-o><Plug>(bullets-promote)", opts)
+
+        -- insert link
+        vim.keymap.set("i", "<C-k>", function()
+            local clipboard = vim.fn.getreg("+")
+            clipboard = clipboard:gsub("\n", "")
+            local pos = vim.api.nvim_win_get_cursor(0)
+            vim.api.nvim_put({ "[](" .. clipboard .. ")" }, "c", true, false)
+            vim.api.nvim_win_set_cursor(0, { pos[1], pos[2] + 1 })
+        end, opts)
     end
 })
 
