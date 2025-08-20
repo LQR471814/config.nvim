@@ -45,11 +45,9 @@ vim.keymap.set("n", "gyy", "\"+Y")
 vim.keymap.set("n", "gyp", "let @\" = expand(\"%\")")
 
 local function paste_from_clipboard()
-    local clipboard = vim.fn.getreg("+")
-    clipboard = clipboard:gsub("^%s*(.-)%s*$", "%1")
-    local pos = vim.api.nvim_win_get_cursor(0)
-    vim.api.nvim_put({ clipboard }, "c", true, false)
-    vim.api.nvim_win_set_cursor(0, pos)
+    local clipboard = vim.trim(vim.fn.getreg("+"))
+    local lines = vim.split(clipboard, "\n", { plain = true })
+    vim.api.nvim_put(lines, "l", false, false)
 end
 
 vim.keymap.set("n", "gp", paste_from_clipboard)
