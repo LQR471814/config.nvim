@@ -44,8 +44,16 @@ vim.keymap.set("v", "gy", "\"+y")
 vim.keymap.set("n", "gyy", "\"+Y")
 vim.keymap.set("n", "gyp", "let @\" = expand(\"%\")")
 
-vim.keymap.set("n", "gp", "\"+p")
-vim.keymap.set("v", "gp", "\"+p")
+local function paste_from_clipboard()
+    local clipboard = vim.fn.getreg("+")
+    clipboard = clipboard:gsub("^%s*(.-)%s*$", "%1")
+    local pos = vim.api.nvim_win_get_cursor(0)
+    vim.api.nvim_put({ clipboard }, "c", true, false)
+    vim.api.nvim_win_set_cursor(0, pos)
+end
+
+vim.keymap.set("n", "gp", paste_from_clipboard)
+vim.keymap.set("v", "gp", paste_from_clipboard)
 
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set({ "n", "v", "i", "x" }, "<C-z>", "<nop>")
