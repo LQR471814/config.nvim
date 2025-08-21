@@ -36,34 +36,12 @@ return {
             vim.keymap.set({ "n", "v" }, "<leader>pc", "<CMD>Telescope commands<CR>")
             vim.keymap.set("n", "<leader>ph", "<CMD>Telescope help_tags<CR>")
 
-            local oil = require("oil")
-            vim.keymap.set("n", "<leader>pd", function()
-                local dir = oil.get_current_dir()
-                if not dir then
-                    oil.open()
-                end
-                dir = oil.get_current_dir()
-
-                builtin.find_files({
-                    prompt_title = "Files from the current directory",
-                    cwd = dir,
-                })
-            end, { desc = "Find files from the current directory" })
-
             vim.keymap.set("n", "<leader>pj", function()
                 builtin.find_files({
                     prompt_title = "Projects",
-                    cwd = "./Projects",
                     find_command = { 'fd', '--type', 'f', '--exclude', 'Archive', 'Project: ' },
                 })
             end, { desc = "Find projects" })
-            vim.keymap.set("n", "<leader>pi", function()
-                builtin.find_files({
-                    prompt_title = "Information",
-                    cwd = "./Information",
-                    find_command = { 'fd', '--type', 'd' },
-                })
-            end, { desc = "Find information" })
         end
     }
 }
