@@ -93,9 +93,8 @@ vim.api.nvim_create_autocmd("BufRead", {
 
         local opts = { buffer = true }
 
-        -- italic / bold
+        -- bold
         vim.keymap.set("v", "<C-b>", "2<Plug>(nvim-surround-visual)*", opts)
-        vim.keymap.set("v", "<C-k>", "<Plug>(nvim-surround-visual)*", opts)
 
         -- renumber list
         vim.keymap.set("n", "<leader>rl", "<Plug>(bullets-renumber)", opts)
