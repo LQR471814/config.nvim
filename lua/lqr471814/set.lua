@@ -115,6 +115,10 @@ vim.api.nvim_create_autocmd("BufRead", {
             vim.api.nvim_put({ "[](" .. clipboard .. ")" }, "c", true, false)
             vim.api.nvim_win_set_cursor(0, { pos[1], pos[2] + 1 })
         end, opts)
+
+        -- tab size
+        vim.opt.tabstop = 4
+        vim.opt.shiftwidth = 4
     end
 })
 
