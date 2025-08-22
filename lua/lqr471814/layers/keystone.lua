@@ -9,7 +9,7 @@ return {
 	-- luasnip
 	require("lqr471814.plugins.luasnip"),
 	-- search and replace
-	require("lqr471814.plugins.spectre"),
+	require("lqr471814.plugins.grug-far"),
 	-- multi-cursors
 	require("lqr471814.plugins.multicursors"),
 }

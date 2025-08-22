@@ -162,6 +162,9 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
+-- search and replace
+vim.keymap.set('n', "<leader>re", ":GrugFar<cr>")
+
 -- remove trailing whitespace on save
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*",
