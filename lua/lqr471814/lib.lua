@@ -1,11 +1,12 @@
 local ls = require('luasnip')
 
-local function in_mathzone()
+local function in_mathzone(line_to_cursor, matched_trigger, captures)
 	return vim.fn['vimtex#syntax#in_mathzone']() == 1
 end
 
 local function latex_snippet(context, nodes, opts)
-	context.conditional = in_mathzone
+	context.condition = in_mathzone
+	context.show_condition = in_mathzone
 	return ls.snippet(context, nodes, opts)
 end
 

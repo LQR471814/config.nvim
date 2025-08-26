@@ -141,6 +141,17 @@ vim.api.nvim_create_autocmd("BufRead", {
     end
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function()
+        vim.defer_fn(function()
+            -- ensure vimtex mathzone detection works
+            vim.opt_local.syntax = "tex"
+        end, 1000)
+    end,
+})
+
+
 vim.keymap.set("n", "<leader>z", function()
     local wrapping = require('wrapping')
     wrapping.toggle_wrap_mode()
