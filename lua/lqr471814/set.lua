@@ -55,6 +55,7 @@ vim.keymap.set("v", "gp", paste_from_clipboard)
 
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set({ "n", "v", "i", "x" }, "<C-z>", "<nop>")
+vim.keymap.set("n", "<leader>w", "gqap")
 
 vim.keymap.set("n", "<leader>pv", function() vim.cmd("Oil") end)
 

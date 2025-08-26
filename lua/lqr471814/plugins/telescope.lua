@@ -15,6 +15,12 @@ return {
         config = function()
             local builtin = require("telescope.builtin")
 
+            require('telescope').setup {
+                defaults = {
+                    path_display = { "truncate" },
+                },
+            }
+
             vim.keymap.set("n", "<leader>pf", function()
                 builtin.find_files({
                     find_command = { 'fd', '--type', 'file', '--hidden', '-E', '.git', '-E', '.treesitter' },
