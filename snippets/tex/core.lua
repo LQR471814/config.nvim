@@ -357,5 +357,16 @@ return {
     s(
         { trig = "^_", wordTrig = false, snippetType = "autosnippet" },
         fmta("\\overline{<>}", { i(1) })
-    )
+    ),
+
+    -- ->
+    s(
+        { trig = "->", snippetType = "autosnippet" },
+        t("\\to")
+    ),
+    -- <->
+    s(
+        { trig = "<->", snippetType = "autosnippet" },
+        t("\\leftrightarrow")
+    ),
 }
