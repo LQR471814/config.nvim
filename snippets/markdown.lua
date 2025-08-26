@@ -13,4 +13,16 @@ return {
         $$
         ]],
     { i(1) })),
+    s({ trig = "{", wordTrig = false, snippetType = "autosnippet" }, fmta(
+        "{<>}",
+        { i(1) }
+    )),
+    s({ trig = "[", wordTrig = false, snippetType = "autosnippet" }, fmta(
+        "[<>]",
+        { i(1) }
+    )),
+    s({ trig = "(", wordTrig = false, snippetType = "autosnippet" }, fmta(
+        "(<>)",
+        { i(1) }
+    )),
 }
