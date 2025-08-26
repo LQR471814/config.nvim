@@ -359,14 +359,14 @@ return {
         fmta("\\overline{<>}", { i(1) })
     ),
 
-    -- ->
-    s(
-        { trig = "->", snippetType = "autosnippet" },
-        t("\\to")
-    ),
     -- <->
     s(
         { trig = "<->", snippetType = "autosnippet" },
         t("\\leftrightarrow")
+    ),
+    -- ->
+    s(
+        { trig = "->", snippetType = "autosnippet" },
+        t("\\to")
     ),
 }
