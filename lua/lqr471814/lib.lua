@@ -10,6 +10,6 @@ local function latex_snippet(context, nodes, opts)
 end
 
 return {
-	in_mathzone,
-	latex_snippet,
+	in_mathzone = in_mathzone,
+	latex_snippet = latex_snippet,
 }

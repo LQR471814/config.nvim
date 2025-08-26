@@ -10,9 +10,11 @@ return {
                 enable_autosnippets = true,
                 update_events = { "TextChanged", "TextChangedI" }
             })
+            ls.filetype_extend("markdown", { "tex" })
 
-            require("luasnip.loaders.from_lua").lazy_load({
-                paths = { "~/.config/nvim/snippets" }
+            local ll = require("luasnip.loaders.from_lua")
+            ll.lazy_load({
+                paths = { "~/.config/nvim/snippets" },
             })
         end
     }
