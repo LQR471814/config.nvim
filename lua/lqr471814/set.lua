@@ -119,6 +119,25 @@ vim.api.nvim_create_autocmd("BufRead", {
         -- tab size
         vim.opt.tabstop = 4
         vim.opt.shiftwidth = 4
+
+        -- table mode
+        local enabled = false
+        local hardwrapval = false
+        vim.keymap.set("n", "<leader>tm", function()
+            enabled = not enabled
+            if enabled then
+                vim.cmd("TableModeEnable")
+                hardwrapval = vim.opt.textwidth:get() == 66
+                vim.opt.textwidth = 0
+                vim.notify("Hard wrapping off.")
+            else
+                vim.cmd("TableModeDisable")
+                if hardwrapval then
+                    vim.opt.textwidth = 66
+                    vim.notify("Hard wrapping on.")
+                end
+            end
+        end, opts)
     end
 })
 

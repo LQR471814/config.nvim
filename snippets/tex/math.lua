@@ -1,5 +1,5 @@
 local ls = require('luasnip')
-local s = ls.snippet
+local s = require("lqr471814.lib").latex_snippet
 local t = ls.text_node
 
 local mapping = {
