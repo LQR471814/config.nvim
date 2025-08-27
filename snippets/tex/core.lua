@@ -46,6 +46,21 @@ return {
         i(1)
     })),
 
+    s({ trig = "homework" }, fmta([[
+        \documentclass[a4paper, 12pt]{article}
+
+        \setlength{\parindent}{0pt}
+        \setcounter{secnumdepth}{0}
+
+        \begin{document}
+
+        <>
+
+        \end{document}
+    ]], {
+        i(1)
+    })),
+
     -- set notation {}
     s({ trig = "\\{", wordTrig = false, snippetType = "autosnippet" }, fmta(
         "\\{<>\\}",

@@ -42,7 +42,6 @@ vim.g.clipboard = {
 vim.keymap.set("n", "gy", "\"+y")
 vim.keymap.set("v", "gy", "\"+y")
 vim.keymap.set("n", "gyy", "\"+Y")
-vim.keymap.set("n", "gyp", "let @\" = expand(\"%\")")
 
 local function paste_from_clipboard()
     local clipboard = vim.trim(vim.fn.getreg("+"))
@@ -227,4 +226,16 @@ end)
 -- show lazygit
 vim.keymap.set('n', "<leader>l", function()
     Snacks.lazygit.open()
+end)
+
+-- copy current directory
+vim.keymap.set("n", "gyp", function()
+    local dir = vim.fn.expand("%:p")
+    vim.fn.setreg("+", string.format([["%s"]], dir))
+    vim.notify("Copied file path to clipboard.")
+end)
+vim.keymap.set("n", "gyd", function()
+    local dir = vim.fn.expand("%:p:h")
+    vim.fn.setreg("+", string.format([["%s"]], dir))
+    vim.notify("Copied directory to clipboard.")
 end)

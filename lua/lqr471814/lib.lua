@@ -1,6 +1,9 @@
 local ls = require('luasnip')
 
 local function in_mathzone(line_to_cursor, matched_trigger, captures)
+	if vim.bo.filetype == "tex" then
+		return true
+	end
 	return vim.fn['vimtex#syntax#in_mathzone']() == 1
 end
 
