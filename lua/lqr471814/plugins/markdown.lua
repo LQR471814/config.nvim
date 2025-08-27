@@ -4,13 +4,7 @@ return {
 	"dhruvasagar/vim-table-mode",
 	{
 		"kaymmm/bullets.nvim",
-		ft = {
-			"markdown",
-			"text",
-			"tex",
-			"plaintex",
-			"norg",
-		},
+		event = "VeryLazy",
 		opts = {
 			outline_levels = { 'num', 'std-' },
 			mappings = false,
@@ -21,14 +15,14 @@ return {
 		dependencies = {
 			'nvim-treesitter/nvim-treesitter',
 		},
-		ft = "markdown",
+		event = "VeryLazy",
 		opts = {
 			hide_on_insert = false
 		}
 	},
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
-		ft = "markdown",
+		event = "VeryLazy",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 			"echasnovski/mini.icons"
