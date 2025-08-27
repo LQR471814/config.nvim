@@ -26,6 +26,28 @@ return {
 			hide_on_insert = false
 		}
 	},
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		ft = "markdown",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"echasnovski/mini.icons"
+		},
+		---@module 'render-markdown'
+		---@type render.md.UserConfig
+		opts = {
+			completions = {
+				blink = {
+					enabled = true
+				},
+			},
+			render_modes = { "n", "i", "c", "t" },
+			latex = {
+				enabled = false
+			},
+		},
+	},
+
 	-- sc-im support
 	-- {
 	--     "DAmesberger/sc-im.nvim",
