@@ -42,6 +42,10 @@ return {
 				},
 			},
 			render_modes = { "n", "i", "c", "t" },
+			heading = {
+				enabled = true,
+				sign = false,
+			},
 			latex = {
 				enabled = false
 			},
