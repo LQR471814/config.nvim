@@ -373,7 +373,6 @@ return {
         { trig = "^_", wordTrig = false, snippetType = "autosnippet" },
         fmta("\\overline{<>}", { i(1) })
     ),
-
     -- <->
     s(
         { trig = "<->", snippetType = "autosnippet" },

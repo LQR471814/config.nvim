@@ -142,9 +142,24 @@ vim.api.nvim_create_autocmd("BufRead", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
+    pattern = "tex",
+    callback = function()
+        vim.defer_fn(function()
+            -- use vimtex latex conceal in latex
+            vim.o.conceallevel = 3
+            vim.g.vimtex_syntax_conceal_disable = 0
+        end, 1000)
+    end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
     pattern = "markdown",
     callback = function()
         vim.defer_fn(function()
+            -- don't use vimtex latex conceal in markdown
+            vim.o.conceallevel = 0
+            vim.g.vimtex_syntax_conceal_disable = 1
+
             -- ensure vimtex mathzone detection works
             vim.opt_local.syntax = "tex"
         end, 1000)

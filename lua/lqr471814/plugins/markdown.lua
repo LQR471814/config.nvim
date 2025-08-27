@@ -33,23 +33,25 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 			"echasnovski/mini.icons"
 		},
-		---@module 'render-markdown'
-		---@type render.md.UserConfig
-		opts = {
-			completions = {
-				blink = {
-					enabled = true
+		config = function()
+			require("render-markdown").setup({
+				---@module 'render-markdown'
+				---@type render.md.UserConfig
+				completions = {
+					blink = {
+						enabled = true
+					},
 				},
-			},
-			render_modes = { "n", "i", "c", "t" },
-			heading = {
-				enabled = true,
-				sign = false,
-			},
-			latex = {
-				enabled = false
-			},
-		},
+				render_modes = { "n", "i", "c", "t" },
+				heading = {
+					enabled = true,
+					sign = false,
+				},
+				latex = {
+					enabled = false,
+				}
+			})
+		end
 	},
 
 	-- sc-im support
