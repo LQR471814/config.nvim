@@ -365,6 +365,9 @@ return {
     -- %
     s({ trig = "%", wordTrig = false, snippetType = "autosnippet" }, t("\\%")),
 
+    -- triple equals
+    s({ trig = "&==", snippetType = "autosnippet" }, t("\\equiv")),
+
     -- &=
     s({ trig = "==", snippetType = "autosnippet" }, t("&=")),
 
