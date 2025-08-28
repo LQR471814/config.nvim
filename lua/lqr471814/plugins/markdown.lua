@@ -1,7 +1,9 @@
 return {
 	-- this plugin already does lazy-loading by default, lazy-loading tends to
 	-- interfere with its functioning
-	"dhruvasagar/vim-table-mode",
+	{
+		"dhruvasagar/vim-table-mode",
+	},
 	{
 		"kaymmm/bullets.nvim",
 		event = "VeryLazy",
@@ -17,7 +19,7 @@ return {
 		},
 		event = "VeryLazy",
 		opts = {
-			hide_on_insert = false
+			hide_on_insert = false,
 		}
 	},
 	{

@@ -154,7 +154,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "markdown",
-    callback = function()
+    callback = function(args)
         vim.defer_fn(function()
             -- don't use vimtex latex conceal in markdown
             vim.o.conceallevel = 0
@@ -162,6 +162,13 @@ vim.api.nvim_create_autocmd("FileType", {
 
             -- ensure vimtex mathzone detection works
             vim.opt_local.syntax = "tex"
+
+            vim.api.nvim_create_autocmd({ "CursorMoved" }, {
+                buffer = args.buf,
+                callback = function()
+                    vim.cmd("redraw!")
+                end
+            })
         end, 1000)
     end,
 })
@@ -256,6 +263,6 @@ vim.keymap.set("n", "gyd", function()
 end)
 vim.keymap.set("n", "gy'", function() -- add quotes to whatever is in the clipboard
     local value = vim.fn.getreg("+")
-    vim.fn.setreg("+", string.format([["%s"]], value:sub(0, #value-1)))
+    vim.fn.setreg("+", string.format([["%s"]], value:sub(0, #value - 1)))
     vim.notify("Quoted clipboard.")
 end)
