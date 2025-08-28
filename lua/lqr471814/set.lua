@@ -141,19 +141,17 @@ vim.api.nvim_create_autocmd("BufRead", {
     end
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "tex",
+vim.api.nvim_create_autocmd("BufRead", {
+    pattern = { "*.tex" },
     callback = function()
-        vim.defer_fn(function()
-            -- use vimtex latex conceal in latex
-            vim.o.conceallevel = 3
-            vim.g.vimtex_syntax_conceal_disable = 0
-        end, 1000)
+        -- use vimtex latex conceal in latex
+        vim.o.conceallevel = 3
+        vim.g.vimtex_syntax_conceal_disable = 0
     end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "markdown",
+vim.api.nvim_create_autocmd("BufRead", {
+    pattern = { "*.md" },
     callback = function(args)
         vim.defer_fn(function()
             -- don't use vimtex latex conceal in markdown
