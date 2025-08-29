@@ -161,10 +161,28 @@ vim.api.nvim_create_autocmd("BufRead", {
             -- ensure vimtex mathzone detection works
             vim.opt_local.syntax = "tex"
 
+            local timer = vim.uv.new_timer()
+            local active = false
+
+            local redraw = function()
+                vim.cmd("redraw!")
+            end
+
+            local handler = function()
+                vim.uv.timer_stop(timer)
+                active = false
+                vim.schedule(redraw)
+            end
+
             vim.api.nvim_create_autocmd({ "CursorMoved" }, {
                 buffer = args.buf,
                 callback = function()
-                    vim.cmd("redraw!")
+                    if active then
+                        vim.uv.timer_stop(timer)
+                    end
+
+                    active = true
+                    vim.uv.timer_start(timer, 500, 0, handler)
                 end
             })
         end, 1000)
