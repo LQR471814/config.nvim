@@ -45,7 +45,13 @@ return {
 				},
 				latex = {
 					enabled = false,
-				}
+				},
+				html = {
+					enabled = false,
+				},
+				yaml = {
+					enabled = false,
+				},
 			})
 		end
 	},

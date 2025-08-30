@@ -24,7 +24,10 @@ return {
                 "gotmpl",
                 "json",
                 "comment",
-                "nu"
+                "nu",
+                "html",
+                "css",
+                "tsx",
             },
 
             ignore_install = {},
