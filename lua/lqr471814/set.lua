@@ -282,3 +282,6 @@ vim.keymap.set("n", "gy'", function() -- add quotes to whatever is in the clipbo
     vim.fn.setreg("+", string.format([["%s"]], value:sub(0, #value - 1)))
     vim.notify("Quoted clipboard.")
 end)
+
+-- lazyredraw (experimental)
+vim.cmd("set lazyredraw")
