@@ -19,6 +19,7 @@ return {
 		},
 		event = "VeryLazy",
 		opts = {
+			filetypes = { "markdown" },
 			hide_on_insert = false,
 		}
 	},
