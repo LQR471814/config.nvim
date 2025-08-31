@@ -12,8 +12,8 @@ vim.api.nvim_create_autocmd("BufRead", {
         vim.keymap.set("i", "<C-b>", "****<Left><Left>", opts)
 
         -- highlight
-        vim.keymap.set("v", "<C-b>", "2<Plug>(nvim-surround-visual)=", opts)
-        vim.keymap.set("i", "<C-b>", "====<Left><Left>", opts)
+        vim.keymap.set("v", "<C-h>", "2<Plug>(nvim-surround-visual)=", opts)
+        vim.keymap.set("i", "<C-h>", "====<Left><Left>", opts)
 
         -- renumber list
         vim.keymap.set("n", "<leader>rl", "<Plug>(bullets-renumber)", opts)
