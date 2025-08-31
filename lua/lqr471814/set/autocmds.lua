@@ -1,9 +1,10 @@
+local lib = require("lqr471814.lib")
+
 -- enable hard wrap on markdown files
 vim.api.nvim_create_autocmd("BufRead", {
     pattern = { "*.md", "*.tex" },
     callback = function()
-        vim.opt.textwidth = 66
-        require("wrapping").hard_wrap_mode()
+        lib.wrap:set("hard")
 
         local opts = { buffer = true }
 
@@ -40,20 +41,19 @@ vim.api.nvim_create_autocmd("BufRead", {
 
         -- table mode
         local enabled = false
-        local hardwrapval = false
+
+        --- @type "off" | "hard" | "soft"
+        local wrapStatus
+
         vim.keymap.set("n", "<leader>tm", function()
             enabled = not enabled
             if enabled then
                 vim.cmd("TableModeEnable")
-                hardwrapval = vim.opt.textwidth:get() == 66
-                vim.opt.textwidth = 0
-                vim.notify("Hard wrapping off.")
+                wrapStatus = lib.wrap:status()
+                lib.wrap:set("off")
             else
                 vim.cmd("TableModeDisable")
-                if hardwrapval then
-                    vim.opt.textwidth = 66
-                    vim.notify("Hard wrapping on.")
-                end
+                lib.wrap:set(wrapStatus)
             end
         end, opts)
     end
@@ -129,4 +129,3 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         vim.api.nvim_win_set_cursor(0, save_cursor)
     end,
 })
-

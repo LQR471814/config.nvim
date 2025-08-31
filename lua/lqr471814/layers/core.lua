@@ -22,17 +22,6 @@ return {
 			{ "echasnovski/mini.icons", opts = {} }
 		},
 	},
-	-- line wrap
-	{
-		"andrewferrier/wrapping.nvim",
-		event = "VeryLazy",
-		config = function()
-			---@diagnostic disable-next-line: missing-fields
-			require("wrapping").setup({
-				notify_on_switch = false
-			})
-		end
-	},
 	-- rename html tags
 	{
 		"windwp/nvim-ts-autotag",

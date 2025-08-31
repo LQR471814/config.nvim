@@ -38,20 +38,12 @@ vim.keymap.set({ "n", "v", "i", "x" }, "<C-z>", "<nop>")
 vim.keymap.set("n", "<leader>w", "gqap")
 vim.keymap.set("n", "<leader>pv", function() vim.cmd("Oil") end)
 
+local lib = require("lqr471814.lib")
 vim.keymap.set("n", "<leader>z", function()
-    local wrapping = require('wrapping')
-    wrapping.toggle_wrap_mode()
-    vim.notify("Toggled wrap mode. Current: " .. wrapping.get_current_mode())
+    lib.wrap:toggle("soft")
 end)
-
 vim.keymap.set("n", "<leader>Z", function()
-    if vim.opt.textwidth:get() > 0 then
-        vim.opt.textwidth = 0
-        vim.notify("Hard wrapping off.")
-    else
-        vim.opt.textwidth = 66
-        vim.notify("Hard wrapping on.")
-    end
+    lib.wrap:toggle("hard")
 end)
 
 vim.keymap.set('n', "<leader>re", ":GrugFar<cr>")
