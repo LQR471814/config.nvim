@@ -21,9 +21,10 @@ vim.keymap.set("n", "gy'", function() -- add quotes to whatever is in the clipbo
 end)
 
 local function paste_from_clipboard()
-    local clipboard = vim.trim(vim.fn.getreg("+"))
-    local lines = vim.split(clipboard, "\n", { plain = true })
-    vim.api.nvim_put(lines, "l", false, false)
+    local clipboard = vim.fn.getreg("+")
+    clipboard = clipboard:gsub("^[\t\n ]+", "")
+    clipboard = clipboard:gsub("[\t\n ]+$", "")
+    vim.api.nvim_paste(clipboard, false, -1)
 end
 
 vim.keymap.set("n", "gp", paste_from_clipboard)
