@@ -120,7 +120,10 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         vim.opt_local.spell = true
         vim.opt_local.spelllang = "en"
-        vim.keymap.set({ "n", "i" }, "<C-;>", "<ESC>[s1z=`]a")
+
+        local opts = { buffer = true }
+        vim.keymap.set({ "n", "i" }, "<C-[>", "<ESC>m'[s1z=<CR>`'", opts)
+        vim.keymap.set({ "n", "i" }, "<C-]>", "<ESC>m']s1z=<CR>`'", opts)
     end
 })
 
