@@ -2,6 +2,9 @@ local cached_value = false
 local cached = false
 
 local function in_mathzone(line_to_cursor, matched_trigger, captures)
+	if vim.bo.filetype == "tex" then
+		return true
+	end
 	-- this caching mechanism is here so that vimtex#syntax#in_mathzone doesn't
 	-- need to be called for every snippet that needs to be enabled on a
 	-- mathzone.
