@@ -1,7 +1,7 @@
 local cached_value = false
 local cached = false
 
-local function in_mathzone(line_to_cursor, matched_trigger, captures)
+local function in_mathzone()
 	if vim.bo.filetype == "tex" then
 		return true
 	end
@@ -39,18 +39,10 @@ end
 
 local function enable_hard_wrap()
 	vim.opt_local.textwidth = 66
-	-- local augroup = vim.api.nvim_create_augroup("HardWrap", {})
-	-- vim.api.nvim_create_autocmd("InsertLeave", {
-	-- 	callback = function()
-	-- 		vim.api.nvim_feedkeys("m'gqap`'", "n", false)
-	-- 	end,
-	-- 	group = augroup,
-	-- })
 end
 
 local function disable_hard_wrap()
 	vim.opt_local.textwidth = 0
-	-- vim.api.nvim_del_augroup_by_name("HardWrap")
 end
 
 --- @alias Mode "off" | "hard" | "soft"
@@ -110,6 +102,7 @@ function Wrap:toggle(status)
 end
 
 return {
+	in_mathzone = in_mathzone,
 	latex_snippet = latex_snippet,
 	wrap = Wrap,
 }

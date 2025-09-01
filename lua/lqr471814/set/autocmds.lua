@@ -82,6 +82,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
         local redraw = function()
             vim.cmd("redraw!")
+            vim.opt_local.spell = not lib.in_mathzone()
         end
 
         local handler = function()
