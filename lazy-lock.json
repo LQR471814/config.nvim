@@ -34,6 +34,7 @@
   "trouble.nvim": { "branch": "main", "commit": "85bedb7eb7fa331a2ccbecb9202d8abba64d37b3" },
   "undotree": { "branch": "master", "commit": "fe9a9d0645f0f5532360b5e5f5c550d7bb4f1869" },
   "vim-fountain": { "branch": "master", "commit": "4464261ce6f173e5c2dab54b34a2860102c27d25" },
+  "vim-matchup": { "branch": "master", "commit": "347c890d51ae8e63239e92c935d2297c94975538" },
   "vim-table-mode": { "branch": "master", "commit": "e4365bde024f73e205eefa2fb78e3029ddb92ea9" },
   "vimtex": { "branch": "master", "commit": "dc90feacb86f7b85b0b791d8073eefc769a23725" }
 }

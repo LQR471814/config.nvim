@@ -73,8 +73,10 @@ vim.api.nvim_create_autocmd("BufEnter", {
     callback = function(args)
         vim.opt_local.spell = true
         vim.opt_local.spelllang = "en"
-        vim.keymap.set({ "n", "i" }, "<C-[>", "<ESC>m'[s1z=<CR>`'")
-        vim.keymap.set({ "n", "i" }, "<C-]>", "<ESC>m']s1z=<CR>`'")
+
+        local opts = { buffer = true }
+        vim.keymap.set({ "n", "i" }, "<C-[>", "<ESC>m'[s1z=<CR>`'", opts)
+        vim.keymap.set({ "n", "i" }, "<C-]>", "<ESC>m']s1z=<CR>`'", opts)
 
         -- this is in a defer because something keeps overriding it
         vim.defer_fn(function()
@@ -133,5 +135,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
         vim.fn.winrestview(view)
         vim.api.nvim_win_set_cursor(0, save_cursor)
+    end,
+})
+
+-- make help keybinds more sane
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "help",
+    callback = function()
+        vim.keymap.set("n", "gd", "<C-]>", { buffer = true })
     end,
 })

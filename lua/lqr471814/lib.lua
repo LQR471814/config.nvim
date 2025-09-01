@@ -1,8 +1,20 @@
+local cached_value = false
+local cached = false
+
 local function in_mathzone(line_to_cursor, matched_trigger, captures)
-	if vim.bo.filetype == "tex" then
-		return true
+	-- this caching mechanism is here so that vimtex#syntax#in_mathzone doesn't
+	-- need to be called for every snippet that needs to be enabled on a
+	-- mathzone.
+	if cached then
+		return cached_value
 	end
-	return vim.fn['vimtex#syntax#in_mathzone']() == 1
+	cached = true
+	vim.defer_fn(function()
+		cached = false
+	end, 10)
+	local res = vim.fn['vimtex#syntax#in_mathzone']() == 1
+	cached_value = res
+	return res
 end
 
 local function latex_snippet(context, nodes, opts)

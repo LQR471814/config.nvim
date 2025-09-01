@@ -59,6 +59,17 @@ return {
 			vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 		end,
 	},
+	-- modern matchparen replacement
+	{
+		"andymass/vim-matchup",
+		---@type matchup.Config
+		event = "VeryLazy",
+		opts = {
+			treesitter = {
+				stopline = 500,
+			}
+		}
+	},
 	-- switch between files
 	require("lqr471814.plugins.harpoon"),
 	-- manipulate brackets
@@ -67,16 +78,16 @@ return {
 	require("lqr471814.plugins.autoclose"),
 	-- multi-cursors
 	require("lqr471814.plugins.multicursors"),
-    -- text case modifications
-    -- {
-    --     "johmsalas/text-case.nvim",
-    --     event = "VeryLazy",
-    --     dependencies = {
-    --         "nvim-telescope/telescope.nvim"
-    --     },
-    --     config = function()
-    --         require("textcase").setup({})
-    --         require("telescope").load_extension("textcase")
-    --     end
-    -- },
+	-- text case modifications
+	-- {
+	--     "johmsalas/text-case.nvim",
+	--     event = "VeryLazy",
+	--     dependencies = {
+	--         "nvim-telescope/telescope.nvim"
+	--     },
+	--     config = function()
+	--         require("textcase").setup({})
+	--         require("telescope").load_extension("textcase")
+	--     end
+	-- },
 }
