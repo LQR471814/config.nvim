@@ -60,15 +60,6 @@ vim.api.nvim_create_autocmd("BufRead", {
 })
 
 vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = { "*.tex" },
-    callback = function()
-        -- use vimtex latex conceal in latex
-        vim.o.conceallevel = 3
-        vim.g.vimtex_syntax_conceal_disable = 0
-    end,
-})
-
-vim.api.nvim_create_autocmd("BufEnter", {
     pattern = { "*.md" },
     callback = function(args)
         vim.opt_local.spell = true
@@ -82,10 +73,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
         -- this is in a defer because something keeps overriding it
         vim.defer_fn(function()
-            -- don't use vimtex latex conceal in markdown
-            vim.o.conceallevel = 0
-            vim.g.vimtex_syntax_conceal_disable = 1
-
             -- ensure vimtex mathzone detection works
             vim.opt_local.syntax = "tex"
         end, 1000)
@@ -150,4 +137,3 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.keymap.set("n", "gd", "<C-]>", { buffer = true })
     end,
 })
-
