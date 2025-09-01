@@ -51,6 +51,7 @@ return {
 
         \setlength{\parindent}{0pt}
         \setcounter{secnumdepth}{0}
+        \usepackage{myconfig}
 
         \begin{document}
 
