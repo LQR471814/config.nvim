@@ -36,12 +36,18 @@ end
 
 local function enable_hard_wrap()
 	vim.opt_local.textwidth = 66
-	vim.opt_local.formatoptions:append("a")
+	-- local augroup = vim.api.nvim_create_augroup("HardWrap", {})
+	-- vim.api.nvim_create_autocmd("InsertLeave", {
+	-- 	callback = function()
+	-- 		vim.api.nvim_feedkeys("m'gqap`'", "n", false)
+	-- 	end,
+	-- 	group = augroup,
+	-- })
 end
 
 local function disable_hard_wrap()
 	vim.opt_local.textwidth = 0
-	vim.opt_local.formatoptions:remove("a")
+	-- vim.api.nvim_del_augroup_by_name("HardWrap")
 end
 
 --- @alias Mode "off" | "hard" | "soft"

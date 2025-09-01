@@ -35,7 +35,7 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.api.nvim_create_user_command('W', 'w', {})
 
 vim.keymap.set({ "n", "v", "i", "x" }, "<C-z>", "<nop>")
-vim.keymap.set("n", "<leader>w", "gqap")
+vim.keymap.set("n", "<leader>w", "m'gqap`'")
 vim.keymap.set("n", "<leader>pv", function() vim.cmd("Oil") end)
 
 local lib = require("lqr471814.lib")
@@ -48,14 +48,6 @@ end)
 
 vim.keymap.set('n', "<leader>re", ":GrugFar<cr>")
 
-vim.keymap.set('i', '<Esc>', function()
-    local luasnip = require('luasnip')
-    if luasnip.session.current_nodes[vim.api.nvim_get_current_buf()] then
-        luasnip.unlink_current()
-    end
-    return '<Esc>'
-end, { expr = true })
-
 vim.keymap.set('n', '<leader>h', function()
     Snacks.notifier.show_history()
 end)
@@ -63,4 +55,3 @@ end)
 vim.keymap.set('n', "<leader>l", function()
     Snacks.lazygit.open()
 end)
-

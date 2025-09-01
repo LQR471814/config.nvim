@@ -73,6 +73,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
     callback = function(args)
         vim.opt_local.spell = true
         vim.opt_local.spelllang = "en"
+        -- prevent line break inside brackets
+        vim.opt_local.breakat = " \\\t!@*-+;:,./?"
 
         local opts = { buffer = true }
         vim.keymap.set({ "n", "i" }, "<C-[>", "<ESC>m'[s1z=<CR>`'", opts)
@@ -148,3 +150,4 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.keymap.set("n", "gd", "<C-]>", { buffer = true })
     end,
 })
+

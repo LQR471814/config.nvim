@@ -16,6 +16,14 @@ return {
             ll.lazy_load({
                 paths = { "~/.config/nvim/snippets" },
             })
+
+            -- clear jumps on insert leave
+            vim.api.nvim_create_autocmd("InsertLeave", {
+                pattern = "*",
+                callback = function()
+                    ls.unlink_current()
+                end
+            })
         end
     }
 }
