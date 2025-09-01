@@ -71,6 +71,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.api.nvim_create_autocmd("BufEnter", {
     pattern = { "*.md" },
     callback = function(args)
+        vim.opt_local.spell = true
+        vim.opt_local.spelllang = "en"
+        vim.keymap.set({ "n", "i" }, "<C-[>", "<ESC>[s1z=`]a")
+
+        -- this is in a defer because something keeps overriding it
         vim.defer_fn(function()
             -- don't use vimtex latex conceal in markdown
             vim.o.conceallevel = 0
@@ -78,32 +83,32 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
             -- ensure vimtex mathzone detection works
             vim.opt_local.syntax = "tex"
-
-            local timer = vim.uv.new_timer()
-            local active = false
-
-            local redraw = function()
-                vim.cmd("redraw!")
-            end
-
-            local handler = function()
-                vim.uv.timer_stop(timer)
-                active = false
-                vim.schedule(redraw)
-            end
-
-            vim.api.nvim_create_autocmd({ "CursorMoved" }, {
-                buffer = args.buf,
-                callback = function()
-                    if active then
-                        vim.uv.timer_stop(timer)
-                    end
-
-                    active = true
-                    vim.uv.timer_start(timer, 500, 0, handler)
-                end
-            })
         end, 1000)
+
+        local timer = vim.uv.new_timer()
+        local active = false
+
+        local redraw = function()
+            vim.cmd("redraw!")
+        end
+
+        local handler = function()
+            vim.uv.timer_stop(timer)
+            active = false
+            vim.schedule(redraw)
+        end
+
+        vim.api.nvim_create_autocmd({ "CursorMoved" }, {
+            buffer = args.buf,
+            callback = function()
+                if active then
+                    vim.uv.timer_stop(timer)
+                end
+
+                active = true
+                vim.uv.timer_start(timer, 500, 0, handler)
+            end
+        })
     end,
 })
 
