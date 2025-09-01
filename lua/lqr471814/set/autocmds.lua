@@ -73,7 +73,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
     callback = function(args)
         vim.opt_local.spell = true
         vim.opt_local.spelllang = "en"
-        vim.keymap.set({ "n", "i" }, "<C-[>", "<ESC>[s1z=`]a")
+        vim.keymap.set({ "n", "i" }, "<C-[>", "<ESC>m'[s1z=<CR>`'")
+        vim.keymap.set({ "n", "i" }, "<C-]>", "<ESC>m']s1z=<CR>`'")
 
         -- this is in a defer because something keeps overriding it
         vim.defer_fn(function()
