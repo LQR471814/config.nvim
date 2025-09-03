@@ -82,7 +82,9 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
         local redraw = function()
             vim.cmd("redraw!")
-            vim.opt_local.spell = not lib.in_mathzone()
+            if vim.opt.filetype:get() == "markdown" then
+                vim.opt_local.spell = not lib.in_mathzone()
+            end
         end
 
         local handler = function()
