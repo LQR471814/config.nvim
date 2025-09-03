@@ -1,3 +1,43 @@
+local Bullets = {
+	enabled = false
+}
+
+function Bullets:enable()
+	if self.enabled then
+		return
+	end
+	self.enabled = true
+
+	local opts = { buffer = true }
+	vim.keymap.set("i", "<cr>", "<Plug>(bullets-newline-cr)", opts)
+	vim.keymap.set("n", "o", "<Plug>(bullets-newline-o)", opts)
+	vim.keymap.set("n", "<leader>d", "<Plug>(bullets-toggle-checkbox)", opts)
+	vim.keymap.set("i", "<Tab>", "<C-o><Plug>(bullets-demote)", opts)
+	vim.keymap.set("i", "<S-Tab>", "<C-o><Plug>(bullets-promote)", opts)
+end
+
+function Bullets:disable()
+	if not self.enabled then
+		return
+	end
+	self.enabled = false
+
+	local opts = { buffer = true }
+	vim.keymap.del("i", "<cr>", opts)
+	vim.keymap.del("n", "o", opts)
+	vim.keymap.del("n", "<leader>d", opts)
+	vim.keymap.del("i", "<Tab>", opts)
+	vim.keymap.del("i", "<S-Tab>", opts)
+
+	local ls = require("luasnip")
+	vim.keymap.set("i", "<Tab>", function()
+		ls.jump(1)
+	end, opts)
+	vim.keymap.set("i", "<S-Tab>", function()
+		ls.jump(-1)
+	end, opts)
+end
+
 local cached_value = false
 local cached = false
 
@@ -15,7 +55,16 @@ local function in_mathzone()
 	vim.defer_fn(function()
 		cached = false
 	end, 10)
+
 	local res = vim.fn['vimtex#syntax#in_mathzone']() == 1
+
+	-- disable bullets.nvim in mathzone
+	if res and vim.bo.filetype == "markdown" then
+		Bullets:disable()
+	else
+		Bullets:enable()
+	end
+
 	cached_value = res
 	return res
 end
@@ -105,4 +154,5 @@ return {
 	in_mathzone = in_mathzone,
 	latex_snippet = latex_snippet,
 	wrap = Wrap,
+	bullets = Bullets,
 }
