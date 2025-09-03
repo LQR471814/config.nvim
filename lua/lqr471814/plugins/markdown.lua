@@ -6,6 +6,7 @@ return {
 	},
 	{
 		"kaymmm/bullets.nvim",
+		commit = "cfc5c6038d6edcb93509ea7d96d9c8fe3dad5438",
 		event = "VeryLazy",
 		opts = {
 			outline_levels = { 'num', 'std-' },
