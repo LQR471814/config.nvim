@@ -68,8 +68,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
         vim.opt_local.breakat = " \\\t!@*-+;:,./?"
 
         local opts = { buffer = true }
-        vim.keymap.set({ "n", "i" }, "<C-[>", "<ESC>m'[s1z=<CR>`'", opts)
-        vim.keymap.set({ "n", "i" }, "<C-]>", "<ESC>m']s1z=<CR>`'", opts)
+        vim.keymap.set("n", "z,", "<ESC>m'[s1z=<CR>`'", opts)
+        vim.keymap.set("n", "z.", "<ESC>m']s1z=<CR>`'", opts)
 
         -- this is in a defer because something keeps overriding it
         vim.defer_fn(function()
@@ -112,8 +112,8 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt_local.spelllang = "en"
 
         local opts = { buffer = true }
-        vim.keymap.set({ "n", "i" }, "<C-[>", "<ESC>m'[s1z=<CR>`'", opts)
-        vim.keymap.set({ "n", "i" }, "<C-]>", "<ESC>m']s1z=<CR>`'", opts)
+        vim.keymap.set("n", "z,", "<ESC>m'[s1z=<CR>`'", opts)
+        vim.keymap.set("n", "z.", "<ESC>m']s1z=<CR>`'", opts)
     end
 })
 
