@@ -20,7 +20,11 @@ vim.api.nvim_create_autocmd("BufRead", {
         vim.keymap.set("n", "<leader>rl", "<Plug>(bullets-renumber)", opts)
 
         -- bullets
-        lib.bullets:enable()
+        vim.keymap.set("i", "<cr>", "<Plug>(bullets-newline-cr)", opts)
+        vim.keymap.set("n", "o", "<Plug>(bullets-newline-o)", opts)
+        vim.keymap.set("n", "<leader>d", "<Plug>(bullets-toggle-checkbox)", opts)
+        vim.keymap.set("i", "<Tab>", "<C-o><Plug>(bullets-demote)", opts)
+        vim.keymap.set("i", "<S-Tab>", "<C-o><Plug>(bullets-promote)", opts)
 
         -- insert link
         vim.keymap.set("i", "<C-k>", function()
