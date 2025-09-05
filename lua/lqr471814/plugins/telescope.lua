@@ -41,13 +41,6 @@ return {
             vim.keymap.set("n", "<leader>pe", "<CMD>Telescope diagnostics<CR>")
             vim.keymap.set({ "n", "v" }, "<leader>pc", "<CMD>Telescope commands<CR>")
             vim.keymap.set("n", "<leader>ph", "<CMD>Telescope help_tags<CR>")
-
-            vim.keymap.set("n", "<leader>pj", function()
-                builtin.find_files({
-                    prompt_title = "Projects",
-                    find_command = { 'fd', '--type', 'f', '--exclude', 'Archive', 'Project: ' },
-                })
-            end, { desc = "Find projects" })
         end
     }
 }
