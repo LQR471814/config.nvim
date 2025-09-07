@@ -62,8 +62,9 @@ return {
 	-- modern matchparen replacement
 	{
 		"andymass/vim-matchup",
-		---@type matchup.Config
+		enabled = false,
 		event = "VeryLazy",
+		---@type matchup.Config
 		opts = {
 			treesitter = {
 				stopline = 500,
