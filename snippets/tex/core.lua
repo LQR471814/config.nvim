@@ -387,4 +387,10 @@ return {
         { trig = "->", snippetType = "autosnippet" },
         t("\\to")
     ),
+
+    -- dots
+    s(
+        { trig = "...", snippetType = "autosnippet", wordTrig = false },
+        t("\\dots")
+    )
 }
