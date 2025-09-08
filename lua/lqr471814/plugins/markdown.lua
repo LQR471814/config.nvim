@@ -32,29 +32,32 @@ return {
 			"echasnovski/mini.icons"
 		},
 		config = function()
-			require("render-markdown").setup({
-				---@module 'render-markdown'
-				---@type render.md.UserConfig
-				completions = {
-					blink = {
-						enabled = true
+			require("render-markdown").setup(
+			---@module 'render-markdown'
+			---@type render.md.UserConfig
+				{
+					debounce = 250,
+					completions = {
+						blink = {
+							enabled = true
+						},
 					},
-				},
-				render_modes = { "n", "i", "c", "t" },
-				heading = {
-					enabled = true,
-					sign = false,
-				},
-				latex = {
-					enabled = false,
-				},
-				html = {
-					enabled = false,
-				},
-				yaml = {
-					enabled = false,
-				},
-			})
+					render_modes = { "n", "i", "c", "t" },
+					heading = {
+						enabled = true,
+						sign = false,
+					},
+					latex = {
+						enabled = false,
+					},
+					html = {
+						enabled = false,
+					},
+					yaml = {
+						enabled = false,
+					},
+				}
+			)
 		end
 	},
 

@@ -49,10 +49,12 @@ vim.api.nvim_create_autocmd("BufRead", {
             enabled = not enabled
             if enabled then
                 vim.cmd("TableModeEnable")
+                vim.cmd("RenderMarkdown disable")
                 wrapStatus = lib.wrap:status()
                 lib.wrap:set("off")
             else
                 vim.cmd("TableModeDisable")
+                vim.cmd("RenderMarkdown enable")
                 lib.wrap:set(wrapStatus)
             end
         end, opts)
