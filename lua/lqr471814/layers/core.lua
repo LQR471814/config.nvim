@@ -62,7 +62,6 @@ return {
 	-- modern matchparen replacement
 	{
 		"andymass/vim-matchup",
-		enabled = false,
 		event = "VeryLazy",
 		---@type matchup.Config
 		opts = {

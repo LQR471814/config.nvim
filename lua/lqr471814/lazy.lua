@@ -34,7 +34,4 @@ local function init(config)
     lazy.setup(modules)
 end
 
--- disable matchparen
-vim.g.loaded_matchparen = 0
-
 return init
