@@ -1,7 +1,7 @@
 local lib = require("lqr471814.lib")
 
--- enable hard wrap on markdown files
-vim.api.nvim_create_autocmd("BufRead", {
+-- enable hard wrap on markdown and tex files
+vim.api.nvim_create_autocmd("BufReadPost", {
     pattern = { "*.md", "*.tex" },
     callback = function()
         lib.wrap:set("hard")
@@ -62,7 +62,18 @@ vim.api.nvim_create_autocmd("BufRead", {
 })
 
 vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = { "*.md" },
+    pattern = { "*.md", "*.markdown" },
+    callback = function()
+        -- this is in a defer because something keeps overriding it
+        vim.defer_fn(function()
+            -- ensure vimtex mathzone detection works
+            vim.opt_local.syntax = "tex"
+        end, 1000)
+    end
+})
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+    pattern = { "*.md", "*.markdown" },
     callback = function(args)
         vim.opt_local.spell = true
         vim.opt_local.spelllang = "en"
@@ -73,17 +84,16 @@ vim.api.nvim_create_autocmd("BufEnter", {
         vim.keymap.set("n", "z,", "<ESC>m'[s1z=<CR>`'", opts)
         vim.keymap.set("n", "z.", "<ESC>m']s1z=<CR>`'", opts)
 
-        -- this is in a defer because something keeps overriding it
-        vim.defer_fn(function()
-            -- ensure vimtex mathzone detection works
-            vim.opt_local.syntax = "tex"
-        end, 1000)
-
         local timer = vim.uv.new_timer()
+        if not timer then
+            vim.notify("failed to create timer!", vim.log.levels.ERROR)
+            return
+        end
+
         local active = false
 
         local redraw = function()
-            vim.cmd("redraw!")
+            vim.cmd("redraw")
             if vim.opt.filetype:get() == "markdown" then
                 vim.opt_local.spell = not lib.in_mathzone()
             end
@@ -103,14 +113,17 @@ vim.api.nvim_create_autocmd("BufEnter", {
                 end
 
                 active = true
-                vim.uv.timer_start(timer, 500, 0, handler)
+                local success = vim.uv.timer_start(timer, 200, 0, handler)
+                if not success then
+                    active = false
+                end
             end
         })
     end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "tex",
+vim.api.nvim_create_autocmd("BufReadPost", {
+    pattern = { "*.md", "*.markdown" },
     callback = function()
         vim.opt_local.spell = true
         vim.opt_local.spelllang = "en"

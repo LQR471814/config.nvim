@@ -21,7 +21,7 @@ return {
             vim.api.nvim_create_autocmd("InsertLeave", {
                 pattern = "*",
                 callback = function()
-                    ls.unlink_current()
+                    vim.cmd("silent lua require('luasnip').unlink_current()")
                 end
             })
         end
