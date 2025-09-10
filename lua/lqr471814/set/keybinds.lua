@@ -55,3 +55,37 @@ end)
 vim.keymap.set('n', "<leader>l", function()
     Snacks.lazygit.open()
 end)
+
+-- telescope
+
+vim.keymap.set("n", "<leader>pf", function()
+    require("telescope.builtin").find_files({
+        find_command = { 'fd', '--type', 'file', '--hidden', '-E', '.git', '-E', '.treesitter' },
+    })
+end, {})
+vim.keymap.set("n", "<leader>ps", function()
+    local target = vim.fn.input("grep > ")
+    require("telescope.builtin").grep_string({
+        search = target,
+        additional_args = { "--iglob", "!.{git,treesitter}", "--hidden" }
+    })
+end, {})
+vim.keymap.set("n", "<leader>pg", function()
+    require("telescope.builtin").git_files()
+end)
+vim.keymap.set("n", "<leader>pb", function()
+    require("telescope.builtin").buffers()
+end)
+vim.keymap.set("n", "<leader>pl", function()
+    require("telescope.builtin").live_grep()
+end)
+vim.keymap.set("n", "<leader>pe", function()
+    require("telescope.builtin").diagnostics()
+end)
+vim.keymap.set({ "n", "v" }, "<leader>pc", function()
+    require("telescope.builtin").commands()
+end)
+vim.keymap.set("n", "<leader>ph", function()
+    require("telescope.builtin").help_tags()
+end)
+

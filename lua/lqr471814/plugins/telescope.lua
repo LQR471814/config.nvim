@@ -12,35 +12,10 @@ return {
             'nvim-lua/plenary.nvim',
             'nvim-telescope/telescope-fzf-native.nvim',
         },
-        config = function()
-            local builtin = require("telescope.builtin")
-
-            require('telescope').setup {
-                defaults = {
-                    path_display = { "truncate" },
-                },
-            }
-
-            vim.keymap.set("n", "<leader>pf", function()
-                builtin.find_files({
-                    find_command = { 'fd', '--type', 'file', '--hidden', '-E', '.git', '-E', '.treesitter' },
-                })
-            end, {})
-
-            vim.keymap.set("n", "<leader>ps", function()
-                local target = vim.fn.input("grep > ")
-                builtin.grep_string({
-                    search = target,
-                    additional_args = { "--iglob", "!.{git,treesitter}", "--hidden" }
-                })
-            end, {})
-
-            vim.keymap.set("n", "<leader>pg", builtin.git_files)
-            vim.keymap.set("n", "<leader>pb", builtin.buffers)
-            vim.keymap.set("n", "<leader>pl", builtin.live_grep)
-            vim.keymap.set("n", "<leader>pe", "<CMD>Telescope diagnostics<CR>")
-            vim.keymap.set({ "n", "v" }, "<leader>pc", "<CMD>Telescope commands<CR>")
-            vim.keymap.set("n", "<leader>ph", "<CMD>Telescope help_tags<CR>")
-        end
+        opts = {
+            defaults = {
+                path_display = { "truncate" },
+            },
+        },
     }
 }
