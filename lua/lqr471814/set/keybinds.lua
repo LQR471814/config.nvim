@@ -93,6 +93,6 @@ end)
 
 vim.keymap.set("n", "g.", "<cmd>BufferLineCycleNext<cr>")
 vim.keymap.set("n", "g,", "<cmd>BufferLineCyclePrev<cr>")
-vim.keymap.set("n", "<leader>q", "<cmd>bd<cr>")
-vim.keymap.set("n", "<leader>Q", "<cmd>bd!<cr>")
+vim.keymap.set("n", "<leader>d", "<cmd>bd<cr>")
+vim.keymap.set("n", "<leader>D", "<cmd>bd!<cr>")
 vim.keymap.set("n", "<leader>pt", "<cmd>BufferLinePick<cr>")
