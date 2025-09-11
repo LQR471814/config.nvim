@@ -14,9 +14,5 @@ return {
         vim.keymap.set({ "n", "i" }, "<C-2>", function() harpoon:list():select(2) end)
         vim.keymap.set({ "n", "i" }, "<C-3>", function() harpoon:list():select(3) end)
         vim.keymap.set({ "n", "i" }, "<C-4>", function() harpoon:list():select(4) end)
-
-        -- Toggle previous & next buffers stored within Harpoon list
-        vim.keymap.set({ "n", "i" }, "<C-p>", function() harpoon:list():prev() end)
-        vim.keymap.set({ "n", "i" }, "<C-n>", function() harpoon:list():next() end)
     end
 }

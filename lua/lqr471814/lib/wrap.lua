@@ -1,61 +1,3 @@
-local cached_value = false
-local cached = false
-
-
-local function in_mathzone()
-	-- this caching mechanism is here so that vimtex#syntax#in_mathzone doesn't
-	-- need to be called for every snippet that needs to be enabled on a
-	-- mathzone.
-	if cached then
-		return cached_value
-	end
-	cached = true
-	vim.defer_fn(function()
-		cached = false
-	end, 10)
-
-	if vim.bo.filetype == "tex" then
-		cached_value = true
-		return true
-	end
-
-	local res = false
-	local captures = vim.treesitter.get_captures_at_cursor(0)
-	local i = 1
-	while i <= #captures do
-		if captures[i] == "markup.math" then
-			res = true
-			break
-		end
-		i = i + 1
-	end
-
-	-- disable bullets.nvim in mathzone
-	local opts = { buffer = true }
-	if res and vim.bo.filetype == "markdown" then
-		local ls = require("luasnip")
-		vim.keymap.set("i", "<Tab>", function()
-			ls.jump(1)
-		end, opts)
-		vim.keymap.set("i", "<S-Tab>", function()
-			ls.jump(-1)
-		end, opts)
-	else
-		vim.keymap.set("i", "<Tab>", "<C-o><Plug>(bullets-demote)", opts)
-		vim.keymap.set("i", "<S-Tab>", "<C-o><Plug>(bullets-promote)", opts)
-	end
-
-	cached_value = res
-	return res
-end
-
-local function latex_snippet(context, nodes, opts)
-	local ls = require("luasnip")
-	context.condition = in_mathzone
-	context.show_condition = in_mathzone
-	return ls.snippet(context, nodes, opts)
-end
-
 local function enable_soft_wrap()
 	vim.opt_local.wrap = true
 	vim.opt_local.linebreak = true
@@ -146,8 +88,4 @@ function Wrap:toggle(status, silent)
 	end
 end
 
-return {
-	in_mathzone = in_mathzone,
-	latex_snippet = latex_snippet,
-	wrap = Wrap,
-}
+return Wrap

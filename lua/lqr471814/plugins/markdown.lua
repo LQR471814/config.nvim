@@ -29,7 +29,8 @@ return {
 		event = "VeryLazy",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
-			"echasnovski/mini.icons"
+			"echasnovski/mini.icons",
+			"nvim-tree/nvim-web-devicons"
 		},
 		config = function()
 			require("render-markdown").setup(

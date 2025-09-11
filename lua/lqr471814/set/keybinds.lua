@@ -89,3 +89,10 @@ vim.keymap.set("n", "<leader>ph", function()
     require("telescope.builtin").help_tags()
 end)
 
+-- bufferline
+
+vim.keymap.set("n", "g.", "<cmd>BufferLineCycleNext<cr>")
+vim.keymap.set("n", "g,", "<cmd>BufferLineCyclePrev<cr>")
+vim.keymap.set("n", "<leader>w", "<cmd>bd<cr>")
+vim.keymap.set("n", "<leader>W", "<cmd>bd!<cr>")
+vim.keymap.set("n", "<leader>pt", "<cmd>BufferLinePick<cr>")

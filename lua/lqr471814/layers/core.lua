@@ -9,7 +9,7 @@ return {
 	},
 	-- file explorer
 	{
-		'stevearc/oil.nvim',
+		"stevearc/oil.nvim",
 		opts = {
 			view_options = {
 				show_hidden = true
@@ -19,7 +19,8 @@ return {
 			}
 		},
 		dependencies = {
-			{ "echasnovski/mini.icons", opts = {} }
+			"echasnovski/mini.icons",
+			"nvim-tree/nvim-web-devicons"
 		},
 	},
 	-- rename html tags
@@ -78,6 +79,22 @@ return {
 	require("lqr471814.plugins.autoclose"),
 	-- multi-cursors
 	require("lqr471814.plugins.multicursors"),
+	-- buffer-lines
+	{
+		"akinsho/bufferline.nvim",
+		version = "*",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("bufferline").setup({
+				options = {
+					pick = {
+						alphabet = "123456789abcdefghijklmopqrstuvwxyz"
+					}
+				}
+			})
+		end
+	},
+
 	-- text case modifications
 	-- {
 	--     "johmsalas/text-case.nvim",
