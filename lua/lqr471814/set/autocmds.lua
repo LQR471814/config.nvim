@@ -4,9 +4,27 @@ local lib = require("lqr471814.lib")
 vim.api.nvim_create_autocmd("BufReadPost", {
     pattern = { "*.md", "*.tex" },
     callback = function()
-        lib.wrap:set("hard")
+        lib.wrap:set("hard", true)
+    end
+})
 
+vim.api.nvim_create_autocmd("BufReadPost", {
+    pattern = { "*.md", "*.markdown" },
+    callback = function(args)
         local opts = { buffer = true }
+
+        -- spell check
+        vim.opt_local.spell = true
+        vim.opt_local.spelllang = "en"
+        vim.keymap.set("n", "z,", "<ESC>m'[s1z=<CR>`'", opts)
+        vim.keymap.set("n", "z.", "<ESC>m']s1z=<CR>`'", opts)
+
+        -- tab size
+        vim.opt.tabstop = 4
+        vim.opt.shiftwidth = 4
+
+        -- prevent line break inside brackets
+        vim.opt_local.breakat = " \\\t!@*-+;:,./?"
 
         -- bold
         vim.keymap.set("v", "<C-b>", "2<Plug>(nvim-surround-visual)*", opts)
@@ -16,10 +34,8 @@ vim.api.nvim_create_autocmd("BufReadPost", {
         vim.keymap.set("v", "<C-h>", "2<Plug>(nvim-surround-visual)=", opts)
         vim.keymap.set("i", "<C-h>", "====<Left><Left>", opts)
 
-        -- renumber list
-        vim.keymap.set("n", "<leader>rl", "<Plug>(bullets-renumber)", opts)
-
         -- bullets
+        vim.keymap.set("n", "<leader>rl", "<Plug>(bullets-renumber)", opts)
         vim.keymap.set("i", "<cr>", "<Plug>(bullets-newline-cr)", opts)
         vim.keymap.set("n", "o", "<Plug>(bullets-newline-o)", opts)
         vim.keymap.set("n", "<leader>d", "<Plug>(bullets-toggle-checkbox)", opts)
@@ -35,103 +51,73 @@ vim.api.nvim_create_autocmd("BufReadPost", {
             vim.api.nvim_win_set_cursor(0, { pos[1], pos[2] + 1 })
         end, opts)
 
-        -- tab size
-        vim.opt.tabstop = 4
-        vim.opt.shiftwidth = 4
-
         -- table mode
-        local enabled = false
 
-        --- @type "off" | "hard" | "soft"
-        local wrapStatus
+        local function enable_markdown_tablemode()
+            local enabled = false
 
-        vim.keymap.set("n", "<leader>tm", function()
-            enabled = not enabled
-            if enabled then
-                vim.cmd("TableModeEnable")
-                vim.cmd("RenderMarkdown disable")
-                wrapStatus = lib.wrap:status()
-                lib.wrap:set("off")
-            else
-                vim.cmd("TableModeDisable")
-                vim.cmd("RenderMarkdown enable")
-                lib.wrap:set(wrapStatus)
-            end
-        end, opts)
-    end
-})
+            --- @type "off" | "hard" | "soft"
+            local wrapStatus
 
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = { "*.md", "*.markdown" },
-    callback = function()
-        -- this is in a defer because something keeps overriding it
-        vim.defer_fn(function()
-            -- ensure vimtex mathzone detection works
-            vim.opt_local.syntax = "tex"
-        end, 1000)
-    end
-})
-
-vim.api.nvim_create_autocmd("BufReadPost", {
-    pattern = { "*.md", "*.markdown" },
-    callback = function(args)
-        vim.opt_local.spell = true
-        vim.opt_local.spelllang = "en"
-        -- prevent line break inside brackets
-        vim.opt_local.breakat = " \\\t!@*-+;:,./?"
-
-        local opts = { buffer = true }
-        vim.keymap.set("n", "z,", "<ESC>m'[s1z=<CR>`'", opts)
-        vim.keymap.set("n", "z.", "<ESC>m']s1z=<CR>`'", opts)
-
-        local timer = vim.uv.new_timer()
-        if not timer then
-            vim.notify("failed to create timer!", vim.log.levels.ERROR)
-            return
-        end
-
-        local active = false
-
-        local redraw = function()
-            vim.cmd("redraw")
-            if vim.opt.filetype:get() == "markdown" then
-                vim.opt_local.spell = not lib.in_mathzone()
-            end
-        end
-
-        local handler = function()
-            vim.uv.timer_stop(timer)
-            active = false
-            vim.schedule(redraw)
-        end
-
-        vim.api.nvim_create_autocmd({ "CursorMoved" }, {
-            buffer = args.buf,
-            callback = function()
-                if active then
-                    vim.uv.timer_stop(timer)
+            vim.keymap.set("n", "<leader>tm", function()
+                enabled = not enabled
+                if enabled then
+                    vim.cmd("TableModeEnable")
+                    vim.cmd("RenderMarkdown disable")
+                    wrapStatus = lib.wrap:status()
+                    lib.wrap:set("off")
+                else
+                    vim.cmd("TableModeDisable")
+                    vim.cmd("RenderMarkdown enable")
+                    lib.wrap:set(wrapStatus)
                 end
+            end, opts)
+        end
 
-                active = true
-                local success = vim.uv.timer_start(timer, 200, 0, handler)
-                if not success then
-                    active = false
+        enable_markdown_tablemode()
+
+        -- monkeypatch mdmath issues
+
+        local function monkeypatch_mdmath()
+            local timer = vim.uv.new_timer()
+            if not timer then
+                vim.notify("failed to create timer!", vim.log.levels.ERROR)
+                return
+            end
+
+            local active = false
+
+            local redraw = function()
+                vim.cmd("redraw")
+                if vim.opt.filetype:get() == "markdown" then
+                    vim.opt_local.spell = not lib.in_mathzone()
                 end
             end
-        })
+
+            local handler = function()
+                vim.uv.timer_stop(timer)
+                active = false
+                vim.schedule(redraw)
+            end
+
+            vim.api.nvim_create_autocmd({ "CursorMoved" }, {
+                buffer = args.buf,
+                callback = function()
+                    if active then
+                        vim.uv.timer_stop(timer)
+                    end
+
+                    active = true
+                    local success = vim.uv.timer_start(timer, 200, 0, handler)
+                    if not success then
+                        active = false
+                    end
+                end
+            })
+        end
+
+        monkeypatch_mdmath()
     end,
-})
-
-vim.api.nvim_create_autocmd("BufReadPost", {
-    pattern = { "*.md", "*.markdown" },
-    callback = function()
-        vim.opt_local.spell = true
-        vim.opt_local.spelllang = "en"
-
-        local opts = { buffer = true }
-        vim.keymap.set("n", "z,", "<ESC>m'[s1z=<CR>`'", opts)
-        vim.keymap.set("n", "z.", "<ESC>m']s1z=<CR>`'", opts)
-    end
 })
 
 -- remove trailing whitespace on save

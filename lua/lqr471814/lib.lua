@@ -1,10 +1,8 @@
 local cached_value = false
 local cached = false
 
+
 local function in_mathzone()
-	if vim.bo.filetype == "tex" then
-		return true
-	end
 	-- this caching mechanism is here so that vimtex#syntax#in_mathzone doesn't
 	-- need to be called for every snippet that needs to be enabled on a
 	-- mathzone.
@@ -16,7 +14,21 @@ local function in_mathzone()
 		cached = false
 	end, 10)
 
-	local res = vim.fn['vimtex#syntax#in_mathzone']() == 1
+	if vim.bo.filetype == "tex" then
+		cached_value = true
+		return true
+	end
+
+	local res = false
+	local captures = vim.treesitter.get_captures_at_cursor(0)
+	local i = 1
+	while i <= #captures do
+		if captures[i] == "markup.math" then
+			res = true
+			break
+		end
+		i = i + 1
+	end
 
 	-- disable bullets.nvim in mathzone
 	local opts = { buffer = true }
@@ -78,42 +90,58 @@ function Wrap:status()
 end
 
 --- @param status Mode
-function Wrap:set(status)
+--- @param silent boolean?
+function Wrap:set(status, silent)
 	if status == "off" then
 		disable_hard_wrap()
 		disable_soft_wrap()
-		vim.notify("All wrappings off.")
+		if not silent then
+			vim.notify("All wrappings off.")
+		end
 	elseif status == "hard" then
 		disable_soft_wrap()
 		enable_hard_wrap()
-		vim.notify("Hard wrapping on.")
+		if not silent then
+			vim.notify("Hard wrapping on.")
+		end
 	elseif status == "soft" then
 		disable_hard_wrap()
 		enable_soft_wrap()
-		vim.notify("Soft wrapping on.")
+		if not silent then
+			vim.notify("Soft wrapping on.")
+		end
 	end
 end
 
 --- @param status "hard" | "soft"
-function Wrap:toggle(status)
+--- @param silent boolean?
+function Wrap:toggle(status, silent)
 	local current = self:status()
 	if status == "hard" then
 		if current == "hard" then
 			disable_hard_wrap()
-			vim.notify("Hard wrapping off.")
+			if not silent then
+				vim.notify("Hard wrapping off.")
+			end
 		else
 			disable_soft_wrap()
 			enable_hard_wrap()
-			vim.notify("Hard wrapping on.")
+			if not silent then
+				vim.notify("Hard wrapping on.")
+			end
 		end
 	elseif status == "soft" then
 		if current == "soft" then
 			disable_soft_wrap()
-			vim.notify("Soft wrapping off.")
+			if not silent then
+				vim.notify("Soft wrapping off.")
+			end
 		else
 			disable_hard_wrap()
 			enable_soft_wrap()
-			vim.notify("Soft wrapping on.")
+			if not silent then
+				vim.notify("Soft wrapping on.")
+			end
 		end
 	end
 end

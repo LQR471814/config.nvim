@@ -36,7 +36,7 @@ return {
 			---@module 'render-markdown'
 			---@type render.md.UserConfig
 				{
-					debounce = 250,
+					debounce = 500,
 					completions = {
 						blink = {
 							enabled = true
