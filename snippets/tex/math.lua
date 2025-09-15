@@ -5,7 +5,8 @@ local t = ls.text_node
 local mapping = {
     fa = "forall",
     t = "therefore",
-    u = "underset"
+    u = "underset",
+    e = "exists"
 }
 local result = {}
 
