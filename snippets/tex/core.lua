@@ -302,9 +302,6 @@ return {
     -- del
     s({ trig = "del" }, t("\\nabla")),
 
-    -- therefore symbol
-    s({ trig = "\\there", snippetType = "autosnippet" }, t("\\therefore")),
-
     s({ trig = "\\*", snippetType = "autosnippet" }, t("\\cdot ")),
 
     -- ensure space exists after closing }, $, %, = or any common operations
@@ -392,5 +389,11 @@ return {
     s(
         { trig = "...", snippetType = "autosnippet", wordTrig = false },
         t("\\dots")
+    ),
+
+    -- binom
+    s(
+        { trig = "binom", snippetType = "autosnippet", wordTrig = false },
+        fmta("\\binom{<>}{<>}", { i(1), i(2) })
     )
 }
