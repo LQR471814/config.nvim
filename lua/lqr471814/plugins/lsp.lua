@@ -1,15 +1,15 @@
 return {
     {
-        'saghen/blink.cmp',
-        version = '1.*',
-        dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },
+        "saghen/blink.cmp",
+        version = "1.*",
+        dependencies = { "L3MON4D3/LuaSnip", version = "v2.*" },
         event = "VeryLazy",
 
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
-            keymap = { preset = 'enter' },
-            snippets = { preset = 'luasnip' },
+            keymap = { preset = "enter" },
+            snippets = { preset = "luasnip" },
             sources = {
                 default = { "lazydev", "lsp", "path", "snippets", "buffer" },
                 per_filetype = {
@@ -41,7 +41,7 @@ return {
             vim.api.nvim_create_autocmd("BufWritePre", {
                 pattern = "*.go",
                 callback = function()
-                    require('go.format').goimports()
+                    require("go.format").goimports()
                 end,
                 group = format_sync_grp,
             })
@@ -73,7 +73,7 @@ return {
         opts = {
             servers = {
                 clangd = {
-                    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }
+                    filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
                 },
                 tailwindcss = {},
                 svelte = {},
@@ -151,13 +151,13 @@ return {
             opts.jsonls = {
                 settings = {
                     json = {
-                        schemas = require('schemastore').json.schemas(),
+                        schemas = require("schemastore").json.schemas(),
                         validate = { enable = true },
                     }
                 }
             }
 
-            local blink = require('blink.cmp')
+            local blink = require("blink.cmp")
 
             for server, config in pairs(opts.servers) do
                 vim.lsp.enable(server)
@@ -169,9 +169,9 @@ return {
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),
                 callback = function(ev)
-                    vim.keymap.set('n', 'gq', 'gw', { noremap = true })
-                    vim.keymap.set('n', 'gqq', 'gww', { noremap = true })
-                    vim.keymap.set('v', 'gq', 'gw', { noremap = true })
+                    vim.keymap.set("n", "gq", "gw", { noremap = true })
+                    vim.keymap.set("n", "gqq", "gww", { noremap = true })
+                    vim.keymap.set("v", "gq", "gw", { noremap = true })
 
                     local options = { buffer = ev.buf }
                     vim.keymap.set("n", "ge", function() vim.diagnostic.open_float() end, options)

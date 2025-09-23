@@ -32,7 +32,7 @@ vim.keymap.set("v", "gp", paste_from_clipboard)
 
 -- avoid keybind typos
 vim.keymap.set("n", "Q", "<nop>")
-vim.api.nvim_create_user_command('W', 'w', {})
+vim.api.nvim_create_user_command("W", "w", {})
 
 vim.keymap.set({ "n", "v", "i", "x" }, "<C-z>", "<nop>")
 vim.keymap.set("n", "<leader>w", "m'gqap`'")
@@ -46,13 +46,13 @@ vim.keymap.set("n", "<leader>Z", function()
     lib.wrap:toggle("hard")
 end)
 
-vim.keymap.set('n', "<leader>re", ":GrugFar<cr>")
+vim.keymap.set("n", "<leader>re", ":GrugFar<cr>")
 
-vim.keymap.set('n', '<leader>h', function()
+vim.keymap.set("n", "<leader>h", function()
     Snacks.notifier.show_history()
 end)
 
-vim.keymap.set('n', "<leader>l", function()
+vim.keymap.set("n", "<leader>l", function()
     Snacks.lazygit.open()
 end)
 
@@ -60,7 +60,7 @@ end)
 
 vim.keymap.set("n", "<leader>pf", function()
     require("telescope.builtin").find_files({
-        find_command = { 'fd', '--type', 'file', '--hidden', '-E', '.git', '-E', '.treesitter' },
+        find_command = { "fd", "--type", "file", "--hidden", "-E", ".git", "-E", ".treesitter" },
     })
 end, {})
 vim.keymap.set("n", "<leader>ps", function()
