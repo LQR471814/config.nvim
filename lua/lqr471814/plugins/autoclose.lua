@@ -4,7 +4,7 @@ return {
     config = true,
     opts = {
         -- enabled = function(bufnr) return true end, -- control if auto-pairs should be enabled when attaching to a buffer
-        disable_filetype = { "TelescopePrompt", "spectre_panel", "snacks_picker_input", "tex", "markdown" },
+        disable_filetype = { "TelescopePrompt", "grug-far", "tex", "markdown" },
         disable_in_macro = true,
         disable_in_visualblock = true,
         disable_in_replace_mode = true,
