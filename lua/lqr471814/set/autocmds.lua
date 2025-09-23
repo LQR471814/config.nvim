@@ -141,3 +141,4 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.keymap.set("n", "gd", "<C-]>", { buffer = true })
     end,
 })
+
