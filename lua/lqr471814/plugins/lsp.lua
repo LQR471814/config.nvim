@@ -83,6 +83,7 @@ return {
                 texlab = {},
                 marksman = {},
                 nushell = {},
+                ast_grep = {},
 
                 nixd = {
                     cmd = { "nixd" },
