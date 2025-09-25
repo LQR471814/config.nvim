@@ -80,20 +80,20 @@ return {
 	-- multi-cursors
 	require("lqr471814.plugins.multicursors"),
 	-- buffer-lines
-	{
-		"akinsho/bufferline.nvim",
-		version = "*",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		config = function()
-			require("bufferline").setup({
-				options = {
-					pick = {
-						alphabet = "123456789abcdefghijklmopqrstuvwxyz"
-					}
-				}
-			})
-		end
-	},
+	-- {
+	-- 	"akinsho/bufferline.nvim",
+	-- 	version = "*",
+	-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	-- 	config = function()
+	-- 		require("bufferline").setup({
+	-- 			options = {
+	-- 				pick = {
+	-- 					alphabet = "123456789abcdefghijklmopqrstuvwxyz"
+	-- 				}
+	-- 			}
+	-- 		})
+	-- 	end
+	-- },
 
 	-- text case modifications
 	-- {
