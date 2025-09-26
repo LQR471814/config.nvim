@@ -140,18 +140,18 @@ return {
                 vim.lsp.config(server, config)
             end
 
+            local keymap = require("lqr471814.lib.keymap")
+
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),
                 callback = function(ev)
-                    local keyopts = { buffer = ev.buf, noremap = true, silent = true, unique = true }
-
-                    vim.keymap.set("n", "ge", function() vim.diagnostic.open_float() end, keyopts)
-                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, keyopts)
-                    vim.keymap.set("n", "gh", vim.lsp.buf.hover, keyopts)
-                    vim.keymap.set("n", "gr", vim.lsp.buf.references, keyopts)
+                    keymap:buffer_map("n", "ge", function() vim.diagnostic.open_float() end, "", ev.buf)
+                    keymap:buffer_map("n", "gd", vim.lsp.buf.definition, "", ev.buf)
+                    keymap:buffer_map("n", "gh", vim.lsp.buf.hover, "", ev.buf)
+                    keymap:buffer_map("n", "gr", vim.lsp.buf.references, "", ev.buf)
 
                     -- rename with a completely different name
-                    vim.keymap.set("n", "<leader>rr", function()
+                    keymap:buffer_map("n", "<leader>rr", function()
                         vim.ui.input(
                             {
                                 prompt = "Rename: ",
@@ -163,22 +163,22 @@ return {
                                 end
                             end
                         )
-                    end, keyopts)
+                    end, "", ev.buf)
 
                     -- rename starting with the same name
-                    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, keyopts)
+                    keymap:buffer_map("n", "<leader>rn", vim.lsp.buf.rename, "", ev.buf)
 
-                    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, keyopts)
-                    vim.keymap.set({ "n", "v" }, "<space>.", vim.lsp.buf.code_action, keyopts)
-                    vim.keymap.set({ "n" }, "<leader>f", function()
+                    keymap:buffer_map("i", "<C-h>", function() vim.lsp.buf.signature_help() end, "", ev.buf)
+                    keymap:buffer_map({ "n", "v" }, "<space>.", vim.lsp.buf.code_action, "", ev.buf)
+                    keymap:buffer_map({ "n" }, "<leader>f", function()
                         vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
-                    end, keyopts)
-                    vim.keymap.set("n", "]g", function()
+                    end, "", ev.buf)
+                    keymap:buffer_map("n", "]g", function()
                         vim.diagnostic.jump({ count = 1, float = true })
-                    end, keyopts)
-                    vim.keymap.set("n", "[g", function()
+                    end, "", ev.buf)
+                    keymap:buffer_map("n", "[g", function()
                         vim.diagnostic.jump({ count = -1, float = true })
-                    end, keyopts)
+                    end, "", ev.buf)
                 end,
             })
         end

@@ -1,3 +1,5 @@
+local keymap = require("lqr471814.lib.keymap")
+
 local Mathzone = {
 	cached_value = false,
 	cached = false
@@ -32,18 +34,17 @@ function Mathzone:in_mathzone()
 	end
 
 	-- disable bullets.nvim in mathzone
-	local opts = { buffer = true, silent = true, noremap = true }
 	if res and vim.bo.filetype == "markdown" then
 		local ls = require("luasnip")
-		vim.keymap.set("i", "<Tab>", function()
+		keymap:overwrite_buffer_map("i", "<Tab>", function()
 			ls.jump(1)
-		end, opts)
-		vim.keymap.set("i", "<S-Tab>", function()
+		end)
+		keymap:overwrite_buffer_map("i", "<S-Tab>", function()
 			ls.jump(-1)
-		end, opts)
+		end)
 	else
-		vim.keymap.set("i", "<Tab>", "<C-o><Plug>(bullets-demote)", opts)
-		vim.keymap.set("i", "<S-Tab>", "<C-o><Plug>(bullets-promote)", opts)
+		keymap:overwrite_buffer_map("i", "<Tab>", "<C-o><Plug>(bullets-demote)")
+		keymap:overwrite_buffer_map("i", "<S-Tab>", "<C-o><Plug>(bullets-promote)")
 	end
 
 	self.cached_value = res

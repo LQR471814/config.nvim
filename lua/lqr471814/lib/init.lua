@@ -1,6 +1,7 @@
 local Mathzone = require("lqr471814.lib.mathzone")
 local Wrap = require("lqr471814.lib.wrap")
 local Telescope = require("lqr471814.lib.telescope")
+local Keymap = require("lqr471814.lib.keymap")
 
 local function in_mathzone()
 	return Mathzone:in_mathzone()
@@ -18,4 +19,5 @@ return {
 	in_mathzone = in_mathzone,
 	wrap = Wrap,
 	telescope = Telescope,
+	keymap = Keymap,
 }
