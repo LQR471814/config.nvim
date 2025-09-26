@@ -16,7 +16,7 @@ return {
         enable_abbr = false,              -- trigger abbreviation
         break_undo = true,                -- switch for basic rule break undo sequence
         check_ts = true, -- tree sitter integration
-        map_cr = true,   -- map <cr> key
+        map_cr = false,  -- map <cr> key
         map_bs = true,   -- map the <BS> key
         map_c_h = false, -- Map the <C-h> key to delete a pair
         map_c_w = false, -- map <c-w> to delete a pair if possible

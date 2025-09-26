@@ -2,6 +2,8 @@
 return {
 	-- multi-cursors
 	require("lqr471814.plugins.multicursors"),
+	-- blink
+	require("lqr471814.plugins.blink"),
 	-- language server
 	require("lqr471814.plugins.lsp"),
 	-- markdown editing

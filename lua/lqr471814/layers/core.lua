@@ -57,7 +57,11 @@ return {
 		"mbbill/undotree",
 		event = "VeryLazy",
 		config = function()
-			vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+			vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, {
+				noremap = true,
+				silent = true,
+				unique = true,
+			})
 		end,
 	},
 	-- modern matchparen replacement

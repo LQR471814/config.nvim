@@ -32,7 +32,7 @@ function Mathzone:in_mathzone()
 	end
 
 	-- disable bullets.nvim in mathzone
-	local opts = { buffer = true, silent = true }
+	local opts = { buffer = true, silent = true, noremap = true }
 	if res and vim.bo.filetype == "markdown" then
 		local ls = require("luasnip")
 		vim.keymap.set("i", "<Tab>", function()

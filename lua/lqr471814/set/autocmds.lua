@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 vim.api.nvim_create_autocmd("BufReadPost", {
     pattern = { "*.md", "*.markdown" },
     callback = function(args)
-        local opts = { buffer = true, silent = true }
+        local opts = { buffer = true, silent = true, noremap = true }
 
         -- spell check
         vim.opt_local.spell = true
@@ -36,7 +36,16 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
         -- bullets
         vim.keymap.set("n", "<leader>rl", "<Plug>(bullets-renumber)", opts)
-        vim.keymap.set("i", "<cr>", "<Plug>(bullets-newline-cr)", opts)
+
+        local blink = require("blink-cmp")
+        vim.keymap.set("i", "<cr>", function()
+            if blink.is_active() then
+                blink.accept()
+            else
+                vim.cmd("<Plug>(bullets-newline-cr)")
+            end
+        end, opts)
+
         vim.keymap.set("n", "o", "<Plug>(bullets-newline-o)", opts)
         vim.keymap.set("n", "<leader>d", "<Plug>(bullets-toggle-checkbox)", opts)
         vim.keymap.set("i", "<Tab>", "<C-o><Plug>(bullets-demote)", opts)
