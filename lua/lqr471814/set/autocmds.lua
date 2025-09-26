@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 vim.api.nvim_create_autocmd("BufReadPost", {
     pattern = { "*.md", "*.markdown" },
     callback = function(args)
-        local opts = { buffer = true }
+        local opts = { buffer = true, silent = true }
 
         -- spell check
         vim.opt_local.spell = true

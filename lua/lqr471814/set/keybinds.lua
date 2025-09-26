@@ -1,8 +1,10 @@
 vim.g.mapleader = " "
 
-vim.keymap.set("n", "gy", "\"+y")
-vim.keymap.set("v", "gy", "\"+y")
-vim.keymap.set("n", "gyy", "\"+Y")
+local silentmap = { silent = true }
+
+vim.keymap.set("n", "gy", "\"+y", silentmap)
+vim.keymap.set("v", "gy", "\"+y", silentmap)
+vim.keymap.set("n", "gyy", "\"+Y", silentmap)
 
 vim.keymap.set("n", "gyp", function()
     local dir = vim.fn.expand("%:p")
@@ -36,7 +38,7 @@ vim.api.nvim_create_user_command("W", "w", {})
 
 vim.keymap.set({ "n", "v", "i", "x" }, "<C-z>", "<nop>")
 vim.keymap.set("n", "<leader>w", "m'gqap`'")
-vim.keymap.set("n", "<leader>pv", function() vim.cmd("Oil") end)
+vim.keymap.set("n", "<leader>pv", "<cmd>Oil<cr>", silentmap)
 
 local lib = require("lqr471814.lib")
 vim.keymap.set("n", "<leader>z", function()
@@ -46,7 +48,7 @@ vim.keymap.set("n", "<leader>Z", function()
     lib.wrap:toggle("hard")
 end)
 
-vim.keymap.set("n", "<leader>re", ":GrugFar<cr>")
+vim.keymap.set("n", "<leader>re", "<cmd>GrugFar<cr>", silentmap)
 
 vim.keymap.set("n", "<leader>h", function()
     Snacks.notifier.show_history()
@@ -62,14 +64,14 @@ vim.keymap.set("n", "<leader>pf", function()
     require("telescope.builtin").find_files({
         find_command = { "fd", "--type", "file", "--hidden", "-E", ".git", "-E", ".treesitter" },
     })
-end, {})
+end)
 vim.keymap.set("n", "<leader>ps", function()
     local target = vim.fn.input("grep > ")
     require("telescope.builtin").grep_string({
         search = target,
         additional_args = { "--iglob", "!.{git,treesitter}", "--hidden" }
     })
-end, {})
+end)
 vim.keymap.set("n", "<leader>pg", function()
     require("telescope.builtin").git_files()
 end)
@@ -89,8 +91,8 @@ end)
 
 -- bufferline
 
-vim.keymap.set("n", "g.", "<cmd>BufferLineCycleNext<cr>")
-vim.keymap.set("n", "g,", "<cmd>BufferLineCyclePrev<cr>")
-vim.keymap.set("n", "<leader>q", "<cmd>bd<cr>")
-vim.keymap.set("n", "<leader>Q", "<cmd>bd!<cr>")
-vim.keymap.set("n", "<leader>pt", "<cmd>BufferLinePick<cr>")
+vim.keymap.set("n", "g.", "<cmd>BufferLineCycleNext<cr>", silentmap)
+vim.keymap.set("n", "g,", "<cmd>BufferLineCyclePrev<cr>", silentmap)
+vim.keymap.set("n", "<leader>q", "<cmd>bd<cr>", silentmap)
+vim.keymap.set("n", "<leader>Q", "<cmd>bd!<cr>", silentmap)
+vim.keymap.set("n", "<leader>pt", "<cmd>BufferLinePick<cr>", silentmap)
