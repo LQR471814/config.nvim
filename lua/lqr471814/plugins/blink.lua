@@ -10,9 +10,8 @@ return {
             local keymap = require("lqr471814.lib.keymap")
 
             keymap:overwrite_map("i", "<cr>", function()
-                if blink.is_active() then
-                    blink.accept()
-                else
+                local accepted = blink.accept()
+                if not accepted then
                     vim.api.nvim_feedkeys("\r", "n", true)
                 end
             end)
