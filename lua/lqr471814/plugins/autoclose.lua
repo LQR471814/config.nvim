@@ -9,7 +9,7 @@ return {
         disable_in_visualblock = true,
         disable_in_replace_mode = true,
         ignored_next_char = [=[[%w%%%'%[%"%.%`%$]]=],
-        enable_moveright = true,
+        enable_moveright = false,
         enable_afterquote = true,         -- add bracket pairs after quote
         enable_check_bracket_line = true, -- check bracket in same line
         enable_bracket_in_quote = true,   --
