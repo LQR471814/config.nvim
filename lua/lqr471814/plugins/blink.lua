@@ -2,19 +2,11 @@ return {
     {
         "saghen/blink.cmp",
         version = "1.*",
-        dependencies = { "L3MON4D3/LuaSnip", version = "v2.*" },
+        dependencies = { { "L3MON4D3/LuaSnip", version = "v2.*" }, { "windwp/nvim-autopairs" } },
         event = "VeryLazy",
 
         config = function()
             local blink = require("blink.cmp")
-            local keymap = require("lqr471814.lib.keymap")
-
-            keymap:overwrite_map("i", "<cr>", function()
-                local accepted = blink.accept()
-                if not accepted then
-                    vim.api.nvim_feedkeys("\r", "n", true)
-                end
-            end)
 
             blink.setup({
                 keymap = {
@@ -23,7 +15,7 @@ return {
                     ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
                     ["<C-e>"] = { "hide", "fallback" },
                     -- this is unreliable, we use our own mappings
-                    -- ["<CR>"] = { "accept", "fallback" },
+                    ["<CR>"] = { "accept", "fallback" },
 
                     ["<Tab>"] = { "snippet_forward", "fallback" },
                     ["<S-Tab>"] = { "snippet_backward", "fallback" },
@@ -52,6 +44,13 @@ return {
                         },
                     },
                 },
+                completion = {
+                    accept = {
+                        auto_brackets = {
+                            enabled = true
+                        }
+                    }
+                }
             })
         end
     },

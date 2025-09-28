@@ -36,14 +36,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
         -- bullets
         keymap:buffer_map("n", "<leader>rl", "<Plug>(bullets-renumber)", "Renumber bullets.")
 
-        local blink = require("blink-cmp")
-        keymap:buffer_map("i", "<cr>", function()
-            local accepted = blink.accept()
-            if not accepted then
-                vim.cmd("InsertNewBulletCR")
-            end
-        end)
-
+        keymap:buffer_map("i", "<cr>", "<Plug>(bullets-newline-cr)")
         keymap:buffer_map("n", "o", function()
             vim.cmd("InsertNewBulletO")
         end)
