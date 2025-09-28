@@ -181,7 +181,7 @@ return {
     )),
 
     -- superscript
-    s({ trig = "([a-zA-Z]+)^", regTrig = true, wordTrig = false, snippetType = "autosnippet" }, fmta(
+    s({ trig = "([a-zA-Z\\)\\]]+)^", regTrig = true, wordTrig = false, snippetType = "autosnippet" }, fmta(
         "<>^{<>}",
         { f(function(_, snip) return snip.captures[1] end), i(1) }
     )),
