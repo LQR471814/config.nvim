@@ -84,6 +84,7 @@ return {
                 marksman = {},
                 nushell = {},
                 ast_grep = {},
+                pyright = {},
 
                 nixd = {
                     cmd = { "nixd" },
