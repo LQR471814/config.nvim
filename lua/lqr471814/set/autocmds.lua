@@ -1,4 +1,5 @@
 local lib = require("lqr471814.lib")
+local keymap = lib.keymap
 
 -- enable hard wrap on markdown and tex files
 vim.api.nvim_create_autocmd("BufReadPost", {
@@ -11,13 +12,11 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 vim.api.nvim_create_autocmd("BufReadPost", {
     pattern = { "*.md", "*.markdown" },
     callback = function(args)
-        local opts = { buffer = true, silent = true }
-
         -- spell check
         vim.opt_local.spell = true
         vim.opt_local.spelllang = "en"
-        vim.keymap.set("n", "z,", "<ESC>m'[s1z=<CR>`'", opts)
-        vim.keymap.set("n", "z.", "<ESC>m']s1z=<CR>`'", opts)
+        keymap:buffer_map("n", "z,", "<ESC>m'[s1z=<CR>`'", "Correct previous spelling error.")
+        keymap:buffer_map("n", "z.", "<ESC>m']s1z=<CR>`'", "Correct next spelling error.")
 
         -- tab size
         vim.opt.tabstop = 4
@@ -27,29 +26,36 @@ vim.api.nvim_create_autocmd("BufReadPost", {
         vim.opt_local.breakat = " \\\t!@*-+;:,./?"
 
         -- bold
-        vim.keymap.set("v", "<C-b>", "2<Plug>(nvim-surround-visual)*", opts)
-        vim.keymap.set("i", "<C-b>", "****<Left><Left>", opts)
+        keymap:buffer_map("v", "<C-b>", "2<Plug>(nvim-surround-visual)*", "Make visual selection bold.")
+        keymap:buffer_map("i", "<C-b>", "****<Left><Left>", "Create bold text.")
 
         -- highlight
-        vim.keymap.set("v", "<C-h>", "2<Plug>(nvim-surround-visual)=", opts)
-        vim.keymap.set("i", "<C-h>", "====<Left><Left>", opts)
+        keymap:buffer_map("v", "<C-h>", "2<Plug>(nvim-surround-visual)=", "Highlight visual selection.")
+        keymap:buffer_map("i", "<C-h>", "====<Left><Left>", "Create highlighted text.")
 
         -- bullets
-        vim.keymap.set("n", "<leader>rl", "<Plug>(bullets-renumber)", opts)
-        vim.keymap.set("i", "<cr>", "<Plug>(bullets-newline-cr)", opts)
-        vim.keymap.set("n", "o", "<Plug>(bullets-newline-o)", opts)
-        vim.keymap.set("n", "<leader>d", "<Plug>(bullets-toggle-checkbox)", opts)
-        vim.keymap.set("i", "<Tab>", "<C-o><Plug>(bullets-demote)", opts)
-        vim.keymap.set("i", "<S-Tab>", "<C-o><Plug>(bullets-promote)", opts)
+        keymap:buffer_map("n", "<leader>rl", "<Plug>(bullets-renumber)", "Renumber bullets.")
+
+        keymap:buffer_map("i", "<cr>", "<Plug>(bullets-newline-cr)")
+        keymap:buffer_map("n", "o", function()
+            vim.cmd("InsertNewBulletO")
+        end)
+        keymap:buffer_map("n", "2o", function()
+            vim.cmd("InsertNewBulletO")
+            vim.cmd("InsertNewBulletO")
+        end)
+        keymap:buffer_map("n", "<leader>d", "<Plug>(bullets-toggle-checkbox)", "Toggle checkbox.")
+        keymap:buffer_map("i", "<Tab>", "<C-o><Plug>(bullets-demote)", "De-indent bullet.")
+        keymap:buffer_map("i", "<S-Tab>", "<C-o><Plug>(bullets-promote)", "Indent bullet.")
 
         -- insert link
-        vim.keymap.set("i", "<C-k>", function()
+        keymap:buffer_map("i", "<C-k>", function()
             local clipboard = vim.fn.getreg("+")
             clipboard = clipboard:gsub("\n", "")
             local pos = vim.api.nvim_win_get_cursor(0)
             vim.api.nvim_put({ "[](" .. clipboard .. ")" }, "c", true, false)
             vim.api.nvim_win_set_cursor(0, { pos[1], pos[2] + 1 })
-        end, opts)
+        end, "Insert link based on clipboard contents.")
 
         -- table mode
 
@@ -59,7 +65,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
             --- @type "off" | "hard" | "soft"
             local wrapStatus
 
-            vim.keymap.set("n", "<leader>tm", function()
+            keymap:buffer_map("n", "<leader>tm", function()
                 enabled = not enabled
                 if enabled then
                     vim.cmd("TableModeEnable")
@@ -71,7 +77,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
                     vim.cmd("RenderMarkdown enable")
                     lib.wrap:set(wrapStatus)
                 end
-            end, opts)
+            end)
         end
 
         enable_markdown_tablemode()
@@ -138,7 +144,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "help",
     callback = function()
-        vim.keymap.set("n", "gd", "<C-]>", { buffer = true })
+        keymap:buffer_map("n", "gd", "<C-]>", "Jump to definition")
     end,
 })
 
