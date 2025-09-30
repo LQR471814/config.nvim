@@ -26,6 +26,7 @@ local function buffers()
         sort_mru = true,
         ignore_current_buffer = false,
         show_all_buffers = true,
+        initial_mode = "normal",
         attach_mappings = function(prompt_bufnr, map)
             map("n", "<C-d>", function()
                 buffer_delete(prompt_bufnr)
