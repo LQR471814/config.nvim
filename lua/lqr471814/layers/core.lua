@@ -57,17 +57,21 @@ return {
 		"mbbill/undotree",
 		event = "VeryLazy",
 		config = function()
-			vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+			local keymap = require("lqr471814.lib.keymap")
+			keymap:map("n", "<leader>u", vim.cmd.UndotreeToggle)
 		end,
 	},
 	-- modern matchparen replacement
 	{
 		"andymass/vim-matchup",
 		event = "VeryLazy",
+		init = function()
+			vim.g.matchup_matchparen_offscreen = { method = "popup" }
+		end,
 		---@type matchup.Config
 		opts = {
 			treesitter = {
-				stopline = 500,
+				stopline = 1500,
 			}
 		}
 	},
@@ -80,20 +84,20 @@ return {
 	-- multi-cursors
 	require("lqr471814.plugins.multicursors"),
 	-- buffer-lines
-	{
-		"akinsho/bufferline.nvim",
-		version = "*",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		config = function()
-			require("bufferline").setup({
-				options = {
-					pick = {
-						alphabet = "123456789abcdefghijklmopqrstuvwxyz"
-					}
-				}
-			})
-		end
-	},
+	-- {
+	-- 	"akinsho/bufferline.nvim",
+	-- 	version = "*",
+	-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	-- 	config = function()
+	-- 		require("bufferline").setup({
+	-- 			options = {
+	-- 				pick = {
+	-- 					alphabet = "123456789abcdefghijklmopqrstuvwxyz"
+	-- 				}
+	-- 			}
+	-- 		})
+	-- 	end
+	-- },
 
 	-- text case modifications
 	-- {

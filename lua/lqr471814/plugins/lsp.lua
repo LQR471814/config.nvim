@@ -1,32 +1,5 @@
 return {
     {
-        'saghen/blink.cmp',
-        version = '1.*',
-        dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },
-        event = "VeryLazy",
-
-        ---@module 'blink.cmp'
-        ---@type blink.cmp.Config
-        opts = {
-            keymap = { preset = 'enter' },
-            snippets = { preset = 'luasnip' },
-            sources = {
-                default = { "lazydev", "lsp", "path", "snippets", "buffer" },
-                per_filetype = {
-                    markdown = { "lsp", "path", "snippets" },
-                },
-                providers = {
-                    lazydev = {
-                        name = "LazyDev",
-                        module = "lazydev.integrations.blink",
-                        score_offset = 100,
-                    },
-                },
-            },
-        },
-        opts_extend = { "sources.default" }
-    },
-    {
         "ray-x/go.nvim",
         ft = { "go", "gomod" },
         dependencies = {
@@ -41,7 +14,7 @@ return {
             vim.api.nvim_create_autocmd("BufWritePre", {
                 pattern = "*.go",
                 callback = function()
-                    require('go.format').goimports()
+                    require("go.format").goimports()
                 end,
                 group = format_sync_grp,
             })
@@ -73,7 +46,7 @@ return {
         opts = {
             servers = {
                 clangd = {
-                    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }
+                    filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
                 },
                 tailwindcss = {},
                 svelte = {},
@@ -83,6 +56,8 @@ return {
                 texlab = {},
                 marksman = {},
                 nushell = {},
+                ast_grep = {},
+                pyright = {},
 
                 nixd = {
                     cmd = { "nixd" },
@@ -151,13 +126,13 @@ return {
             opts.jsonls = {
                 settings = {
                     json = {
-                        schemas = require('schemastore').json.schemas(),
+                        schemas = require("schemastore").json.schemas(),
                         validate = { enable = true },
                     }
                 }
             }
 
-            local blink = require('blink.cmp')
+            local blink = require("blink.cmp")
 
             for server, config in pairs(opts.servers) do
                 vim.lsp.enable(server)
@@ -166,21 +141,18 @@ return {
                 vim.lsp.config(server, config)
             end
 
+            local keymap = require("lqr471814.lib.keymap")
+
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),
                 callback = function(ev)
-                    vim.keymap.set('n', 'gq', 'gw', { noremap = true })
-                    vim.keymap.set('n', 'gqq', 'gww', { noremap = true })
-                    vim.keymap.set('v', 'gq', 'gw', { noremap = true })
-
-                    local options = { buffer = ev.buf }
-                    vim.keymap.set("n", "ge", function() vim.diagnostic.open_float() end, options)
-                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, options)
-                    vim.keymap.set("n", "gh", vim.lsp.buf.hover, options)
-                    vim.keymap.set("n", "gr", vim.lsp.buf.references, options)
+                    keymap:buffer_map("n", "ge", function() vim.diagnostic.open_float() end, "", ev.buf)
+                    keymap:buffer_map("n", "gd", vim.lsp.buf.definition, "", ev.buf)
+                    keymap:buffer_map("n", "gh", vim.lsp.buf.hover, "", ev.buf)
+                    keymap:buffer_map("n", "gr", vim.lsp.buf.references, "", ev.buf)
 
                     -- rename with a completely different name
-                    vim.keymap.set("n", "<leader>rr", function()
+                    keymap:buffer_map("n", "<leader>rr", function()
                         vim.ui.input(
                             {
                                 prompt = "Rename: ",
@@ -192,22 +164,22 @@ return {
                                 end
                             end
                         )
-                    end, options)
+                    end, "", ev.buf)
 
                     -- rename starting with the same name
-                    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, options)
+                    keymap:buffer_map("n", "<leader>rn", vim.lsp.buf.rename, "", ev.buf)
 
-                    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, options)
-                    vim.keymap.set({ "n", "v" }, "<space>.", vim.lsp.buf.code_action, options)
-                    vim.keymap.set({ "n" }, "<leader>f", function()
+                    keymap:buffer_map("i", "<C-h>", function() vim.lsp.buf.signature_help() end, "", ev.buf)
+                    keymap:buffer_map({ "n", "v" }, "<space>.", vim.lsp.buf.code_action, "", ev.buf)
+                    keymap:buffer_map({ "n" }, "<leader>f", function()
                         vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
-                    end, options)
-                    vim.keymap.set("n", "]g", function()
+                    end, "", ev.buf)
+                    keymap:buffer_map("n", "]g", function()
                         vim.diagnostic.jump({ count = 1, float = true })
-                    end)
-                    vim.keymap.set("n", "[g", function()
+                    end, "", ev.buf)
+                    keymap:buffer_map("n", "[g", function()
                         vim.diagnostic.jump({ count = -1, float = true })
-                    end)
+                    end, "", ev.buf)
                 end,
             })
         end

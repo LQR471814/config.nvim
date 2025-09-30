@@ -1,0 +1,14 @@
+id: my_rule_1
+language: lua
+rule:
+  kind: string
+  regex: ^\'[^"]+\'$
+  pattern: $STR
+transform:
+  NEW_FORMAT:
+    replace:
+      source: $STR
+      replace:  \'(?<X>.+)\'
+      by: |-
+        "$X"
+fix: $NEW_FORMAT

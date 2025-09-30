@@ -1,9 +1,9 @@
-local ls = require('luasnip')
+local ls = require("luasnip")
 local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
-local fmta = require('luasnip.extras.fmt').fmta
-local rep = require('luasnip.extras').rep
+local fmta = require("luasnip.extras.fmt").fmta
+local rep = require("luasnip.extras").rep
 local s = require("lqr471814.lib").latex_snippet
 
 return {

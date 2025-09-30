@@ -1,4 +1,4 @@
-local ls = require('luasnip')
+local ls = require("luasnip")
 local s = require("lqr471814.lib").latex_snippet
 local t = ls.text_node
 
@@ -36,8 +36,8 @@ local mapping = {
     c = "chi",
     ps = "psi",
     PS = "Psi",
-    om = "omega",
-    OM = "Omega",
+    w = "omega",
+    W = "Omega",
 }
 local result = {}
 
