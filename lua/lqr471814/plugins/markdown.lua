@@ -50,6 +50,13 @@ return {
 					},
 					anti_conceal = {
 						enabled = true,
+						ignore = {
+							quote = true,
+							code_background = true,
+							indent = true,
+							sign = true,
+							virtual_lines = true,
+						},
 					},
 
 					heading = {
