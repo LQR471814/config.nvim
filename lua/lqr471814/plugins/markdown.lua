@@ -43,6 +43,15 @@ return {
 						},
 					},
 					render_modes = { "n", "i", "c", "t" },
+
+					win_options = {
+						conceallevel = { default = vim.o.conceallevel, rendered = 3 },
+						concealcursor = { default = vim.o.concealcursor, rendered = '' },
+					},
+					anti_conceal = {
+						enabled = true,
+					},
+
 					heading = {
 						enabled = true,
 						sign = false,

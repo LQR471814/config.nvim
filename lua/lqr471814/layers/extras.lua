@@ -74,5 +74,6 @@ return {
 				desc = "Quickfix List (Trouble)",
 			},
 		},
-	}
+	},
+	require("lqr471814.plugins.profile")
 }
