@@ -42,7 +42,7 @@ return {
 							enabled = true
 						},
 					},
-					render_modes = { "n", "i", "c", "t" },
+					render_modes = true,
 
 					win_options = {
 						conceallevel = { default = vim.o.conceallevel, rendered = 3 },
