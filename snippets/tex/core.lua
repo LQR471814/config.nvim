@@ -302,8 +302,6 @@ return {
     -- del
     s({ trig = "del" }, t("\\nabla")),
 
-    s({ trig = "\\*", snippetType = "autosnippet" }, t("\\cdot ")),
-
     -- ensure space exists after closing }, $, %, = or any common operations
     s({
         trig = "",
