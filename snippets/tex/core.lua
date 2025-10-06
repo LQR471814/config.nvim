@@ -265,7 +265,7 @@ return {
     )),
 
     -- vector variable
-    s({ trig = "([a-zA-Z])>", regTrig = true, wordTrig = false, snippetType = "autosnippet" }, fmta(
+    s({ trig = "([a-zA-Z0-9])>", regTrig = true, wordTrig = false, snippetType = "autosnippet" }, fmta(
         "\\vec{<>}<>",
         { f(function(_, snip) return snip.captures[1] end), i(1) }
     )),
