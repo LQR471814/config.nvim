@@ -20,7 +20,7 @@ return {
 		"lervag/vimtex",
 		event = "VeryLazy",
 		config = function()
-            vim.g.vimtex_syntax_conceal_disable = 1
+			vim.g.vimtex_syntax_conceal_disable = 1
 		end
 	},
 	-- local config
@@ -75,5 +75,11 @@ return {
 			},
 		},
 	},
+	-- firenvim
+	{
+		"glacambre/firenvim",
+		build = ":call firenvim#install(0)"
+	},
+	-- profiling
 	require("lqr471814.plugins.profile")
 }
