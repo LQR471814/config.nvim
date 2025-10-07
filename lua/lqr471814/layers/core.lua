@@ -83,6 +83,8 @@ return {
 	require("lqr471814.plugins.autoclose"),
 	-- multi-cursors
 	require("lqr471814.plugins.multicursors"),
+	-- natural dates
+	{ "Gelio/cmp-natdat", config = true },
 	-- buffer-lines
 	-- {
 	-- 	"akinsho/bufferline.nvim",
