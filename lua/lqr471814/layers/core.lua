@@ -11,11 +11,10 @@ return {
 	{
 		"stevearc/oil.nvim",
 		opts = {
+			watch_for_changes = true,
+			skip_confirm_for_simple_edits = true,
 			view_options = {
 				show_hidden = true
-			},
-			keymaps = {
-				["go"] = "actions.open_external",
 			}
 		},
 		dependencies = {

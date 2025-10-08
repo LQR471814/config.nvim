@@ -89,6 +89,20 @@ end, "Fuzzy-find commands.")
 keymap:map("n", "<leader>ph", function()
     require("telescope.builtin").help_tags()
 end, "Fuzzy-find help entries.")
+keymap:map("n", "<leader>pH", function()
+    local docs = {}
+    for _, p in ipairs(vim.api.nvim_list_runtime_paths()) do
+        local d = p .. "/doc"
+        if vim.fn.isdirectory(d) == 1 then
+            table.insert(docs, d)
+        end
+    end
+    require("telescope.builtin").live_grep({
+        prompt_title = "Grep plugin help",
+        search_dirs = docs,
+        additional_args = function() return { "--glob=*.txt", "--glob=!tags" } end,
+    })
+end, "Fuzzy-find help entry content.")
 
 keymap:map("n", "<leader>q", "<cmd>bd<cr>", "Close the current buffer.")
 keymap:map("n", "<leader>Q", "<cmd>bd!<cr>", "Close the current buffer without saving.")
@@ -106,3 +120,4 @@ keymap:map("n", "<leader>to", "<cmd>tabonly<cr>", "Close all other tabs.")
 -- to go to a specific tab use {N}gt
 -- to go to a next tab use gt
 -- to go to a previous tab use gT
+
