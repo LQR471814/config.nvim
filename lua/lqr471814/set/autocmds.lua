@@ -175,10 +175,10 @@ vim.api.nvim_create_autocmd("User", {
 
             if action.type == "delete" then
                 local path = action.url:match("^.*://(.*)$")
-                Snacks.bufdelete({ file = path, force = true, wipe = true })
+                Snacks.bufdelete({ file = path, wipe = true })
             elseif action.type == "move" then
                 local path = action.src_url:match("^.*://(.*)$")
-                Snacks.bufdelete({ file = path, force = true, wipe = true })
+                Snacks.bufdelete({ file = path, wipe = true })
             end
 
             ::continue::
