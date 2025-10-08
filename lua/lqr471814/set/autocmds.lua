@@ -156,6 +156,35 @@ vim.api.nvim_create_autocmd("VimResized", {
 
 -- make neovim help open in a vertical split
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "help",
-  command = "wincmd L"
+    pattern = "help",
+    command = "wincmd L"
+})
+
+-- automatically delete buffer when corresponding file on filesystem is deleted
+vim.api.nvim_create_autocmd("User", {
+    pattern = "OilActionsPost",
+    callback = function(args)
+        if args.data.err then
+            return
+        end
+
+        for _, action in ipairs(args.data.actions) do
+            if action.type == "delete" and action.entry_type == "file" then
+                local path = action.url:match("^.*://(.*)$")
+
+                local bufnr = vim.fn.bufnr(path)
+                if bufnr ~= -1 then
+                    local winids = vim.fn.win_findbuf(bufnr)
+                    if #winids > 0 then
+                        -- buffer is shown; close any buffer in that window first
+                        for _, w in ipairs(winids) do
+                            vim.fn.win_execute(w, "bfirst | bwipeout! " .. bufnr)
+                        end
+                    else
+                        vim.cmd("bwipeout! " .. bufnr)
+                    end
+                end
+            end
+        end
+    end,
 })
