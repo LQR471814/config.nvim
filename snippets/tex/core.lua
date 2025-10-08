@@ -393,5 +393,11 @@ return {
     s(
         { trig = "binom", snippetType = "autosnippet", wordTrig = false },
         fmta("\\binom{<>}{<>}", { i(1), i(2) })
+    ),
+
+    -- mod congruence
+    s(
+        { trig = "modcong" },
+        fmta("\\ (\\text{mod}\\ <>)", { i(1) })
     )
 }
