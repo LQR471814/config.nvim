@@ -214,3 +214,14 @@ vim.api.nvim_create_autocmd("User", {
 --     -- ensure this runs before oil’s own write handler
 --     desc = "Write modified buffers before oil rename"
 -- })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = "app.codingrooms.com_zystudio*.txt",
+    callback = function()
+        vim.cmd("set filetype=c")
+        vim.defer_fn(function()
+            vim.cmd("LspStop clangd")
+        end, 1000)
+    end,
+})
+
