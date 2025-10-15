@@ -12,6 +12,16 @@ return {
         <>
         $$
         ]],
+    s({ trig = "adm", snippetType = "autosnippet" }, fmta(
+        [[
+        $$
+        \begin{aligned}
+          <>
+        \end{aligned}
+        $$
+        ]],
+        { i(1) }
+    )),
     { i(1) })),
     s({ trig = "{", wordTrig = false, snippetType = "autosnippet" }, fmta(
         "{<>}",
