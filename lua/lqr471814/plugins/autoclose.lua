@@ -12,12 +12,12 @@ return {
             ["}"] = { escape = true, close = false, pair = "{}" },
 
             ['"'] = { escape = false, close = true, pair = '""' },
-            ["'"] = { escape = false, close = true, pair = "''" },
-            ["`"] = { escape = false, close = true, pair = "``" },
+            ["'"] = { escape = false, close = true, pair = "''", disabled_filetypes = { "lisp" } },
+            ["`"] = { escape = false, close = true, pair = "``", disabled_filetypes = { "lisp" } },
         },
         options = {
             disabled_filetypes = { "TelescopePrompt", "grug-far", "tex", "markdown" },
-            auto_indent = true,
+            auto_indent = false,
             disable_command_mode = true,
         },
     }

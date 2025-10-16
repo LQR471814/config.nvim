@@ -42,7 +42,23 @@ return {
 							enabled = true
 						},
 					},
-					render_modes = { "n", "i", "c", "t" },
+					render_modes = true,
+
+					win_options = {
+						conceallevel = { default = vim.o.conceallevel, rendered = 3 },
+						concealcursor = { default = vim.o.concealcursor, rendered = '' },
+					},
+					anti_conceal = {
+						enabled = true,
+						ignore = {
+							quote = true,
+							code_background = true,
+							indent = true,
+							sign = true,
+							virtual_lines = true,
+						},
+					},
+
 					heading = {
 						enabled = true,
 						sign = false,

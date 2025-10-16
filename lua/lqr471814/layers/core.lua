@@ -11,11 +11,10 @@ return {
 	{
 		"stevearc/oil.nvim",
 		opts = {
+			watch_for_changes = true,
+			skip_confirm_for_simple_edits = true,
 			view_options = {
 				show_hidden = true
-			},
-			keymaps = {
-				["go"] = "actions.open_external",
 			}
 		},
 		dependencies = {
@@ -75,6 +74,10 @@ return {
 			}
 		}
 	},
+	{
+		"junegunn/vim-easy-align",
+		event = "VeryLazy",
+	},
 	-- switch between files
 	require("lqr471814.plugins.harpoon"),
 	-- manipulate brackets
@@ -83,6 +86,8 @@ return {
 	require("lqr471814.plugins.autoclose"),
 	-- multi-cursors
 	require("lqr471814.plugins.multicursors"),
+	-- natural dates
+	{ "Gelio/cmp-natdat", config = true },
 	-- buffer-lines
 	-- {
 	-- 	"akinsho/bufferline.nvim",

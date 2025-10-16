@@ -265,7 +265,7 @@ return {
     )),
 
     -- vector variable
-    s({ trig = "([a-zA-Z])>", regTrig = true, wordTrig = false, snippetType = "autosnippet" }, fmta(
+    s({ trig = "([a-zA-Z0-9])>", regTrig = true, wordTrig = false, snippetType = "autosnippet" }, fmta(
         "\\vec{<>}<>",
         { f(function(_, snip) return snip.captures[1] end), i(1) }
     )),
@@ -301,8 +301,6 @@ return {
 
     -- del
     s({ trig = "del" }, t("\\nabla")),
-
-    s({ trig = "\\*", snippetType = "autosnippet" }, t("\\cdot ")),
 
     -- ensure space exists after closing }, $, %, = or any common operations
     s({
@@ -395,5 +393,23 @@ return {
     s(
         { trig = "binom", snippetType = "autosnippet", wordTrig = false },
         fmta("\\binom{<>}{<>}", { i(1), i(2) })
-    )
+    ),
+
+    -- mod congruence
+    s(
+        { trig = "modcong" },
+        fmta("\\ (\\text{mod}\\ <>)", { i(1) })
+    ),
+
+    -- comment
+    s(
+        { trig = "comment" },
+        "% "
+    ),
+
+    -- todos
+    s(
+        { trig = "todo" },
+        "% TODO: "
+    ),
 }

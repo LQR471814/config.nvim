@@ -153,3 +153,84 @@ vim.api.nvim_create_autocmd("VimResized", {
     pattern = "*",
     command = "wincmd =",
 })
+
+-- make neovim help open in a vertical split
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "help",
+    command = "wincmd L"
+})
+
+-- automatically delete buffer when corresponding file on filesystem is deleted
+vim.api.nvim_create_autocmd("User", {
+    pattern = "OilActionsPost",
+    callback = function(event)
+        if event.data.err then
+            return
+        end
+
+        for _, action in ipairs(event.data.actions) do
+            if action.entry_type ~= "file" then
+                goto continue
+            end
+
+            if action.type == "delete" then
+                local path = action.url:match("^.*://(.*)$")
+                Snacks.bufdelete({ file = path, wipe = true })
+            elseif action.type == "move" then
+                local path = action.src_url:match("^.*://(.*)$")
+                Snacks.bufdelete({ file = path, wipe = true })
+            end
+
+            ::continue::
+        end
+    end,
+})
+
+-- notify snacks-rename of file rename
+vim.api.nvim_create_autocmd("User", {
+    pattern = "OilActionsPost",
+    callback = function(event)
+        if event.data.actions.type == "move" then
+            Snacks.rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
+        end
+    end,
+})
+
+-- vim.api.nvim_create_autocmd("BufWriteCmd", {
+--     pattern = "oil://*",
+--     callback = function(ev)
+--         -- Before oil writes (which includes renames), check for edited buffers
+--         for _, buf in ipairs(api.nvim_list_bufs()) do
+--             if api.nvim_buf_is_loaded(buf) then
+--                 local fname = api.nvim_buf_get_name(buf)
+--                 if fname ~= "" and api.nvim_buf_get_option(buf, "modified") then
+--                     -- Write that buffer first
+--                     api.nvim_buf_call(buf, function() vim.cmd("write") end)
+--                 end
+--             end
+--         end
+--         -- After that, let oil continue with its mutation write
+--     end,
+--     -- ensure this runs before oil’s own write handler
+--     desc = "Write modified buffers before oil rename"
+-- })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = "app.codingrooms.com_zystudio*.txt",
+    callback = function()
+        vim.cmd("set filetype=c")
+        vim.defer_fn(function()
+            vim.cmd("LspStop clangd")
+        end, 1000)
+    end,
+})
+
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "lisp",
+    callback = function()
+        vim.opt_local.tabstop = 2
+        vim.opt_local.shiftwidth = 2
+        vim.opt_local.expandtab = true
+    end
+})

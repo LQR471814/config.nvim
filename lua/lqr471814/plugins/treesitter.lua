@@ -28,6 +28,7 @@ return {
                 "html",
                 "css",
                 "tsx",
+                "commonlisp"
             },
 
             ignore_install = {},

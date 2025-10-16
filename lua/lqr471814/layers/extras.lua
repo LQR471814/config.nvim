@@ -20,7 +20,7 @@ return {
 		"lervag/vimtex",
 		event = "VeryLazy",
 		config = function()
-            vim.g.vimtex_syntax_conceal_disable = 1
+			vim.g.vimtex_syntax_conceal_disable = 1
 		end
 	},
 	-- local config
@@ -74,5 +74,26 @@ return {
 				desc = "Quickfix List (Trouble)",
 			},
 		},
-	}
+	},
+	-- firenvim
+	{
+		"glacambre/firenvim",
+		build = ":call firenvim#install(0)",
+		config = function()
+			vim.g.firenvim_config = {
+				globalSettings = { alt = "all" },
+				localSettings = {
+					[".*"] = {
+						cmdline  = "neovim",
+						content  = "text",
+						priority = 0,
+						selector = "textarea",
+						takeover = "never"
+					}
+				}
+			}
+		end
+	},
+	-- profiling
+	require("lqr471814.plugins.profile")
 }

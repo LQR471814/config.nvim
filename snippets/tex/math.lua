@@ -6,7 +6,9 @@ local mapping = {
     fa = "forall",
     t = "therefore",
     u = "underset",
-    e = "exists"
+    e = "exists",
+    ["c"] = "cdot",
+    ["o"] = "circ",
 }
 local result = {}
 
