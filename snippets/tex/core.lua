@@ -402,14 +402,8 @@ return {
     ),
 
     -- comment
-    s(
-        { trig = "comment" },
-        "% "
-    ),
+    s({ trig = "comment" }, t("% ")),
 
     -- todos
-    s(
-        { trig = "todo" },
-        "% TODO: "
-    ),
+    s({ trig = "todo" }, t("% TODO: ")),
 }
