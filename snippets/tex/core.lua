@@ -399,5 +399,17 @@ return {
     s(
         { trig = "modcong" },
         fmta("\\ (\\text{mod}\\ <>)", { i(1) })
-    )
+    ),
+
+    -- comment
+    s(
+        { trig = "comment" },
+        "% "
+    ),
+
+    -- todos
+    s(
+        { trig = "todo" },
+        "% TODO: "
+    ),
 }

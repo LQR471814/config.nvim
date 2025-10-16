@@ -58,6 +58,11 @@ return {
                 nushell = {},
                 ast_grep = {},
                 pyright = {},
+                ltex_plus = {
+                    ltex = {
+                        language = "en-US",
+                    },
+                },
 
                 nixd = {
                     cmd = { "nixd" },

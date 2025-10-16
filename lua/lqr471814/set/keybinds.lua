@@ -121,3 +121,7 @@ keymap:map("n", "<leader>to", "<cmd>tabonly<cr>", "Close all other tabs.")
 -- to go to a next tab use gt
 -- to go to a previous tab use gT
 
+-- vim-easy-align
+keymap:map("n", "ga", "<Plug>(EasyAlign)", "Trigger vim-easy-align.")
+keymap:map("v", "ga", "<Plug>(EasyAlign)", "Trigger vim-easy-align.")
+

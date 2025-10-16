@@ -17,7 +17,7 @@ return {
         },
         options = {
             disabled_filetypes = { "TelescopePrompt", "grug-far", "tex", "markdown" },
-            auto_indent = true,
+            auto_indent = false,
             disable_command_mode = true,
         },
     }
