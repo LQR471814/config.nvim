@@ -216,7 +216,7 @@ vim.api.nvim_create_autocmd("User", {
 -- })
 
 vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = "app.codingrooms.com_zystudio*.txt",
+    pattern = "learn.zybooks.com*.txt",
     callback = function()
         vim.cmd("set filetype=c")
         vim.defer_fn(function()
