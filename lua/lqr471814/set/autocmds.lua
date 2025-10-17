@@ -216,7 +216,10 @@ vim.api.nvim_create_autocmd("User", {
 -- })
 
 vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = "learn.zybooks.com*.txt",
+    pattern = {
+        "learn.zybooks.com*.txt",
+        "app.codingrooms.com*.txt",
+    },
     callback = function()
         vim.cmd("set filetype=c")
         vim.cmd("set guifont=Monaspice_NF_Light:h11")
