@@ -406,4 +406,26 @@ return {
 
     -- todos
     s({ trig = "todo" }, t("% TODO: ")),
+
+    -- table
+    s({ trig = "table" }, fmta(
+        [[
+            \begin{table}[h]
+                \centering
+                \begin{tabular}{<>}
+                    \hline
+                    <>
+                \end{tabular}
+                \caption{<>}
+                \label{<>}
+            \end{table}
+        ]],
+        { i(1), i(2), i(3), i(4) }
+    )),
+
+    -- image
+    s({ trig = "image" }, fmta(
+        [[\includegraphics[width=\linewidth]{<>}]],
+        { i(1) }
+    )),
 }
