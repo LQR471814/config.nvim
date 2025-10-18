@@ -401,6 +401,12 @@ return {
         fmta("\\ (\\text{mod}\\ <>)", { i(1) })
     ),
 
+    -- mod
+    s(
+        { trig = "mod" },
+        t("\\textbf{~mod~} ")
+    ),
+
     -- comment
     s({ trig = "comment" }, t("% ")),
 
