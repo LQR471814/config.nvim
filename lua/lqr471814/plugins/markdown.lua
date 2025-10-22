@@ -14,6 +14,8 @@ return {
 		},
 	},
 	{
+		-- it seems like blink breaks when:
+		--   - mdmath has an error while opening a vsplit
 		"Thiago4532/mdmath.nvim",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
