@@ -181,9 +181,9 @@ return {
     )),
 
     -- superscript
-    s({ trig = "([a-zA-Z]+)^", regTrig = true, wordTrig = false, snippetType = "autosnippet" }, fmta(
-        "<>^{<>}",
-        { f(function(_, snip) return snip.captures[1] end), i(1) }
+    s({ trig = "^", wordTrig = false, snippetType = "autosnippet" }, fmta(
+        "^{<>}",
+        { i(1) }
     )),
 
     -- fraction
