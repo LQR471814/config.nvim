@@ -369,7 +369,7 @@ return {
 
     -- overline
     s(
-        { trig = "^_", wordTrig = false, snippetType = "autosnippet" },
+        { trig = "ovr" },
         fmta("\\overline{<>}", { i(1) })
     ),
     -- <->
