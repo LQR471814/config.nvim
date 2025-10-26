@@ -64,6 +64,7 @@ return {
                     },
                 },
 
+                julials = {},
                 nixd = {
                     cmd = { "nixd" },
                     settings = {
