@@ -28,7 +28,8 @@ return {
                 "html",
                 "css",
                 "tsx",
-                "commonlisp"
+                "commonlisp",
+                "julia"
             },
 
             ignore_install = {},
