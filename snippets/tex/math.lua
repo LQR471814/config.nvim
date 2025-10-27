@@ -17,7 +17,8 @@ for key, value in pairs(mapping) do
     result[i] = s(
         {
             trig = ";" .. key,
-            snippetType = "autosnippet"
+            snippetType = "autosnippet",
+            wordTrig = false,
         },
         {
             t("\\" .. value)
