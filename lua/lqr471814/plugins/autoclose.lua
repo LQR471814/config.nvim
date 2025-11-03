@@ -12,7 +12,7 @@ return {
             ["}"] = { escape = true, close = false, pair = "{}" },
 
             ['"'] = { escape = false, close = true, pair = '""' },
-            ["'"] = { escape = false, close = true, pair = "''", disabled_filetypes = { "lisp" } },
+            ["'"] = { escape = false, close = true, pair = "''", disabled_filetypes = { "lisp", "julia" } },
             ["`"] = { escape = false, close = true, pair = "``", disabled_filetypes = { "lisp" } },
         },
         options = {
