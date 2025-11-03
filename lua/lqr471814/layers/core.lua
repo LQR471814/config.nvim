@@ -74,10 +74,6 @@ return {
 			}
 		}
 	},
-	{
-		"junegunn/vim-easy-align",
-		event = "VeryLazy",
-	},
 	-- switch between files
 	require("lqr471814.plugins.harpoon"),
 	-- manipulate brackets
