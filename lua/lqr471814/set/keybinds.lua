@@ -121,3 +121,7 @@ keymap:map("n", "<leader>to", "<cmd>tabonly<cr>", "Close all other tabs.")
 -- to go to a next tab use gt
 -- to go to a previous tab use gT
 
+-- diff split
+keymap:map("n", "<leader>ds", "<cmd>windo diffthis<cr>", "Diff 2 open splits.")
+keymap:map("n", "<leader>dS", "<cmd>windo diffthis<cr>", "Disable diff.")
+
