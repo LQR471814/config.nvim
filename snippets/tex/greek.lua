@@ -36,8 +36,8 @@ local mapping = {
     c = "chi",
     ps = "psi",
     Ps = "Psi",
-    w = "omega",
-    W = "Omega",
+    o = "omega",
+    O = "Omega",
 }
 local result = {}
 
