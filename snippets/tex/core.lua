@@ -436,5 +436,14 @@ return {
     )),
 
     -- laplace
-    s({ trig = "laplace" }, fmta("\\mathcal{L}\\{<>\\}", { i(1) })),
+    s({ trig = "laplace" }, fmta("\\mathcal{L}\\left\\{<>\\right\\}", { i(1) })),
+
+    -- scaled parenthesis
+    s({ trig = "paren" }, fmta("\\left(<>\\right)", { i(1) })),
+
+    -- scaled square brackets
+    s({ trig = "square" }, fmta("\\left[<>\\right]", { i(1) })),
+
+    -- scaled curly brackets
+    s({ trig = "curly" }, fmta("\\left\\{<>\\right\\}", { i(1) })),
 }
