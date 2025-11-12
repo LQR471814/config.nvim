@@ -434,4 +434,7 @@ return {
         [[\includegraphics[width=\linewidth]{<>}]],
         { i(1) }
     )),
+
+    -- laplace
+    s({ trig = "laplace" }, fmta("\\mathcal{L}\\{<>\\}", { i(1) })),
 }
