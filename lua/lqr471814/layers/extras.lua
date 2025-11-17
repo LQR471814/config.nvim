@@ -10,6 +10,8 @@ return {
 	require("lqr471814.plugins.markdown"),
 	-- notifications / image viewing / etc...
 	require("lqr471814.plugins.snacks"),
+	-- git merge tool
+	require("lqr471814.plugins.diffview"),
 	-- support .fountain files
 	{
 		"kblin/vim-fountain",
