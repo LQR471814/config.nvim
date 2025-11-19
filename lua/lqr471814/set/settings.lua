@@ -45,7 +45,6 @@ vim.g.tex_flavor = "latex"
 vim.opt.conceallevel = 0
 vim.opt.title = true
 vim.g.tex_conceal = "abdmg"
-vim.g.vimtex_compiler_latexmk_engines = { _ = "-xelatex" }
 vim.g.vimtex_compiler_latexmk = {
     -- options = { "-file-line-error", "-interaction=nonstopmode" },
     out_dir = "",
