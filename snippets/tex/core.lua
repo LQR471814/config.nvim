@@ -436,7 +436,7 @@ return {
     )),
 
     -- laplace
-    s({ trig = "laplace" }, fmta("\\mathcal{L}\\left\\{<>\\right\\}", { i(1) })),
+    s({ trig = "laplace" }, fmta("\\mathcal{L}<>\\left\\{<>\\right\\}", { i(1), i(2) })),
 
     -- scaled parenthesis
     s({ trig = "paren" }, fmta("\\left(<>\\right)", { i(1) })),
