@@ -1,13 +1,5 @@
 -- plugins that do not require dependencies, they should work anywhere
 return {
-	-- rename html tags
-	{ "windwp/nvim-ts-autotag", event = { "BufReadPre", "BufNewFile" } },
-	-- pcre syntax
-	{ "othree/eregex.vim",      event = "VeryLazy" },
-	-- natural dates
-	{ "Gelio/cmp-natdat",       config = true },
-	-- make editing big files faster
-	{ "mireq/large_file",       config = true },
 	-- theme
 	require("lqr471814.plugins.theme"),
 	-- guess indentation config of a file
@@ -28,4 +20,14 @@ return {
 	require("lqr471814.plugins.oil"),
 	-- local config
 	require("lqr471814.plugins.localconf"),
+	-- notifications / etc...
+	require("lqr471814.plugins.snacks"),
+	-- rename html tags
+	{ "windwp/nvim-ts-autotag", event = { "BufReadPre", "BufNewFile" } },
+	-- pcre syntax
+	{ "othree/eregex.vim",      event = "VeryLazy" },
+	-- natural dates
+	{ "Gelio/cmp-natdat",       config = true },
+	-- make editing big files faster
+	{ "mireq/large_file",       config = true },
 }

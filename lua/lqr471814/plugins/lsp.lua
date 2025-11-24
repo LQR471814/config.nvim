@@ -175,7 +175,7 @@ return {
                     -- rename starting with the same name
                     keymap:buffer_map("n", "<leader>rn", vim.lsp.buf.rename, "", ev.buf)
 
-                    keymap:buffer_map("i", "<C-h>", function() vim.lsp.buf.signature_help() end, "", ev.buf)
+                    keymap:buffer_map("i", "<C-y>", function() vim.lsp.buf.signature_help() end, "", ev.buf)
                     keymap:buffer_map({ "n", "v" }, "<space>.", vim.lsp.buf.code_action, "", ev.buf)
                     keymap:buffer_map({ "n" }, "<leader>f", function()
                         vim.lsp.buf.format({ async = false, timeout_ms = 10000 })

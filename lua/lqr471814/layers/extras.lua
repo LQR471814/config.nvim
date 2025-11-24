@@ -6,8 +6,10 @@ return {
 	require("lqr471814.plugins.lsp"),
 	-- markdown editing
 	require("lqr471814.plugins.markdown"),
-	-- notifications / image viewing / etc...
-	require("lqr471814.plugins.snacks"),
+	-- latex support
+	require("lqr471814.plugins.latex"),
+	-- treesitter walker
+	require("lqr471814.plugins.tree-climber"),
 	-- git merge tool
 	require("lqr471814.plugins.diffview"),
 	-- browser integration
@@ -18,13 +20,4 @@ return {
 	require("lqr471814.plugins.profile"),
 	-- support .fountain files
 	{ "kblin/vim-fountain", event = "VeryLazy" },
-	-- latex support
-	{
-		"lervag/vimtex",
-		-- vimtex lazy loads by default
-		lazy = false,
-		config = function()
-			vim.g.vimtex_syntax_conceal_disable = 1
-		end
-	},
 }
