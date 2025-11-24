@@ -30,8 +30,8 @@ vim.api.nvim_create_autocmd("BufReadPost", {
         keymap:buffer_map("i", "<C-b>", "****<Left><Left>", "Create bold text.")
 
         -- highlight
-        keymap:buffer_map("v", "<C-h>", "2<Plug>(nvim-surround-visual)=", "Highlight visual selection.")
-        keymap:buffer_map("i", "<C-h>", "====<Left><Left>", "Create highlighted text.")
+        keymap:buffer_map("v", "<C-M-h>", "2<Plug>(nvim-surround-visual)=", "Highlight visual selection.")
+        keymap:buffer_map("i", "<C-M-h>", "====<Left><Left>", "Create highlighted text.")
 
         -- bullets
         keymap:buffer_map("n", "<leader>rl", "<Plug>(bullets-renumber)", "Renumber bullets.")
