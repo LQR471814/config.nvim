@@ -5,20 +5,20 @@ local Mathzone = {
 	cached = false
 }
 
-function Mathzone:in_mathzone()
+function Mathzone.in_mathzone()
 	-- this caching mechanism is here so that vimtex#syntax#in_mathzone doesn't
 	-- need to be called for every snippet that needs to be enabled on a
 	-- mathzone.
-	if self.cached then
-		return self.cached_value
+	if Mathzone.cached then
+		return Mathzone.cached_value
 	end
-	self.cached = true
+	Mathzone.cached = true
 	vim.defer_fn(function()
-		self.cached = false
+		Mathzone.cached = false
 	end, 10)
 
 	if vim.bo.filetype == "tex" then
-		self.cached_value = true
+		Mathzone.cached_value = true
 		return true
 	end
 
@@ -36,18 +36,18 @@ function Mathzone:in_mathzone()
 	-- disable bullets.nvim in mathzone
 	if res and vim.bo.filetype == "markdown" then
 		local ls = require("luasnip")
-		keymap:overwrite_buffer_map("i", "<Tab>", function()
+		keymap.overwrite_buffer_map("i", "<Tab>", function()
 			ls.jump(1)
 		end)
-		keymap:overwrite_buffer_map("i", "<S-Tab>", function()
+		keymap.overwrite_buffer_map("i", "<S-Tab>", function()
 			ls.jump(-1)
 		end)
 	else
-		keymap:overwrite_buffer_map("i", "<Tab>", "<C-o><Plug>(bullets-demote)")
-		keymap:overwrite_buffer_map("i", "<S-Tab>", "<C-o><Plug>(bullets-promote)")
+		keymap.overwrite_buffer_map("i", "<Tab>", "<C-o><Plug>(bullets-demote)")
+		keymap.overwrite_buffer_map("i", "<S-Tab>", "<C-o><Plug>(bullets-promote)")
 	end
 
-	self.cached_value = res
+	Mathzone.cached_value = res
 	return res
 end
 

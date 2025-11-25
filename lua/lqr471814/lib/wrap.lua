@@ -21,7 +21,7 @@ end
 local Wrap = {}
 
 --- @return Mode
-function Wrap:status()
+function Wrap.status()
 	if vim.opt_local.wrap:get() == true and vim.opt_local.linebreak:get() == true then
 		return "soft"
 	end
@@ -33,7 +33,7 @@ end
 
 --- @param status Mode
 --- @param silent boolean?
-function Wrap:set(status, silent)
+function Wrap.set(status, silent)
 	if status == "off" then
 		disable_hard_wrap()
 		disable_soft_wrap()
@@ -57,8 +57,8 @@ end
 
 --- @param status "hard" | "soft"
 --- @param silent boolean?
-function Wrap:toggle(status, silent)
-	local current = self:status()
+function Wrap.toggle(status, silent)
+	local current = Wrap.status()
 	if status == "hard" then
 		if current == "hard" then
 			disable_hard_wrap()
