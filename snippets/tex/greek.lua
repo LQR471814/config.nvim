@@ -13,7 +13,7 @@ local mapping = {
     z = "zeta",
     h = "eta",
     th = "theta",
-    TH = "Theta",
+    Th = "Theta",
     i = "iota",
     k = "kappa",
     l = "lambda",
@@ -26,7 +26,7 @@ local mapping = {
     pi = "pi",
     PI = "Pi",
     ph = "phi",
-    PH = "Phi",
+    Ph = "Phi",
     r = "rho",
     s = "sigma",
     S = "Sigma",
@@ -35,9 +35,9 @@ local mapping = {
     U = "Upsilon",
     c = "chi",
     ps = "psi",
-    PS = "Psi",
-    w = "omega",
-    W = "Omega",
+    Ps = "Psi",
+    o = "omega",
+    O = "Omega",
 }
 local result = {}
 
@@ -46,7 +46,8 @@ for key, value in pairs(mapping) do
     result[i] = s(
         {
             trig = "'" .. key,
-            snippetType = "autosnippet"
+            snippetType = "autosnippet",
+            wordTrig = false
         },
         {
             t("\\" .. value)

@@ -1,9 +1,7 @@
 return {
 	-- this plugin already does lazy-loading by default, lazy-loading tends to
 	-- interfere with its functioning
-	{
-		"dhruvasagar/vim-table-mode",
-	},
+	{ "dhruvasagar/vim-table-mode" },
 	{
 		"kaymmm/bullets.nvim",
 		commit = "cfc5c6038d6edcb93509ea7d96d9c8fe3dad5438",

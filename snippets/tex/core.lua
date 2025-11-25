@@ -181,9 +181,9 @@ return {
     )),
 
     -- superscript
-    s({ trig = "([a-zA-Z]+)^", regTrig = true, wordTrig = false, snippetType = "autosnippet" }, fmta(
-        "<>^{<>}",
-        { f(function(_, snip) return snip.captures[1] end), i(1) }
+    s({ trig = "^", wordTrig = false, snippetType = "autosnippet" }, fmta(
+        "^{<>}",
+        { i(1) }
     )),
 
     -- fraction
@@ -224,9 +224,9 @@ return {
                         break
                     end
 
-                    if c == "}" or c == ")" then
+                    if c == "}" or c == ")" or c == "]" then
                         opened_parens = opened_parens + 1
-                    elseif c == "{" or c == "(" then
+                    elseif c == "{" or c == "(" or c == "[" then
                         opened_parens = opened_parens - 1
                     end
 
@@ -369,7 +369,7 @@ return {
 
     -- overline
     s(
-        { trig = "^_", wordTrig = false, snippetType = "autosnippet" },
+        { trig = "ovr" },
         fmta("\\overline{<>}", { i(1) })
     ),
     -- <->
@@ -401,9 +401,49 @@ return {
         fmta("\\ (\\text{mod}\\ <>)", { i(1) })
     ),
 
+    -- mod
+    s(
+        { trig = "mod" },
+        t("\\textbf{~mod~} ")
+    ),
+
     -- comment
     s({ trig = "comment" }, t("% ")),
 
     -- todos
     s({ trig = "todo" }, t("% TODO: ")),
+
+    -- table
+    s({ trig = "table" }, fmta(
+        [[
+            \begin{table}[h]
+                \centering
+                \begin{tabular}{<>}
+                    \hline
+                    <>
+                \end{tabular}
+                \caption{<>}
+                \label{<>}
+            \end{table}
+        ]],
+        { i(1), i(2), i(3), i(4) }
+    )),
+
+    -- image
+    s({ trig = "image" }, fmta(
+        [[\includegraphics[width=\linewidth]{<>}]],
+        { i(1) }
+    )),
+
+    -- laplace
+    s({ trig = "laplace" }, fmta("\\mathcal{L}<>\\left\\{<>\\right\\}", { i(1), i(2) })),
+
+    -- scaled parenthesis
+    s({ trig = "paren" }, fmta("\\left(<>\\right)", { i(1) })),
+
+    -- scaled square brackets
+    s({ trig = "square" }, fmta("\\left[<>\\right]", { i(1) })),
+
+    -- scaled curly brackets
+    s({ trig = "curly" }, fmta("\\left\\{<>\\right\\}", { i(1) })),
 }

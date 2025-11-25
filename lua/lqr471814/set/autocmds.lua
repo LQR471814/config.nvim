@@ -2,14 +2,14 @@ local lib = require("lqr471814.lib")
 local keymap = lib.keymap
 
 -- enable hard wrap on markdown and tex files
-vim.api.nvim_create_autocmd("BufReadPost", {
+vim.api.nvim_create_autocmd("BufAdd", {
     pattern = { "*.md", "*.tex" },
     callback = function()
         lib.wrap:set("hard", true)
     end
 })
 
-vim.api.nvim_create_autocmd("BufReadPost", {
+vim.api.nvim_create_autocmd("BufAdd", {
     pattern = { "*.md", "*.markdown" },
     callback = function(args)
         -- spell check
@@ -30,8 +30,8 @@ vim.api.nvim_create_autocmd("BufReadPost", {
         keymap:buffer_map("i", "<C-b>", "****<Left><Left>", "Create bold text.")
 
         -- highlight
-        keymap:buffer_map("v", "<C-h>", "2<Plug>(nvim-surround-visual)=", "Highlight visual selection.")
-        keymap:buffer_map("i", "<C-h>", "====<Left><Left>", "Create highlighted text.")
+        keymap:buffer_map("v", "<C-M-h>", "2<Plug>(nvim-surround-visual)=", "Highlight visual selection.")
+        keymap:buffer_map("i", "<C-M-h>", "====<Left><Left>", "Create highlighted text.")
 
         -- bullets
         keymap:buffer_map("n", "<leader>rl", "<Plug>(bullets-renumber)", "Renumber bullets.")
@@ -49,7 +49,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
         keymap:buffer_map("i", "<S-Tab>", "<C-o><Plug>(bullets-promote)", "Indent bullet.")
 
         -- insert link
-        keymap:buffer_map("i", "<C-k>", function()
+        keymap:buffer_map("i", "<C-M-k>", function()
             local clipboard = vim.fn.getreg("+")
             clipboard = clipboard:gsub("\n", "")
             local pos = vim.api.nvim_win_get_cursor(0)
@@ -160,42 +160,6 @@ vim.api.nvim_create_autocmd("FileType", {
     command = "wincmd L"
 })
 
--- automatically delete buffer when corresponding file on filesystem is deleted
-vim.api.nvim_create_autocmd("User", {
-    pattern = "OilActionsPost",
-    callback = function(event)
-        if event.data.err then
-            return
-        end
-
-        for _, action in ipairs(event.data.actions) do
-            if action.entry_type ~= "file" then
-                goto continue
-            end
-
-            if action.type == "delete" then
-                local path = action.url:match("^.*://(.*)$")
-                Snacks.bufdelete({ file = path, wipe = true })
-            elseif action.type == "move" then
-                local path = action.src_url:match("^.*://(.*)$")
-                Snacks.bufdelete({ file = path, wipe = true })
-            end
-
-            ::continue::
-        end
-    end,
-})
-
--- notify snacks-rename of file rename
-vim.api.nvim_create_autocmd("User", {
-    pattern = "OilActionsPost",
-    callback = function(event)
-        if event.data.actions.type == "move" then
-            Snacks.rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
-        end
-    end,
-})
-
 -- vim.api.nvim_create_autocmd("BufWriteCmd", {
 --     pattern = "oil://*",
 --     callback = function(ev)
@@ -216,9 +180,13 @@ vim.api.nvim_create_autocmd("User", {
 -- })
 
 vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = "app.codingrooms.com_zystudio*.txt",
+    pattern = {
+        "learn.zybooks.com*.txt",
+        "app.codingrooms.com*.txt",
+    },
     callback = function()
         vim.cmd("set filetype=c")
+        vim.cmd("set guifont=Monaspice_NF_Light:h11")
         vim.defer_fn(function()
             vim.cmd("LspStop clangd")
         end, 1000)
@@ -227,7 +195,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "lisp",
+    pattern = { "lisp", "nix" },
     callback = function()
         vim.opt_local.tabstop = 2
         vim.opt_local.shiftwidth = 2

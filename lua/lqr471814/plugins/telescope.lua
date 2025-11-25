@@ -15,6 +15,21 @@ return {
         opts = {
             defaults = {
                 path_display = { "truncate" },
+                layout_strategy = "flex",
+                layout_config = {
+                    flex = {
+                        flip_columns = 120,
+                        flip_lines   = 20,
+                    },
+                    horizontal = {
+                        preview_width  = 0.4,
+                        preview_cutoff = 40,
+                    },
+                    vertical = {
+                        preview_height = 0.5,
+                        preview_cutoff = 10,
+                    },
+                },
             },
         },
     }
