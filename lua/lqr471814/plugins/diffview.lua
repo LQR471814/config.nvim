@@ -7,7 +7,7 @@ return {
 		local keymap = require("lqr471814.lib.keymap")
 
 		local open = false
-		keymap:map("n", "<leader>d", function()
+		keymap.map("n", "<leader>d", function()
 			if not open then
 				vim.cmd("DiffviewOpen")
 			else

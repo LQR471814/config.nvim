@@ -7,23 +7,23 @@ return {
 
         local keymap = require("lqr471814.lib.keymap")
 
-        keymap:map({ "n", "x" }, "<leader>M", function()
+        keymap.map({ "n", "x" }, "<leader>M", function()
             mc.matchAddCursor(-1)
         end, "Add prev new cursor by word or selection.")
-        keymap:map({ "n", "x" }, "<leader>N", function()
+        keymap.map({ "n", "x" }, "<leader>N", function()
             mc.matchSkipCursor(-1)
         end, "Skip the prev cursor added.")
-        keymap:map({ "n", "x" }, "<leader>m", function()
+        keymap.map({ "n", "x" }, "<leader>m", function()
             mc.matchAddCursor(1)
         end, "Add next new cursor by word or selection.")
-        keymap:map({ "n", "x" }, "<leader>n", function()
+        keymap.map({ "n", "x" }, "<leader>n", function()
             mc.matchSkipCursor(1)
         end, "Skip the next cursor added.")
 
-        keymap:map("x", "S", mc.splitCursors, "Split visual selection into multiple cursors by regex.")
-        keymap:map({"n", "x"}, "gc", mc.restoreCursors, "Restore cursors.")
-        keymap:map({"n", "x"}, "gz", mc.alignCursors, "Align cursor columns.")
-        keymap:map("n", "ga", mc.addCursorOperator,
+        keymap.map("x", "S", mc.splitCursors, "Split visual selection into multiple cursors by regex.")
+        keymap.map({"n", "x"}, "gc", mc.restoreCursors, "Restore cursors.")
+        keymap.map({"n", "x"}, "gz", mc.alignCursors, "Align cursor columns.")
+        keymap.map("n", "ga", mc.addCursorOperator,
             "Adds a cursor to the start of each line in following cursor movement.")
 
         -- keymap layer only when multiple cursors exist
