@@ -4,9 +4,13 @@ local Telescope = require("lqr471814.lib.telescope")
 local Keymap = require("lqr471814.lib.keymap")
 
 local function latex_snippet(context, nodes, opts)
+	local cond = Mathzone.in_mathzone
+	if context.outside_latex then
+		cond = Mathzone.not_in_mathzone
+	end
 	local ls = require("luasnip")
-	context.condition = Mathzone.in_mathzone
-	context.show_condition = Mathzone.in_mathzone
+	context.condition = cond
+	context.show_condition = cond
 	return ls.snippet(context, nodes, opts)
 end
 

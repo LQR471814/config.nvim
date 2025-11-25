@@ -131,13 +131,13 @@ return {
     )),
 
     -- inline mode math
-    s({ trig = "mk", snippetType = "autosnippet" }, fmta(
+    s({ trig = "mk", snippetType = "autosnippet", outside_latex = true }, fmta(
         "$<>$",
         { i(1) }
     )),
 
     -- display mode math
-    s({ trig = "dm", snippetType = "autosnippet" }, fmta(
+    s({ trig = "dm", snippetType = "autosnippet", outside_latex = true }, fmta(
         [[
         \[
           <>

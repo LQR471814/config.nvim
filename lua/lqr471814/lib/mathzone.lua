@@ -6,9 +6,10 @@ local Mathzone = {
 }
 
 function Mathzone.in_mathzone()
-	-- this caching mechanism is here so that vimtex#syntax#in_mathzone doesn't
-	-- need to be called for every snippet that needs to be enabled on a
-	-- mathzone.
+	-- this caching mechanism is here so that mathzone checking does not need
+	-- to performed for every snippet that needs to be enabled on a mathzone
+	-- (since this function will be called for every snippet that is only
+	-- enabled in a mathzone)
 	if Mathzone.cached then
 		return Mathzone.cached_value
 	end
@@ -18,8 +19,8 @@ function Mathzone.in_mathzone()
 	end, 10)
 
 	if vim.bo.filetype == "tex" then
-		Mathzone.cached_value = true
-		return true
+		Mathzone.cached = vim.fn["vimtex#syntax#in_mathzone"]() == 1
+		return Mathzone.cached
 	end
 
 	local res = false
@@ -49,6 +50,10 @@ function Mathzone.in_mathzone()
 
 	Mathzone.cached_value = res
 	return res
+end
+
+function Mathzone.not_in_mathzone()
+	return not Mathzone.in_mathzone()
 end
 
 return Mathzone
