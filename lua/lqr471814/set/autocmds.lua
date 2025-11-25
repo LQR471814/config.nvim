@@ -2,14 +2,14 @@ local lib = require("lqr471814.lib")
 local keymap = lib.keymap
 
 -- enable hard wrap on markdown and tex files
-vim.api.nvim_create_autocmd("BufReadPost", {
+vim.api.nvim_create_autocmd("BufAdd", {
     pattern = { "*.md", "*.tex" },
     callback = function()
         lib.wrap:set("hard", true)
     end
 })
 
-vim.api.nvim_create_autocmd("BufReadPost", {
+vim.api.nvim_create_autocmd("BufAdd", {
     pattern = { "*.md", "*.markdown" },
     callback = function(args)
         -- spell check
