@@ -63,6 +63,7 @@ return {
                         language = "en-US",
                     },
                 },
+                denols = {},
 
                 julials = {},
                 nixd = {
