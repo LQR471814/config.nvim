@@ -1,7 +1,9 @@
 local keymap = require("lqr471814.lib.keymap")
 local lib = require("lqr471814.lib")
 
-local Markdown = {}
+local state = {
+	enabled = {}
+}
 
 local function enable_markdown_tablemode()
 	local enabled = false
@@ -64,9 +66,17 @@ local function monkeypatch_mdmath(buf)
 end
 
 --- @param buf integer
-function Markdown.setup(buf)
+local function setup(buf)
+	if state.enabled[buf] then
+		return
+	end
+	state.enabled[buf] = true
+
+	-- set hard wrap
+	lib.wrap.set("hard", true)
+
 	-- spell check
-	vim.opt_local.spell = true
+	vim.opt_local.spell     = true
 	vim.opt_local.spelllang = "en"
 	keymap.buffer_map("n", "z,", "<ESC>m'[s1z=<CR>`'", "Correct previous spelling error.")
 	keymap.buffer_map("n", "z.", "<ESC>m']s1z=<CR>`'", "Correct next spelling error.")
@@ -117,4 +127,16 @@ function Markdown.setup(buf)
 	monkeypatch_mdmath(buf)
 end
 
-return Markdown
+vim.api.nvim_create_autocmd("BufDelete", {
+	callback = function(args)
+		local buf = args.buf
+		state.enabled[buf] = nil
+	end
+})
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+	pattern = { "*.md", "*.markdown" },
+	callback = function(args)
+		setup(args.buf)
+	end,
+})
