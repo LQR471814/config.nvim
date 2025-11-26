@@ -46,98 +46,108 @@ return {
         config = function()
             local lspconfig = require("lspconfig")
             local opts = {
-                servers = {
-                    clangd = {
-                        filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
+                clangd = {
+                    filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
+                },
+                tailwindcss = {},
+                svelte = {},
+                templ = {},
+                ruff = {},
+                gopls = {},
+                texlab = {},
+                marksman = {},
+                nushell = {},
+                ast_grep = {},
+                pyright = {},
+                ltex_plus = {
+                    ltex = {
+                        language = "en-US",
                     },
-                    tailwindcss = {},
-                    svelte = {},
-                    templ = {},
-                    ruff = {},
-                    gopls = {},
-                    texlab = {},
-                    marksman = {},
-                    nushell = {},
-                    ast_grep = {},
-                    pyright = {},
-                    ltex_plus = {
-                        ltex = {
-                            language = "en-US",
-                        },
-                    },
+                },
 
-                    julials = {},
-                    nixd = {
-                        cmd = { "nixd" },
-                        settings = {
-                            nixd = {
-                                nixpkgs = {
-                                    expr = "import <nixpkgs> { }",
-                                },
-                                formatting = {
-                                    command = { "nixfmt" },
-                                },
-                                options = {
-                                    home_manager = {
-                                        expr =
-                                        "(import <home-manager/modules> { configuration = ~/.config/home-manager/home.nix; pkgs = import <nixpkgs> {}; }).options",
-                                    },
+                julials = {},
+                nixd = {
+                    cmd = { "nixd" },
+                    settings = {
+                        nixd = {
+                            nixpkgs = {
+                                expr = "import <nixpkgs> { }",
+                            },
+                            formatting = {
+                                command = { "nixfmt" },
+                            },
+                            options = {
+                                home_manager = {
+                                    expr =
+                                    "(import <home-manager/modules> { configuration = ~/.config/home-manager/home.nix; pkgs = import <nixpkgs> {}; }).options",
                                 },
                             },
                         },
                     },
-                    denols = {
-                        root_dir = lspconfig.util.root_pattern("deno.json"),
-                    },
-                    vtsls = {
-                        root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json"),
-                        settings = {
-                            vtsls = {
-                                experimental = {
-                                    completion = {
-                                        enableServerSideFuzzyMatch = true
-                                    }
-                                }
-                            },
-                            javascript = {
-                                preferences = {
-                                    autoImportFileExcludePatterns = {
-                                        "node_modules/**"
-                                    }
-                                },
-                                updateImportsOnFileMove = { enabled = "always" },
-                                suggest = {
-                                    completeFunctionCalls = true,
-                                },
-                            },
-                            typescript = {
-                                preferences = {
-                                    autoImportFileExcludePatterns = {
-                                        "node_modules/**"
-                                    }
-                                },
-                                updateImportsOnFileMove = { enabled = "always" },
-                                suggest = {
-                                    completeFunctionCalls = true,
-                                },
-                            }
-                        }
-                    },
-                    lua_ls = {
-                        settings = {
-                            Lua = {
+                },
+                denols = {
+                    root_dir = function(bufnr, on_dir)
+                        local res = lspconfig.util.root_pattern("deno.json")(vim.fn.getcwd())
+                        if res then
+                            on_dir(res)
+                        end
+                    end,
+                    single_file_support = false,
+                },
+                vtsls = {
+                    root_dir = function(bufnr, on_dir)
+                        local res = lspconfig.util.root_pattern("package.json")(vim.fn.getcwd())
+                        if res then
+                            on_dir(res)
+                        end
+                    end,
+                    single_file_support = false,
+                    settings = {
+                        vtsls = {
+                            experimental = {
                                 completion = {
-                                    callSnippet = "Replace"
+                                    enableServerSideFuzzyMatch = true
                                 }
                             }
+                        },
+                        javascript = {
+                            preferences = {
+                                autoImportFileExcludePatterns = {
+                                    "node_modules/**"
+                                }
+                            },
+                            updateImportsOnFileMove = { enabled = "always" },
+                            suggest = {
+                                completeFunctionCalls = true,
+                            },
+                        },
+                        typescript = {
+                            preferences = {
+                                autoImportFileExcludePatterns = {
+                                    "node_modules/**"
+                                }
+                            },
+                            updateImportsOnFileMove = { enabled = "always" },
+                            suggest = {
+                                completeFunctionCalls = true,
+                            },
                         }
-                    },
-                    jsonls = {
-                        settings = {
-                            json = {
-                                schemas = require("schemastore").json.schemas(),
-                                validate = { enable = true },
+                    }
+                },
+                lua_ls = {
+                    settings = {
+                        Lua = {
+                            completion = {
+                                callSnippet = "Replace"
                             }
+                        }
+                    }
+                },
+                jsonls = {
+                    settings = {
+                        json = {
+                            schemas = require("schemastore").json.schemas(),
+                            validate = { enable = true },
                         }
                     }
                 }
@@ -145,9 +155,9 @@ return {
 
             -- setup lsp
             local blink = require("blink.cmp")
-            for server, config in pairs(opts.servers) do
-                vim.lsp.enable(server)
+            for server, config in pairs(opts) do
                 config.capabilities = blink.get_lsp_capabilities(config.capabilities)
+                vim.lsp.enable(server)
                 vim.lsp.config(server, config)
             end
 
