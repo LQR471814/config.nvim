@@ -43,113 +43,116 @@ return {
             "b0o/schemastore.nvim",
             "saghen/blink.cmp",
         },
-        opts = {
-            servers = {
-                clangd = {
-                    filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
-                },
-                tailwindcss = {},
-                svelte = {},
-                templ = {},
-                ruff = {},
-                gopls = {},
-                texlab = {},
-                marksman = {},
-                nushell = {},
-                ast_grep = {},
-                pyright = {},
-                ltex_plus = {
-                    ltex = {
-                        language = "en-US",
+        config = function()
+            local lspconfig = require("lspconfig")
+            local opts = {
+                servers = {
+                    clangd = {
+                        filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
                     },
-                },
-                denols = {},
+                    tailwindcss = {},
+                    svelte = {},
+                    templ = {},
+                    ruff = {},
+                    gopls = {},
+                    texlab = {},
+                    marksman = {},
+                    nushell = {},
+                    ast_grep = {},
+                    pyright = {},
+                    ltex_plus = {
+                        ltex = {
+                            language = "en-US",
+                        },
+                    },
 
-                julials = {},
-                nixd = {
-                    cmd = { "nixd" },
-                    settings = {
-                        nixd = {
-                            nixpkgs = {
-                                expr = "import <nixpkgs> { }",
-                            },
-                            formatting = {
-                                command = { "nixfmt" },
-                            },
-                            options = {
-                                home_manager = {
-                                    expr =
-                                    "(import <home-manager/modules> { configuration = ~/.config/home-manager/home.nix; pkgs = import <nixpkgs> {}; }).options",
+                    julials = {},
+                    nixd = {
+                        cmd = { "nixd" },
+                        settings = {
+                            nixd = {
+                                nixpkgs = {
+                                    expr = "import <nixpkgs> { }",
+                                },
+                                formatting = {
+                                    command = { "nixfmt" },
+                                },
+                                options = {
+                                    home_manager = {
+                                        expr =
+                                        "(import <home-manager/modules> { configuration = ~/.config/home-manager/home.nix; pkgs = import <nixpkgs> {}; }).options",
+                                    },
                                 },
                             },
                         },
                     },
-                },
-                vtsls = {
-                    settings = {
-                        vtsls = {
-                            experimental = {
+                    denols = {
+                        root_dir = lspconfig.util.root_pattern("deno.json"),
+                    },
+                    vtsls = {
+                        root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json"),
+                        settings = {
+                            vtsls = {
+                                experimental = {
+                                    completion = {
+                                        enableServerSideFuzzyMatch = true
+                                    }
+                                }
+                            },
+                            javascript = {
+                                preferences = {
+                                    autoImportFileExcludePatterns = {
+                                        "node_modules/**"
+                                    }
+                                },
+                                updateImportsOnFileMove = { enabled = "always" },
+                                suggest = {
+                                    completeFunctionCalls = true,
+                                },
+                            },
+                            typescript = {
+                                preferences = {
+                                    autoImportFileExcludePatterns = {
+                                        "node_modules/**"
+                                    }
+                                },
+                                updateImportsOnFileMove = { enabled = "always" },
+                                suggest = {
+                                    completeFunctionCalls = true,
+                                },
+                            }
+                        }
+                    },
+                    lua_ls = {
+                        settings = {
+                            Lua = {
                                 completion = {
-                                    enableServerSideFuzzyMatch = true
+                                    callSnippet = "Replace"
                                 }
                             }
-                        },
-                        javascript = {
-                            preferences = {
-                                autoImportFileExcludePatterns = {
-                                    "node_modules/**"
-                                }
-                            },
-                            updateImportsOnFileMove = { enabled = "always" },
-                            suggest = {
-                                completeFunctionCalls = true,
-                            },
-                        },
-                        typescript = {
-                            preferences = {
-                                autoImportFileExcludePatterns = {
-                                    "node_modules/**"
-                                }
-                            },
-                            updateImportsOnFileMove = { enabled = "always" },
-                            suggest = {
-                                completeFunctionCalls = true,
-                            },
                         }
-                    }
-                },
-                lua_ls = {
-                    settings = {
-                        Lua = {
-                            completion = {
-                                callSnippet = "Replace"
+                    },
+                    jsonls = {
+                        settings = {
+                            json = {
+                                schemas = require("schemastore").json.schemas(),
+                                validate = { enable = true },
                             }
                         }
-                    }
-                },
-            }
-        },
-        config = function(_, opts)
-            opts.jsonls = {
-                settings = {
-                    json = {
-                        schemas = require("schemastore").json.schemas(),
-                        validate = { enable = true },
                     }
                 }
             }
 
+            -- setup lsp
             local blink = require("blink.cmp")
-
             for server, config in pairs(opts.servers) do
                 vim.lsp.enable(server)
-
                 config.capabilities = blink.get_lsp_capabilities(config.capabilities)
                 vim.lsp.config(server, config)
             end
 
+            -- setup lsp keymapping
             local keymap = require("lqr471814.lib.keymap")
-
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),
                 callback = function(ev)
@@ -176,7 +179,7 @@ return {
                     -- rename starting with the same name
                     keymap.buffer_map("n", "<leader>rn", vim.lsp.buf.rename, "", ev.buf)
 
-                    keymap.buffer_map("i", "<C-y>", function() vim.lsp.buf.signature_help() end, "", ev.buf)
+                    keymap.buffer_map("i", "<C-h>", function() vim.lsp.buf.signature_help() end, "", ev.buf)
                     keymap.buffer_map({ "n", "v" }, "<space>.", vim.lsp.buf.code_action, "", ev.buf)
                     keymap.buffer_map({ "n" }, "<leader>f", function()
                         vim.lsp.buf.format({ async = false, timeout_ms = 10000 })

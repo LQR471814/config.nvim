@@ -9,7 +9,7 @@ return {
 		-- movement
 		keymap.map({ "n", "v" }, "<C-j>", function() tc.goto_next(opts) end, "Go to the next tree-sitter node.")
 		keymap.map({ "n", "v" }, "<C-k>", function() tc.goto_prev(opts) end, "Go to the prev tree-sitter node.")
-		keymap.map({ "n", "v" }, "<C-h>", function() tc.goto_parent(opts) end, "Go to the parent tree-sitter node.")
+		keymap.map({ "n", "v" }, "<C-p>", function() tc.goto_parent(opts) end, "Go to the parent tree-sitter node.")
 		keymap.map({ "n", "v" }, "<C-l>", function() tc.goto_child(opts) end, "Go the child tree-sitter node.")
 
 		-- swapping
