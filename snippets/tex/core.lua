@@ -206,7 +206,8 @@ return {
                 while idx >= 1 do
                     local c = string.sub(line_to_cursor, idx, idx)
 
-                    -- ensure that fraction numerators don't end up consuming the inline math delimiter
+                    -- ensure that fraction numerators don't end up consuming
+                    -- the inline math delimiter or equal signs
                     if c == "$" then
                         if idx == 1 then
                             break
@@ -217,6 +218,11 @@ return {
                         if before ~= "\\" then
                             break
                         end
+                    end
+
+                    -- stop at equal sign
+                    if c == "=" then
+                        break
                     end
 
                     -- ensure stopping at whitespace doesn't break any parenthesis
@@ -301,59 +307,6 @@ return {
 
     -- del
     s({ trig = "del" }, t("\\nabla")),
-
-    -- ensure space exists after closing }, $, %, = or any common operations
-    s({
-        trig = "",
-        snippetType = "autosnippet",
-        trigEngine = function(_, _2)
-            return function(line_to_cursor, _)
-                local len = string.len(line_to_cursor)
-
-                if len < 2 then
-                    return nil
-                end
-
-                local current = string.sub(line_to_cursor, len, len)
-                if
-                    current == " " or
-                    not string.match(current, "%w")
-                then
-                    return nil
-                end
-
-                local prev = string.sub(line_to_cursor, len - 1, len - 1)
-                if
-                    prev ~= "$" and
-                    prev ~= "}" and
-                    prev ~= "%" and
-                    prev ~= "="
-                then
-                    return nil
-                end
-
-                -- this ensures you don't put a space in $<here>$ and instead only out $$<here>
-                if prev == "$" then
-                    local count = 0
-                    local idx = 1
-                    while idx < len do
-                        if string.sub(line_to_cursor, idx, idx) == "$" then
-                            count = count + 1
-                        end
-                        idx = idx + 1
-                    end
-
-                    -- if the current $ is unclosed in the text up to the cursor
-                    -- don't add a space after the $
-                    if count % 2 ~= 0 then
-                        return nil
-                    end
-                end
-
-                return current, { current }
-            end
-        end
-    }, f(function(_, snip) return " " .. snip.captures[1] end)),
 
     -- item
     s({ trig = "--", snippetType = "autosnippet" }, t("\\item")),
