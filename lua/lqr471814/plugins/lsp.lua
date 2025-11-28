@@ -87,8 +87,9 @@ return {
                 },
                 denols = {
                     root_dir = function(bufnr, on_dir)
-                        local denopath = lspconfig.util.root_pattern("deno.json")(vim.fn.getcwd())
-                        local nodepath = lspconfig.util.root_pattern("package.json")(vim.fn.getcwd())
+                        local path = vim.api.nvim_buf_get_name(bufnr)
+                        local denopath = lspconfig.util.root_pattern("deno.json")(path)
+                        local nodepath = lspconfig.util.root_pattern("package.json")(path)
                         if not denopath then
                             return
                         end
@@ -115,8 +116,9 @@ return {
                 },
                 vtsls = {
                     root_dir = function(bufnr, on_dir)
-                        local denopath = lspconfig.util.root_pattern("deno.json")(vim.fn.getcwd())
-                        local nodepath = lspconfig.util.root_pattern("package.json")(vim.fn.getcwd())
+                        local path = vim.api.nvim_buf_get_name(bufnr)
+                        local denopath = lspconfig.util.root_pattern("deno.json")(path)
+                        local nodepath = lspconfig.util.root_pattern("package.json")(path)
                         if not nodepath then
                             return
                         end
