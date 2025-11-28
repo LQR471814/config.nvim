@@ -89,7 +89,11 @@ return {
                     root_dir = function(bufnr, on_dir)
                         local denopath = lspconfig.util.root_pattern("deno.json")(vim.fn.getcwd())
                         local nodepath = lspconfig.util.root_pattern("package.json")(vim.fn.getcwd())
+                        if not denopath then
+                            return
+                        end
                         if not nodepath then
+                            on_dir(denopath)
                             return
                         end
                         local denoparts = vim.split(denopath, "/", { trimempty = true })
@@ -114,6 +118,10 @@ return {
                         local denopath = lspconfig.util.root_pattern("deno.json")(vim.fn.getcwd())
                         local nodepath = lspconfig.util.root_pattern("package.json")(vim.fn.getcwd())
                         if not nodepath then
+                            return
+                        end
+                        if not denopath then
+                            on_dir(nodepath)
                             return
                         end
                         local denoparts = vim.split(denopath, "/", { trimempty = true })
