@@ -399,4 +399,8 @@ return {
 
     -- scaled curly brackets
     s({ trig = "curly" }, fmta("\\left\\{<>\\right\\}", { i(1) })),
+
+    -- floor / ceil
+    s({ trig = "floor" }, fmta("\\left\\lfloor<>\\right\\rfloor", { i(1) })),
+    s({ trig = "ceil" }, fmta("\\left\\lceil<>\\right\\rceil", { i(1) })),
 }
