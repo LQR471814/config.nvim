@@ -5,7 +5,7 @@ return {
 	{
 		"kaymmm/bullets.nvim",
 		commit = "cfc5c6038d6edcb93509ea7d96d9c8fe3dad5438",
-		event = "VeryLazy",
+		ft = "markdown",
 		opts = {
 			outline_levels = { "num", "std-" },
 			mappings = false,
@@ -13,10 +13,8 @@ return {
 	},
 	{
 		"Thiago4532/mdmath.nvim",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-		},
-		event = "VeryLazy",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		ft = "markdown",
 		opts = {
 			filetypes = { "markdown" },
 			hide_on_insert = false,
@@ -24,12 +22,12 @@ return {
 	},
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
-		event = "VeryLazy",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 			"echasnovski/mini.icons",
 			"nvim-tree/nvim-web-devicons"
 		},
+		ft = "markdown",
 		config = function()
 			require("render-markdown").setup(
 			---@module 'render-markdown'

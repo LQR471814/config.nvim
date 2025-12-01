@@ -19,5 +19,5 @@ return {
 	-- profiling
 	require("lqr471814.plugins.profile"),
 	-- support .fountain files
-	{ "kblin/vim-fountain", event = "VeryLazy" },
+	{ "kblin/vim-fountain", ft = "fountain" },
 }

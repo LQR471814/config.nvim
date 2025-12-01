@@ -1,6 +1,6 @@
 return {
 	"sindrets/diffview.nvim",
-	event = "VeryLazy",
+	cmd = { "DiffviewOpen", "DiffviewClose" },
 	config = function()
 		require("diffview").setup({})
 

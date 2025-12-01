@@ -1,5 +1,6 @@
 return {
 	"MagicDuck/grug-far.nvim",
+	-- lazy loading not necessary
 	config = function()
 		require("grug-far").setup({});
 

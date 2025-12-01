@@ -1,5 +1,6 @@
 return {
 	"drybalka/tree-climber.nvim",
+	event = "VeryLazy",
 	config = function()
 		local tc = require("tree-climber")
 		local keymap = require("lqr471814.lib.keymap")

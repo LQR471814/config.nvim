@@ -27,7 +27,7 @@ return {
 	-- pcre syntax
 	{ "othree/eregex.vim",      event = "VeryLazy" },
 	-- natural dates
-	{ "Gelio/cmp-natdat",       config = true },
+	{ "Gelio/cmp-natdat",       event = "VeryLazy",                    config = true },
 	-- make editing big files faster
 	{ "mireq/large_file",       config = true },
 }
