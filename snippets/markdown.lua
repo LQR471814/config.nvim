@@ -13,7 +13,7 @@ return {
         $$
         ]],
         { i(1) })),
-    s({ trig = "adm", snippetType = "autosnippet", wordTrig = true }, fmta(
+    s({ trig = "aligned" }, fmta(
         [[
         $$
         \begin{aligned}

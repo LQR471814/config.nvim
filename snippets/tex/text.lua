@@ -25,7 +25,7 @@ return {
 		{ i(1) }
 	)),
 	-- aligned display mode math
-	s({ trig = "adm", snippetType = "autosnippet" }, fmta(
+	s({ trig = "aligned" }, fmta(
 		[[
         \[
         \begin{aligned}
