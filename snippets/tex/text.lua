@@ -36,6 +36,20 @@ return {
 		{ i(1) }
 	)),
 
+    -- \begin \end
+    s({ trig = "beg", snippetType = "autosnippet" }, fmta(
+        [[
+        \begin{<>}
+          <>
+        \end{<>}
+        ]],
+        {
+            i(1),
+            i(2),
+            rep(1),
+        }
+    )),
+
 	-- \documentclass
 	s({ trig = "article" }, fmta([[
         \documentclass[a4paper, 12pt]{article}
