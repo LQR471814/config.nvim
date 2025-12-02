@@ -27,20 +27,6 @@ return {
         { i(1) }
     )),
 
-    -- \begin \end
-    s({ trig = "beg", snippetType = "autosnippet" }, fmta(
-        [[
-        \begin{<>}
-          <>
-        \end{<>}
-        ]],
-        {
-            i(1),
-            i(2),
-            rep(1),
-        }
-    )),
-
     -- integrals
     s({ trig = "dint", snippetType = "autosnippet" }, fmta(
         "\\int_{<>}^{<>}",
