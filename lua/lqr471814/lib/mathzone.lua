@@ -19,8 +19,8 @@ function Mathzone.in_mathzone()
 	end, 10)
 
 	if vim.bo.filetype == "tex" then
-		Mathzone.cached = vim.fn["vimtex#syntax#in_mathzone"]() == 1
-		return Mathzone.cached
+		Mathzone.cached_value = vim.fn["vimtex#syntax#in_mathzone"]() == 1
+		return Mathzone.cached_value
 	end
 
 	local res = false

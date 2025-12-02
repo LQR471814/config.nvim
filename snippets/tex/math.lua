@@ -172,7 +172,7 @@ return {
 
     -- overline
     s(
-        { trig = ";_" },
+        { trig = ";_", snippetType = "autosnippet" },
         fmta("\\overline{<>}", { i(1) })
     ),
     -- <->
