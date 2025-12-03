@@ -6,7 +6,7 @@ local Keymap = require("lqr471814.lib.keymap")
 local function latex_snippet(context, nodes, opts)
 	local cond = Mathzone.in_mathzone
 	if context.outside_latex then
-		cond = Mathzone.not_in_mathzone
+		cond = Mathzone.outside_mathzone_tex
 	end
 	local ls = require("luasnip")
 	context.condition = cond

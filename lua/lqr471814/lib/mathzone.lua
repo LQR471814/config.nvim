@@ -1,26 +1,9 @@
+local util = require("lqr471814.lib.util")
 local keymap = require("lqr471814.lib.keymap")
 
-local Mathzone = {
-	cached_value = false,
-	cached = false
-}
-
-function Mathzone.in_mathzone()
-	-- this caching mechanism is here so that mathzone checking does not need
-	-- to performed for every snippet that needs to be enabled on a mathzone
-	-- (since this function will be called for every snippet that is only
-	-- enabled in a mathzone)
-	if Mathzone.cached then
-		return Mathzone.cached_value
-	end
-	Mathzone.cached = true
-	vim.defer_fn(function()
-		Mathzone.cached = false
-	end, 10)
-
+local function in_mathzone()
 	if vim.bo.filetype == "tex" then
-		Mathzone.cached_value = vim.fn["vimtex#syntax#in_mathzone"]() == 1
-		return Mathzone.cached_value
+		return vim.fn["vimtex#syntax#in_mathzone"]() == 1
 	end
 
 	local res = false
@@ -48,12 +31,18 @@ function Mathzone.in_mathzone()
 		keymap.overwrite_buffer_map("i", "<S-Tab>", "<C-o><Plug>(bullets-promote)")
 	end
 
-	Mathzone.cached_value = res
 	return res
 end
 
-function Mathzone.not_in_mathzone()
-	return not Mathzone.in_mathzone()
+local function outside_mathzone_tex()
+	return vim.bo.filetype == "tex" and (not in_mathzone())
 end
 
-return Mathzone
+return {
+	-- this caching mechanism is here so that mathzone checking does not need
+	-- to performed for every snippet that needs to be enabled on a mathzone
+	-- (since this function will be called for every snippet that is only
+	-- enabled in a mathzone)
+	in_mathzone = util.cache(20, in_mathzone),
+	outside_mathzone_tex = util.cache(20, outside_mathzone_tex),
+}
