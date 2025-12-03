@@ -38,6 +38,10 @@ local function outside_mathzone_tex()
 	return vim.bo.filetype == "tex" and (not in_mathzone())
 end
 
+local function all_zones_tex()
+	return vim.bo.filetype == "tex"
+end
+
 return {
 	-- this caching mechanism is here so that mathzone checking does not need
 	-- to performed for every snippet that needs to be enabled on a mathzone
@@ -45,4 +49,5 @@ return {
 	-- enabled in a mathzone)
 	in_mathzone = util.cache(20, in_mathzone),
 	outside_mathzone_tex = util.cache(20, outside_mathzone_tex),
+	all_zones_tex = util.cache(20, all_zones_tex),
 }
