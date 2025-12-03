@@ -99,7 +99,7 @@ local function setup(buf)
 	-- bullets
 	keymap.buffer_map("n", "<leader>rl", "<Plug>(bullets-renumber)", "Renumber bullets.")
 
-	-- keymap:buffer_map("i", "<cr>", "<Plug>(bullets-newline-cr)")
+	keymap.buffer_map("i", "<cr>", "<Plug>(bullets-newline-cr)")
 	keymap.buffer_map("n", "o", function()
 		vim.cmd("InsertNewBulletO")
 	end)
