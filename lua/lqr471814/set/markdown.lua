@@ -112,7 +112,7 @@ local function setup(buf)
 	keymap.buffer_map("i", "<S-Tab>", "<C-o><Plug>(bullets-promote)", "Indent bullet.")
 
 	-- insert link
-	keymap.buffer_map("i", "<C-M-k>", function()
+	keymap.buffer_map("i", "<C-k>", function()
 		local clipboard = vim.fn.getreg("+")
 		clipboard = clipboard:gsub("\n", "")
 		local pos = vim.api.nvim_win_get_cursor(0)
