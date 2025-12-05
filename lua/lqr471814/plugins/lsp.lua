@@ -89,7 +89,8 @@ return {
                                     ]],
                                 },
                                 home_manager = {
-                                    expr = [[(builtins.getFlake (builtins.toString ./.)).homeConfigurations.lqr471814.options]],
+                                    expr =
+                                    [[(builtins.getFlake (builtins.toString ./.)).homeConfigurations.lqr471814.options]],
                                 },
                             },
                         },
@@ -254,9 +255,4 @@ return {
             })
         end
     },
-    { -- keeps LSP RAM usage low by automatically stopping and starting LSP servers
-        "hinell/lsp-timeout.nvim",
-        event = "VeryLazy",
-        dependencies = { "neovim/nvim-lspconfig" }
-    }
 }
