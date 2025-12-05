@@ -44,6 +44,9 @@ return {
             "saghen/blink.cmp",
         },
         config = function()
+            -- disable lsp debug logging
+            vim.lsp.set_log_level("off")
+
             local lspconfig = require("lspconfig")
             local opts = {
                 clangd = {
@@ -77,9 +80,16 @@ return {
                                 command = { "nixfmt" },
                             },
                             options = {
+                                nixos = {
+                                    expr = [[
+                                        let
+                                            config = (builtins.getFlake (builtins.toString ./.)).nixosConfigurations;
+                                        in
+                                            builtins.getAttr (builtins.elemAt (builtins.attrNames config) 0) config
+                                    ]],
+                                },
                                 home_manager = {
-                                    expr =
-                                    "(import <home-manager/modules> { configuration = ~/.config/home-manager/home.nix; pkgs = import <nixpkgs> {}; }).options",
+                                    expr = [[(builtins.getFlake (builtins.toString ./.)).homeConfigurations.lqr471814.options]],
                                 },
                             },
                         },
@@ -244,4 +254,9 @@ return {
             })
         end
     },
+    { -- keeps LSP RAM usage low by automatically stopping and starting LSP servers
+        "hinell/lsp-timeout.nvim",
+        event = "VeryLazy",
+        dependencies = { "neovim/nvim-lspconfig" }
+    }
 }
