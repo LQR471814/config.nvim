@@ -38,7 +38,7 @@ return {
     )),
 
     -- \begin \end
-    s({ trig = "beg", snippetType = "autosnippet" }, fmta(
+    ls.snippet({ trig = "beg", snippetType = "autosnippet" }, fmta(
         [[
         \begin{<>}
           <>
