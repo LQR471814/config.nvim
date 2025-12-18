@@ -67,6 +67,10 @@ return {
                         language = "en-US",
                     },
                 },
+                ["nu-lint"] = {
+                    cmd = { "nu-lint", "--lsp" },
+                    filetypes = { "nu" }
+                },
 
                 julials = {},
                 nixd = {
