@@ -33,4 +33,14 @@ function Keymap.overwrite_buffer_map(mode, key, action, desc, buffer_no)
 	vim.keymap.set(mode, key, action, opts)
 end
 
+function Keymap.delete(modes, key)
+	vim.keymap.del(modes, key)
+end
+
+function Keymap.buffer_delete(modes, key, buffer_no)
+	vim.keymap.del(modes, key, {
+		buffer = buffer_no or true
+	})
+end
+
 return Keymap
