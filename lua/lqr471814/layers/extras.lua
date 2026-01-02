@@ -9,7 +9,7 @@ return {
 	-- latex support
 	require("lqr471814.plugins.latex"),
 	-- treesitter walker
-	require("lqr471814.plugins.tree-climber"),
+	-- require("lqr471814.plugins.tree-climber"),
 	-- git merge tool
 	require("lqr471814.plugins.diffview"),
 	-- browser integration
