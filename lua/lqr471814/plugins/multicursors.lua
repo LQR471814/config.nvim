@@ -17,7 +17,7 @@ return {
         keymap.map({ "n", "x" }, "<leader>m", function()
             mc.matchAddCursor(1)
         end, "Add next new cursor by word or selection.")
-        keymap.map({ "n", "x" }, "<leader>n", function()
+        keymap.map({ "x" }, "<leader>n", function()
             mc.matchSkipCursor(1)
         end, "Skip the next cursor added.")
 
