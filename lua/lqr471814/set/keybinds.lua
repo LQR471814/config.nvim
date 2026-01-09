@@ -90,7 +90,9 @@ keymap.map("n", "<leader>n", function()
     Snacks.picker.explorer()
 end)
 keymap.map("n", "<leader>pr", function()
-    Snacks.picker.recent()
+    Snacks.picker.recent({
+        filter = { cwd = true }
+    })
 end, "Fuzzy-find files by filename.")
 keymap.map("n", "<leader>pf", function()
     Snacks.picker.files({
