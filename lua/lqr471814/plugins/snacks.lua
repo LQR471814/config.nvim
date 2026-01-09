@@ -8,6 +8,7 @@ return {
 			math = { enabled = false },
 		},
 		lazygit = {},
-		quickfile = {}
+		quickfile = {},
+		picker = {},
 	}
 }

@@ -59,35 +59,78 @@ keymap.map("n", "<leader>l", function()
     Snacks.lazygit.open()
 end, "Open lazygit (git).")
 
--- telescope
+-- snacks.picker
 
+--- filesystem
+
+default_fs_exclusion = { -- fs entries that should always be excluded
+    ".git",
+    ".venv",
+    "node_modules",
+    ".treesitter",
+    '*.fls',
+    '*.aux',
+    '*.fdb_latexmk',
+    '*.synctex.gz',
+    '*.pdf_tex',
+    '*.dvi',
+    '*.ps',
+    '*.bbl',
+    '*.bcf',
+    '*.blg',
+    '*.out',
+    '*.run.xml',
+    '*.xdv',
+    '*.vimtex',
+    '*.db',
+    '_Archived',
+}
+
+keymap.map("n", "<leader>n", function()
+    Snacks.picker.explorer()
+end)
+keymap.map("n", "<leader>pr", function()
+    Snacks.picker.recent()
+end, "Fuzzy-find files by filename.")
 keymap.map("n", "<leader>pf", function()
-    require("telescope.builtin").find_files({
-        find_command = { "fd", "--type", "file", "--hidden", "-E", ".git", "-E", ".treesitter" },
+    Snacks.picker.files({
+        hidden = true,
+        ignored = false, -- Snacks handles excludes via the 'exclude' table or native 'fd' logic
+        exclude = default_fs_exclusion,
     })
 end, "Fuzzy-find files by filename.")
 keymap.map("n", "<leader>ps", function()
-    local target = vim.fn.input("grep > ")
-    require("telescope.builtin").grep_string({
-        search = target,
-        additional_args = { "--iglob", "!.{git,treesitter}", "--hidden" }
+    Snacks.picker.grep({
+        hidden = true,
+        exclude = default_fs_exclusion,
     })
 end, "Find files via text content.")
-keymap.map("n", "<leader>pg", function()
-    require("telescope.builtin").git_files()
-end, "Fuzzy-find files in the git working tree.")
-keymap.map("n", "<leader>o", lib.telescope.buffers, "Fuzzy-find open buffers.")
-keymap.map("n", "<leader>pl", function()
-    require("telescope.builtin").live_grep()
-end, "Fuzzy-find files via text content (live grep).")
+
+--- git integration
+
+keymap.map("n", "<leader>ga", function()
+    Snacks.picker.git_log()
+end, "Fuzzy-find all git logs on current branch.")
+keymap.map("n", "<leader>gf", function()
+    Snacks.picker.git_log_file()
+end, "Fuzzy-find git logs pertaining to the current file.")
+keymap.map("n", "<leader>gl", function()
+    Snacks.picker.git_log_file()
+end, "Fuzzy-find git logs pertaining to the current line.")
+
+--- editor
+
+keymap.map("n", "<leader>o", function()
+    Snacks.picker.buffers()
+end, "Fuzzy-find open buffers.")
 keymap.map("n", "<leader>pe", function()
-    require("telescope.builtin").diagnostics()
+    Snacks.picker.diagnostics()
 end, "Fuzzy-find diagnostics.")
 keymap.map({ "n", "v" }, "<leader>pc", function()
-    require("telescope.builtin").commands()
+    Snacks.picker.commands()
 end, "Fuzzy-find commands.")
 keymap.map("n", "<leader>ph", function()
-    require("telescope.builtin").help_tags()
+    Snacks.picker.help()
 end, "Fuzzy-find help entries.")
 keymap.map("n", "<leader>pH", function()
     local docs = {}
@@ -97,15 +140,35 @@ keymap.map("n", "<leader>pH", function()
             table.insert(docs, d)
         end
     end
-    require("telescope.builtin").live_grep({
-        prompt_title = "Grep plugin help",
-        search_dirs = docs,
-        additional_args = function() return { "--glob=*.txt", "--glob=!tags" } end,
+    Snacks.picker.grep({
+        dirs = docs,
+        glob = "*.txt",
+        -- Snacks handles internal tags automatically, but we can pass extra args if needed
+        args = { "--glob=!tags" },
+        title = "Grep plugin help",
     })
 end, "Fuzzy-find help entry content.")
 
-keymap.map("n", "<leader>q", "<cmd>bd<cr>", "Close the current buffer.")
-keymap.map("n", "<leader>Q", "<cmd>bd!<cr>", "Close the current buffer without saving.")
+--- language
+
+keymap.map("n", "<leader>ad", function()
+    Snacks.picker.lsp_declarations()
+end, "Pick lsp_declarations")
+keymap.map("n", "<leader>af", function()
+    Snacks.picker.lsp_definitions()
+end, "Pick lsp_definitions")
+keymap.map("n", "<leader>aci", function()
+    Snacks.picker.lsp_incoming_calls()
+end, "Pick lsp_incoming_calls")
+keymap.map("n", "<leader>aco", function()
+    Snacks.picker.lsp_incoming_calls()
+end, "Pick lsp_incoming_calls")
+keymap.map("n", "<leader>ai", function()
+    Snacks.picker.lsp_implementations()
+end, "Pick lsp_implementations")
+keymap.map("n", "<leader>as", function()
+    Snacks.picker.lsp_workspace_symbols()
+end, "Pick lsp_workspace_symbols")
 
 -- wrap
 keymap.map("n", "gq", "gw", "Wrap lines.")
@@ -131,4 +194,3 @@ keymap.map("n", "<leader>ds", function()
     end
     diffopen = not diffopen
 end, "Toggle diff splits.")
-

@@ -28,6 +28,7 @@ return {
         opts = {
             library = {
                 { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                { path = "snacks.nvim",        words = { "Snacks" } },
             },
             integrations = {
                 cmp = false,
@@ -223,9 +224,15 @@ return {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),
                 callback = function(ev)
                     keymap.buffer_map("n", "ge", function() vim.diagnostic.open_float() end, "", ev.buf)
-                    keymap.buffer_map("n", "gd", vim.lsp.buf.definition, "", ev.buf)
+                    keymap.buffer_map("n", "gd", function()
+                        Snacks.picker.lsp_definitions({
+                            auto_confirm = true
+                        })
+                    end, "Go to definition.", ev.buf)
                     keymap.buffer_map("n", "gh", vim.lsp.buf.hover, "", ev.buf)
-                    keymap.buffer_map("n", "gr", vim.lsp.buf.references, "", ev.buf)
+                    keymap.buffer_map("n", "gr", function()
+                        Snacks.picker.lsp_references()
+                    end, "", ev.buf)
 
                     -- rename with a completely different name
                     keymap.buffer_map("n", "<leader>rr", function()
@@ -248,7 +255,7 @@ return {
                     keymap.buffer_map("i", "<C-h>", function() vim.lsp.buf.signature_help() end, "", ev.buf)
                     keymap.buffer_map({ "n", "v" }, "<space>.", vim.lsp.buf.code_action, "", ev.buf)
                     keymap.buffer_map({ "n" }, "<leader>f", function()
-                        vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
+                        vim.lsp.buf.format({ async = true, timeout_ms = 5000 })
                     end, "", ev.buf)
                     keymap.buffer_map("n", "]g", function()
                         vim.diagnostic.jump({ count = 1, float = true })

@@ -16,7 +16,7 @@ return {
             ["`"] = { escape = false, close = true, pair = "``", disabled_filetypes = { "lisp" } },
         },
         options = {
-            disabled_filetypes = { "TelescopePrompt", "grug-far", "tex", "markdown" },
+            disabled_filetypes = { "snacks_picker_input", "grug-far", "tex", "markdown" },
             auto_indent = true,
             disable_command_mode = true,
         },
