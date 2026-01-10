@@ -123,7 +123,15 @@ end, "Fuzzy-find git logs pertaining to the current line.")
 --- editor
 
 keymap.map("n", "<leader>o", function()
-    Snacks.picker.buffers()
+    Snacks.picker.buffers({
+        win = {
+            input = {
+                keys = {
+                    ["dd"] = "bufdelete"
+                }
+            }
+        },
+    })
 end, "Fuzzy-find open buffers.")
 keymap.map("n", "<leader>pe", function()
     Snacks.picker.diagnostics()
