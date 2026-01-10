@@ -90,10 +90,10 @@ keymap.map("n", "<leader>n", function()
     Snacks.picker.explorer()
 end)
 keymap.map("n", "<leader>pr", function()
-    Snacks.picker.recent({
+    Snacks.picker.smart({
         filter = { cwd = true }
     })
-end, "Fuzzy-find files by filename.")
+end, "Smart-pick by frequency.")
 keymap.map("n", "<leader>pf", function()
     Snacks.picker.files({
         hidden = true,
