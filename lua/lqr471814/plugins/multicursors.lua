@@ -21,10 +21,10 @@ return {
             mc.matchSkipCursor(1)
         end, "Skip the next cursor added.")
 
-        keymap.map("x", "gs", mc.splitCursors, "Split visual selection into multiple cursors by regex.")
-        keymap.map({"n", "x"}, "gc", mc.restoreCursors, "Restore cursors.")
-        keymap.map({"n", "x"}, "gz", mc.alignCursors, "Align cursor columns.")
-        keymap.map("n", "ga", mc.addCursorOperator,
+        keymap.map("x", "<leader>cs", mc.splitCursors, "Split visual selection into multiple cursors by regex.")
+        keymap.map({"n", "x"}, "<leader>cc", mc.restoreCursors, "Restore cursors.")
+        keymap.map({"n", "x"}, "<leader>cz", mc.alignCursors, "Align cursor columns.")
+        keymap.map("n", "<leader>ca", mc.addCursorOperator,
             "Adds a cursor to the start of each line in following cursor movement.")
 
         -- keymap layer only when multiple cursors exist
