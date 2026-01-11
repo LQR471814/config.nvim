@@ -22,6 +22,8 @@ return {
 	require("lqr471814.plugins.localconf"),
 	-- notifications / etc...
 	require("lqr471814.plugins.snacks"),
+	-- progress / spinners
+	require("lqr471814.plugins.fidget"),
 	-- rename html tags
 	{ "windwp/nvim-ts-autotag", event = { "BufReadPre", "BufNewFile" } },
 	-- pcre syntax
