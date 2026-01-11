@@ -29,7 +29,12 @@ return {
                 "css",
                 "tsx",
                 "commonlisp",
-                "julia"
+                "julia",
+                "vue",
+                "scss",
+                "typst",
+                "norg",
+                "regex",
             },
 
             ignore_install = {},
