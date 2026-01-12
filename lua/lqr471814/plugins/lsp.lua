@@ -74,6 +74,7 @@ return {
                 },
                 please = {},
 
+                ocamllsp = {},
                 julials = {},
                 nixd = {
                     cmd = { "nixd" },
