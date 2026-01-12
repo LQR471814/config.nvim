@@ -35,6 +35,7 @@ return {
                 "typst",
                 "norg",
                 "regex",
+                "ocaml",
             },
 
             ignore_install = {},
