@@ -65,6 +65,7 @@ return {
 				  name = "devenv";
 				  packages =
 					(with pkgs; [
+					  pkg-config
 					  <>
 					])
 					++ libs;
