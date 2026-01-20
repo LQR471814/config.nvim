@@ -58,17 +58,14 @@ return {
 			in
 			{
 			  devShells.${system}.default =
-				let
-				  libs = with pkgs; [ ];
-				in
 				pkgs.mkShell {
 				  name = "devenv";
-				  packages =
+				  buildInputs = (with pkgs; [ ]);
+				  nativeBuildInputs =
 					(with pkgs; [
 					  pkg-config
 					  <>
-					])
-					++ libs;
+					]);
 				  shellHook = ''
 					export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath libs}:$LD_LIBRARY_PATH"
 					echo "Devshell activated."
