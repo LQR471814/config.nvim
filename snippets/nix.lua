@@ -69,8 +69,10 @@ return {
 					  pkg-config
 					  <>
 					]);
+
+				  LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath libs}:$LD_LIBRARY_PATH";
+
 				  shellHook = ''
-					export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath libs}:$LD_LIBRARY_PATH"
 					echo "Devshell activated."
 				  '';
 				};
