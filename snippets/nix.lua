@@ -57,18 +57,23 @@ return {
 			  };
 			in
 			{
-			  devShells.${system}.default = pkgs.mkShell {
-			    name = "devenv";
-			    buildInputs = with pkgs; [ ];
-			    nativeBuildInputs = with pkgs; [
-			  	  pkg-config
-			  	  <>
-			    ];
-			    shellHook = ''
-			  	  export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath libs}:$LD_LIBRARY_PATH"
-			  	  echo "Devshell activated."
-			    '';
-			  };
+			  devShells.${system}.default =
+				let
+				  libs = with pkgs; [ ];
+				in
+				pkgs.mkShell {
+				  name = "devenv";
+				  buildInputs = libs;
+				  nativeBuildInputs =
+					(with pkgs; [
+					  pkg-config
+					  <>
+					]);
+				  shellHook = ''
+					export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath libs}:$LD_LIBRARY_PATH"
+					echo "Devshell activated."
+				  '';
+				};
 			};
 		}
 	]], { i(1) })),
