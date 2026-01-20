@@ -24,6 +24,8 @@ return {
 	require("lqr471814.plugins.snacks"),
 	-- progress / spinners
 	require("lqr471814.plugins.fidget"),
+	-- render ansi escape codes natively
+	require("lqr471814.plugins.ansi"),
 	-- rename html tags
 	{ "windwp/nvim-ts-autotag", event = { "BufReadPre", "BufNewFile" } },
 	-- pcre syntax

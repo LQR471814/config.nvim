@@ -85,3 +85,10 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt_local.expandtab = true
     end
 })
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.log",
+  callback = function()
+    vim.bo.filetype = "log"
+  end,
+})
