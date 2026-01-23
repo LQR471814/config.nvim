@@ -54,6 +54,7 @@ return {
                     filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
                 },
                 tailwindcss = {},
+                biome = {},
                 svelte = {},
                 templ = {},
                 ruff = {},
