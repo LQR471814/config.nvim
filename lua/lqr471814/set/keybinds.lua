@@ -204,3 +204,7 @@ keymap.map("n", "<leader>ds", function()
     end
     diffopen = not diffopen
 end, "Toggle diff splits.")
+
+keymap.map("n", "<leader>rn", function()
+    require("ts-autotag").rename()
+end)

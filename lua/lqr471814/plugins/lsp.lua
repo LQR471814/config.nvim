@@ -249,7 +249,10 @@ return {
                                 default = "",
                             },
                             function(input)
-                                if input then
+                                if not input then
+                                    return
+                                end
+                                if not require("ts-autotag").rename(input) then
                                     vim.lsp.buf.rename(input)
                                 end
                             end
@@ -257,7 +260,11 @@ return {
                     end, "", ev.buf)
 
                     -- rename starting with the same name
-                    keymap.buffer_map("n", "<leader>rn", vim.lsp.buf.rename, "", ev.buf)
+                    keymap.buffer_map("n", "<leader>rn", function()
+                        if not require("ts-autotag").rename() then
+                            vim.lsp.buf.rename()
+                        end
+                    end, "", ev.buf)
 
                     keymap.buffer_map("i", "<C-h>", function() vim.lsp.buf.signature_help() end, "", ev.buf)
                     keymap.buffer_map({ "n", "v" }, "<space>.", vim.lsp.buf.code_action, "", ev.buf)
