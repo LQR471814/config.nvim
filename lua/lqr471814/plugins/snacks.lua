@@ -9,6 +9,11 @@ return {
 		},
 		lazygit = {},
 		quickfile = {},
-		picker = {},
+		picker = {
+			main = {
+				file = false,
+				current = true,
+			},
+		},
 	}
 }
