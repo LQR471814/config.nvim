@@ -268,9 +268,6 @@ return {
 
                     keymap.buffer_map("i", "<C-h>", function() vim.lsp.buf.signature_help() end, "", ev.buf)
                     keymap.buffer_map({ "n", "v" }, "<space>.", vim.lsp.buf.code_action, "", ev.buf)
-                    keymap.buffer_map({ "n" }, "<leader>f", function()
-                        vim.lsp.buf.format({ async = true, timeout_ms = 5000 })
-                    end, "", ev.buf)
                     keymap.buffer_map("n", "]g", function()
                         vim.diagnostic.jump({ count = 1, float = true })
                     end, "", ev.buf)
@@ -281,4 +278,47 @@ return {
             })
         end
     },
+    -- improve formatters
+    {
+        'stevearc/conform.nvim',
+        event = { "BufWritePre" },
+        cmd = { "ConformInfo" },
+        keys = {
+            {
+                "<leader>f",
+                function()
+                    require("conform").format()
+                end,
+                mode = "n",
+                desc = "Format buffer."
+            },
+        },
+        config = function()
+            local conform = require("conform")
+            local jsopts = {
+                "biome",
+                "denols",
+                "vtsls",
+                stop_after_first = true,
+                lsp_format = "fallback"
+            }
+            conform.setup({
+                lsp_format = "fallback",
+                default_format_opts = {
+                    lsp_format = "fallback",
+                    timeout_ms = 500
+                },
+                formatters_by_ft = {
+                    typescript = jsopts,
+                    typescriptreact = jsopts,
+                    javascript = jsopts,
+                    ["*"] = { "trim_whitespace" },
+                },
+                format_on_save = {
+                    timeout_ms = 500,
+                    lsp_format = "fallback"
+                }
+            })
+        end,
+    }
 }
