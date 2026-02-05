@@ -26,6 +26,8 @@ return {
 	require("lqr471814.plugins.fidget"),
 	-- render ansi escape codes natively
 	require("lqr471814.plugins.log"),
+	-- formatting
+	require("lqr471814.plugins.conform"),
 	-- rename html tags
 	{ "tronikelis/ts-autotag.nvim" },
 	-- pcre syntax

@@ -278,47 +278,4 @@ return {
             })
         end
     },
-    -- improve formatters
-    {
-        'stevearc/conform.nvim',
-        event = { "BufWritePre" },
-        cmd = { "ConformInfo" },
-        keys = {
-            {
-                "<leader>f",
-                function()
-                    require("conform").format()
-                end,
-                mode = "n",
-                desc = "Format buffer."
-            },
-        },
-        config = function()
-            local conform = require("conform")
-            local jsopts = {
-                "biome",
-                "denols",
-                "vtsls",
-                stop_after_first = true,
-                lsp_format = "fallback"
-            }
-            conform.setup({
-                lsp_format = "fallback",
-                default_format_opts = {
-                    lsp_format = "fallback",
-                    timeout_ms = 500
-                },
-                formatters_by_ft = {
-                    typescript = jsopts,
-                    typescriptreact = jsopts,
-                    javascript = jsopts,
-                    ["*"] = { "trim_whitespace" },
-                },
-                format_on_save = {
-                    timeout_ms = 500,
-                    lsp_format = "fallback"
-                }
-            })
-        end,
-    }
 }
