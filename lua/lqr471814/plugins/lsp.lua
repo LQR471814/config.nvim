@@ -286,6 +286,7 @@ return {
                 "astro",
                 "svelte",
                 "ts_ls",
+                "denols",
                 "typescript-tools",
                 "volar",
                 "vtsls",
