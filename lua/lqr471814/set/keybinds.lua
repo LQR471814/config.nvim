@@ -176,7 +176,7 @@ end, "Pick lsp_incoming_calls")
 keymap.map("n", "<leader>ai", function()
     Snacks.picker.lsp_implementations()
 end, "Pick lsp_implementations")
-keymap.map("n", "<leader>as", function()
+keymap.map("n", "<leader>pl", function()
     Snacks.picker.lsp_workspace_symbols()
 end, "Pick lsp_workspace_symbols")
 
