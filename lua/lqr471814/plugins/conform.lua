@@ -10,7 +10,7 @@ return {
                 function()
                     require("conform").format()
                 end,
-        	    mode = "n",
+                mode = "n",
                 desc = "Format buffer."
             },
         },
@@ -24,15 +24,23 @@ return {
                 lsp_format = "fallback"
             }
             conform.setup({
-				notify_no_formatters = true,
+                notify_no_formatters = true,
                 default_format_opts = {
                     lsp_format = "prefer",
                     timeout_ms = 500
+                },
+                formatters = {
+                    nufmt = {
+                        command = "nufmt",
+                        args = { "--stdin" },
+                        stdin = true,
+                    },
                 },
                 formatters_by_ft = {
                     typescript = jsopts,
                     typescriptreact = jsopts,
                     javascript = jsopts,
+                    nushell = { "nufmt", lsp_format = "fallback" },
                     ["*"] = { "trim_whitespace" },
                 },
                 format_on_save = {
