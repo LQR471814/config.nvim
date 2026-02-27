@@ -106,6 +106,35 @@ return {
         i(1)
     })),
 
+    s({ trig = "mla" }, fmta([[
+        \documentclass[a4paper, 12pt]{article}
+
+        \usepackage[utf8]{inputenc}
+        \usepackage[T1]{fontenc}
+        \usepackage[margin=1in]{geometry} % 1-inch margins on all sides
+        \usepackage{setspace}
+        \usepackage{indentfirst} % Indent the first paragraph of sections
+        \usepackage{mathptmx}
+
+        \doublespacing % Double space everything
+        \setlength{\parindent}{0.5in} % Standard MLA indent
+
+        \usepackage{fancyhdr}
+        \pagestyle{fancy}
+        \fancyhf{} % Clear all header/footer fields
+        \renewcommand{\headrulewidth}{0pt} % Remove the horizontal line
+        \rhead{Last Name \thepage} % Top right: Name and Page Number
+
+        \begin{document}
+
+        \noindent Name \\
+        \noindent Instructor \\
+        \noindent Course \\
+        \noindent \today
+
+        \end{document}
+    ]])),
+
     -- usepackage
     s({ trig = "pkg", snippetType = "autosnippet" }, fmta(
         "\\usepackage{<>}",
