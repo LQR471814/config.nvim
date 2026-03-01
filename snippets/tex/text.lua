@@ -127,13 +127,20 @@ return {
 
         \begin{document}
 
-        \noindent Name \\
-        \noindent Instructor \\
-        \noindent Course \\
+        \noindent <> % Name \\
+        \noindent <> % Instructor \\
+        \noindent <> % Course \\
         \noindent \today
 
+        <>
+
         \end{document}
-    ]])),
+    ]], {
+        i(1),
+        i(2),
+        i(3),
+        i(4),
+    })),
 
     -- usepackage
     s({ trig = "pkg", snippetType = "autosnippet" }, fmta(
