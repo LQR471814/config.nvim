@@ -2,16 +2,8 @@ return {
     "kylechui/nvim-surround",
     event = "VeryLazy",
     config = function()
+        local keymap = require("lqr471814.lib.keymap")
         require("nvim-surround").setup({
-            keymaps = {
-                normal = "ys",
-                normal_cur = "yss",
-                visual = "S",
-                visual_line = "gS",
-                delete = "ds",
-                change = "cs",
-                change_line = "cS",
-            },
             -- disables the whitespace in front and back of the thing
             surrounds = {
                 ["("] = false,
