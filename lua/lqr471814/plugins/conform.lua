@@ -40,6 +40,10 @@ return {
                     typescript = jsopts,
                     typescriptreact = jsopts,
                     javascript = jsopts,
+                    tex = {
+                        "latexindent",
+                        lsp_format = "fallback"
+                    },
                     nushell = { "nufmt", lsp_format = "fallback" },
                     ["*"] = { "trim_whitespace" },
                 },
