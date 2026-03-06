@@ -225,7 +225,7 @@ return {
     -- figure
     s({ trig = "figure" }, fmta(
         [[
-            \begin{figure}[h]
+            \begin{figure}[ht]
                 \centering
                 \includegraphics[width=<>\textwidth]{<>}
                 \caption{<>}
