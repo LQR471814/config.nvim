@@ -47,10 +47,16 @@ return {
                     nushell = { "nufmt", lsp_format = "fallback" },
                     ["*"] = { "trim_whitespace" },
                 },
-                format_on_save = {
-                    lsp_format = "prefer",
-                    timeout_ms = 500,
-                }
+                format_on_save = function(bufnr)
+                    local ft = vim.bo[bufnr].filetype
+                    if ft == "go" then
+                        return nil
+                    end
+                    return {
+                        lsp_format = "prefer",
+                        timeout_ms = 500,
+                    }
+                end
             })
         end,
     }
