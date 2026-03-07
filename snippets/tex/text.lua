@@ -38,7 +38,7 @@ return {
     )),
 
     -- \begin \end
-    s({ trig = "beg", snippetType = "autosnippet", all_zones_tex = true }, fmta(
+    s({ trig = "\\b", snippetType = "autosnippet", all_zones_tex = true }, fmta(
         [[
         \begin{<>}
           <>
