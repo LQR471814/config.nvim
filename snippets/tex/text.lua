@@ -207,13 +207,16 @@ return {
                 \centering
                 \begin{tabular}{<>}
                     \hline
-                    <>
+                    \textbf{<>} \\
+                    \hline
+                    <> \\
+                    \hline
                 \end{tabular}
                 \caption{<>}
                 \label{<>}
             \end{table}
         ]],
-        { i(1), i(2), i(3), i(4) }
+        { i(1), i(2), i(3), i(4), i(5) }
     )),
 
     -- image
