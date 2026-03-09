@@ -64,16 +64,16 @@ return {
                 nushell = {},
                 ast_grep = {},
                 pyright = {},
-                ltex_plus = {
-                    ltex = {
-                        language = "en-US",
-                    },
-                    settings = {
-                        ltex = {
-                            checkFrequency = "save"
-                        }
-                    }
-                },
+                -- ltex_plus = {
+                --     ltex = {
+                --         language = "en-US",
+                --     },
+                --     settings = {
+                --         ltex = {
+                --             checkFrequency = "save"
+                --         }
+                --     }
+                -- },
                 ["nu-lint"] = {
                     cmd = { "nu-lint", "--lsp" },
                     filetypes = { "nu" }
