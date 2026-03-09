@@ -5,6 +5,10 @@ return {
 	opts = {
 		notifier = {},
 		image = {
+			doc = {
+				inline = false,
+				float = true,
+			},
 			math = { enabled = false },
 		},
 		lazygit = {},
