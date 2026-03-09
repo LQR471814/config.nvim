@@ -237,4 +237,29 @@ return {
         ]],
         { i(1), i(2), i(3), i(4), i(5) }
     )),
+
+    -- dual figure
+    s({ trig = "dual figure" }, fmta(
+        [[
+            \begin{figure}[htbp]
+                \centering
+                \begin{subfigure}[b]{0.45\textwidth}
+                    \centering
+                    \includegraphics[width=\textwidth]{<>}
+                    \caption{<>}
+                    \label{<>}
+                \end{subfigure}
+                \hfill
+                \begin{subfigure}[b]{0.45\textwidth}
+                    \centering
+                    \includegraphics[width=\textwidth]{<>}
+                    \caption{<>}
+                    \label{<>}
+                \end{subfigure}
+                \caption{<>}
+                \label{<>}
+            \end{figure}
+        ]],
+        { i(1), i(2), i(3), i(4), i(5), i(6), i(7), i(8) }
+    )),
 }
