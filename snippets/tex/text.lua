@@ -228,13 +228,13 @@ return {
     -- figure
     s({ trig = "figure" }, fmta(
         [[
-            \begin{figure}[ht]
+            \begin{figure}[<>]
                 \centering
                 \includegraphics[width=<>\textwidth]{<>}
                 \caption{<>}
                 \label{<>}
             \end{figure}
         ]],
-        { i(1), i(2), i(3), i(4) }
+        { i(1), i(2), i(3), i(4), i(5) }
     )),
 }
