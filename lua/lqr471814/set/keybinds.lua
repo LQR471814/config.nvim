@@ -9,11 +9,19 @@ keymap.map("n", "gyy", "\"+Y", "Copy current line to system clipboard.")
 
 keymap.map("n", "gyp", function()
     local dir = vim.fn.expand("%:p")
+    if dir:find("oil://", 1, true) == 1 then
+        -- remove oil:// from the prefix if it is there
+        dir = dir:sub(7)
+    end
     vim.fn.setreg("+", dir)
     vim.notify("Copied file path to clipboard.")
 end, "Copy current file path to clipboard.")
 keymap.map("n", "gyd", function()
     local dir = vim.fn.expand("%:p:h")
+    if dir:find("oil://", 1, true) == 1 then
+        -- remove oil:// from the prefix if it is there
+        dir = dir:sub(7)
+    end
     vim.fn.setreg("+", dir)
     vim.notify("Copied directory to clipboard.")
 end, "Copy current directory to clipboard.")
