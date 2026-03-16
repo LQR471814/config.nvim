@@ -18,6 +18,8 @@ return {
 	require("lqr471814.plugins.trouble"),
 	-- profiling
 	require("lqr471814.plugins.profile"),
+	-- lean proof-assistant
+	require("lqr471814.plugins.lean"),
 	-- support .fountain files
 	{ "kblin/vim-fountain", ft = "fountain" },
 }
