@@ -276,6 +276,10 @@ return {
                     end, "", ev.buf)
                 end,
             })
+
+            vim.diagnostic.config({
+                update_in_insert = false
+            })
         end
     },
     {
