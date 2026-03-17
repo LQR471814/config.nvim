@@ -28,6 +28,8 @@ return {
 	require("lqr471814.plugins.log"),
 	-- formatting
 	require("lqr471814.plugins.conform"),
+	-- buffer management
+	require("lqr471814.plugins.buffers"),
 	-- rename html tags
 	{ "tronikelis/ts-autotag.nvim" },
 	-- pcre syntax
