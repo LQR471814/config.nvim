@@ -280,6 +280,23 @@ return {
             vim.diagnostic.config({
                 update_in_insert = false
             })
+
+            vim.api.nvim_create_autocmd("LspDetach", {
+                callback = function(args)
+                    local client_id = args.data.client_id
+                    local client = vim.lsp.get_client_by_id(client_id)
+                    if not client then
+                        return
+                    end
+
+                    -- Check if any other buffers are still using this client
+                    local active_buffers = vim.lsp.get_buffers_by_client_id(client_id)
+                    if #active_buffers <= 1 then
+                        vim.lsp.stop_client(client_id)
+                        print("All buffers using LSP closed, stopping: " .. client.name)
+                    end
+                end,
+            })
         end
     },
     {
