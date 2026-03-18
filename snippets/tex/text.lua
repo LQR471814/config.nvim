@@ -52,7 +52,7 @@ return {
     )),
 
     -- bibliography
-    s({ trig = "bibliography" }, t([[
+    s({ trig = "bibliography" }, fmta([[
         \usepackage[backend=biber,style=apa,doi=true,url=true]{biblatex}
         \addbibresource{refs.bib}
 
@@ -60,7 +60,7 @@ return {
 
         \section{References}
         \printbibliography[heading=none]
-    ]])),
+    ]], {})),
 
     -- \documentclass
     s({ trig = "article" }, fmta([[
