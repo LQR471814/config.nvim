@@ -51,6 +51,17 @@ return {
         }
     )),
 
+    -- bibliography
+    s({ trig = "bibliography" }, t([[
+        \usepackage[backend=biber,style=apa,doi=true,url=true]{biblatex}
+        \addbibresource{refs.bib}
+
+        \autocite{}
+
+        \section{References}
+        \printbibliography[heading=none]
+    ]])),
+
     -- \documentclass
     s({ trig = "article" }, fmta([[
         \documentclass[a4paper, 12pt]{article}
