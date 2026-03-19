@@ -87,14 +87,15 @@ return {
     s({ trig = "standalone" }, fmta([[
         \documentclass[border=1pt]{standalone}
 
-        \numberwithin{equation}{}
         \usepackage{myconfig}
 
         \begin{document}
 
-        \begin{equation}
-          <>
-        \end{equation}
+        $
+            \begin{aligned}
+                <>
+            \end{aligned}
+        $
 
         \end{document}
     ]], {
