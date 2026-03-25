@@ -44,7 +44,7 @@ return {
                         "latexindent",
                         lsp_format = "fallback"
                     },
-                    nushell = { "nufmt", lsp_format = "fallback" },
+                    nushell = { "nufmt", stop_after_first = true, lsp_format = "fallback" },
                     ["*"] = { "trim_whitespace" },
                 },
                 format_on_save = function(bufnr)
