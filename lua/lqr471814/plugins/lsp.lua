@@ -80,6 +80,7 @@ return {
                 },
                 please = {},
 
+                rust_analyzer = {},
                 ocamllsp = {},
                 julials = {},
                 nixd = {
