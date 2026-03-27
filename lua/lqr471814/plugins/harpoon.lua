@@ -8,12 +8,12 @@ return {
         harpoon:setup()
 
         local keymap = require("lqr471814.lib.keymap")
-        keymap.map("n", "<leader>a", function() harpoon:list():add() end)
-        keymap.map("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+        keymap.map("n", "<leader>a", function() harpoon:list():add() end, "Add entry to harpoon list.")
+        keymap.map("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, "Toggle harpoon menu.")
 
-        keymap.map({ "n", "i" }, "<C-1>", function() harpoon:list():select(1) end)
-        keymap.map({ "n", "i" }, "<C-2>", function() harpoon:list():select(2) end)
-        keymap.map({ "n", "i" }, "<C-3>", function() harpoon:list():select(3) end)
-        keymap.map({ "n", "i" }, "<C-4>", function() harpoon:list():select(4) end)
+        keymap.map({ "n", "i" }, "<C-1>", function() harpoon:list():select(1) end, "Goto harpoon list entry 1.")
+        keymap.map({ "n", "i" }, "<C-2>", function() harpoon:list():select(2) end, "Goto harpoon list entry 2.")
+        keymap.map({ "n", "i" }, "<C-3>", function() harpoon:list():select(3) end, "Goto harpoon list entry 3.")
+        keymap.map({ "n", "i" }, "<C-4>", function() harpoon:list():select(4) end, "Goto harpoon list entry 4.")
     end
 }

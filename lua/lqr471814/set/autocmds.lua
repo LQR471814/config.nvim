@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "help",
     callback = function()
-        keymap.buffer_map("n", "gd", "<C-]>", "Jump to definition")
+        keymap.overwrite_buffer_map("n", "gd", "<C-]>", "Jump to definition")
     end,
 })
 
@@ -87,8 +87,8 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = "*.log",
-  callback = function()
-    vim.bo.filetype = "log"
-  end,
+    pattern = "*.log",
+    callback = function()
+        vim.bo.filetype = "log"
+    end,
 })

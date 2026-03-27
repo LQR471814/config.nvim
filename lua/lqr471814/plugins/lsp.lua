@@ -231,19 +231,19 @@ return {
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),
                 callback = function(ev)
-                    keymap.buffer_map("n", "ge", function() vim.diagnostic.open_float() end, "", ev.buf)
-                    keymap.buffer_map("n", "gd", function()
+                    keymap.overwrite_buffer_map("n", "ge", function() vim.diagnostic.open_float() end, "", ev.buf)
+                    keymap.overwrite_buffer_map("n", "gd", function()
                         Snacks.picker.lsp_definitions({
                             auto_confirm = true
                         })
                     end, "Go to definition.", ev.buf)
-                    keymap.buffer_map("n", "gh", vim.lsp.buf.hover, "", ev.buf)
-                    keymap.buffer_map("n", "gr", function()
+                    keymap.overwrite_buffer_map("n", "gh", vim.lsp.buf.hover, "", ev.buf)
+                    keymap.overwrite_buffer_map("n", "gr", function()
                         Snacks.picker.lsp_references()
                     end, "", ev.buf)
 
                     -- rename with a completely different name
-                    keymap.buffer_map("n", "<leader>rr", function()
+                    keymap.overwrite_buffer_map("n", "<leader>rr", function()
                         vim.ui.input(
                             {
                                 prompt = "Rename: ",
@@ -261,18 +261,18 @@ return {
                     end, "", ev.buf)
 
                     -- rename starting with the same name
-                    keymap.buffer_map("n", "<leader>rn", function()
+                    keymap.overwrite_buffer_map("n", "<leader>rn", function()
                         if not require("ts-autotag").rename() then
                             vim.lsp.buf.rename()
                         end
                     end, "", ev.buf)
 
-                    keymap.buffer_map("i", "<C-h>", function() vim.lsp.buf.signature_help() end, "", ev.buf)
-                    keymap.buffer_map({ "n", "v" }, "<space>.", vim.lsp.buf.code_action, "", ev.buf)
-                    keymap.buffer_map("n", "]g", function()
+                    keymap.overwrite_buffer_map("i", "<C-h>", function() vim.lsp.buf.signature_help() end, "", ev.buf)
+                    keymap.overwrite_buffer_map({ "n", "v" }, "<leader>.", vim.lsp.buf.code_action, "", ev.buf)
+                    keymap.overwrite_buffer_map("n", "]g", function()
                         vim.diagnostic.jump({ count = 1, float = true })
                     end, "", ev.buf)
-                    keymap.buffer_map("n", "[g", function()
+                    keymap.overwrite_buffer_map("n", "[g", function()
                         vim.diagnostic.jump({ count = -1, float = true })
                     end, "", ev.buf)
                 end,
