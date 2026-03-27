@@ -9,25 +9,25 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end
 })
 
--- remove trailing whitespace on save
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*",
-    callback = function()
-        local save_cursor = vim.api.nvim_win_get_cursor(0)
-        local view = vim.fn.winsaveview()
-
-        vim.cmd([[%s/\s\+$//e]])
-
-        vim.fn.winrestview(view)
-        vim.api.nvim_win_set_cursor(0, save_cursor)
-    end,
-})
+-- remove trailing whitespace on save (unnecessary with conform.nvim)
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--     pattern = "*",
+--     callback = function()
+--         local save_cursor = vim.api.nvim_win_get_cursor(0)
+--         local view = vim.fn.winsaveview()
+--
+--         vim.cmd([[%s/\s\+$//e]])
+--
+--         vim.fn.winrestview(view)
+--         vim.api.nvim_win_set_cursor(0, save_cursor)
+--     end,
+-- })
 
 -- make help keybinds more sane
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "help",
     callback = function()
-        keymap.buffer_map("n", "gd", "<C-]>", "Jump to definition")
+        keymap.overwrite_buffer_map("n", "gd", "<C-]>", "Jump to definition")
     end,
 })
 
@@ -84,4 +84,11 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt_local.shiftwidth = 2
         vim.opt_local.expandtab = true
     end
+})
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+    pattern = "*.log",
+    callback = function()
+        vim.bo.filetype = "log"
+    end,
 })

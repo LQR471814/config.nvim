@@ -1,6 +1,7 @@
 return {
     "jake-stewart/multicursor.nvim",
     branch = "1.0",
+    event = "VeryLazy",
     config = function()
         local mc = require("multicursor-nvim")
         mc.setup()
@@ -16,14 +17,14 @@ return {
         keymap.map({ "n", "x" }, "<leader>m", function()
             mc.matchAddCursor(1)
         end, "Add next new cursor by word or selection.")
-        keymap.map({ "n", "x" }, "<leader>n", function()
+        keymap.map({ "x" }, "<leader>n", function()
             mc.matchSkipCursor(1)
         end, "Skip the next cursor added.")
 
-        keymap.map("x", "S", mc.splitCursors, "Split visual selection into multiple cursors by regex.")
-        keymap.map({"n", "x"}, "gc", mc.restoreCursors, "Restore cursors.")
-        keymap.map({"n", "x"}, "gz", mc.alignCursors, "Align cursor columns.")
-        keymap.map("n", "ga", mc.addCursorOperator,
+        keymap.map("x", "<leader>cs", mc.splitCursors, "Split visual selection into multiple cursors by regex.")
+        keymap.map({"n", "x"}, "<leader>cc", mc.restoreCursors, "Restore cursors.")
+        keymap.map({"n", "x"}, "<leader>cz", mc.alignCursors, "Align cursor columns.")
+        keymap.map("n", "<leader>ca", mc.addCursorOperator,
             "Adds a cursor to the start of each line in following cursor movement.")
 
         -- keymap layer only when multiple cursors exist

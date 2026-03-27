@@ -4,8 +4,6 @@ return {
 	require("lqr471814.plugins.treesitter"),
 	-- tree sitter comments
 	require("lqr471814.plugins.comment"),
-	-- fuzzy find
-	require("lqr471814.plugins.telescope"),
 	-- luasnip
 	require("lqr471814.plugins.luasnip"),
 	-- search and replace

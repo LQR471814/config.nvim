@@ -12,11 +12,11 @@ return {
             ["}"] = { escape = true, close = false, pair = "{}" },
 
             ['"'] = { escape = false, close = true, pair = '""' },
-            ["'"] = { escape = false, close = true, pair = "''", disabled_filetypes = { "lisp", "julia" } },
+            ["'"] = { escape = false, close = true, pair = "''", disabled_filetypes = { "lisp", "julia", "tla", "lean" } },
             ["`"] = { escape = false, close = true, pair = "``", disabled_filetypes = { "lisp" } },
         },
         options = {
-            disabled_filetypes = { "TelescopePrompt", "grug-far", "tex", "markdown" },
+            disabled_filetypes = { "snacks_picker_input", "grug-far", "tex", "markdown" },
             auto_indent = true,
             disable_command_mode = true,
         },

@@ -9,7 +9,7 @@ return {
 	-- latex support
 	require("lqr471814.plugins.latex"),
 	-- treesitter walker
-	require("lqr471814.plugins.tree-climber"),
+	-- require("lqr471814.plugins.tree-climber"),
 	-- git merge tool
 	require("lqr471814.plugins.diffview"),
 	-- browser integration
@@ -18,6 +18,8 @@ return {
 	require("lqr471814.plugins.trouble"),
 	-- profiling
 	require("lqr471814.plugins.profile"),
+	-- lean proof-assistant
+	require("lqr471814.plugins.lean"),
 	-- support .fountain files
-	{ "kblin/vim-fountain", event = "VeryLazy" },
+	{ "kblin/vim-fountain", ft = "fountain" },
 }

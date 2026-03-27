@@ -1,0 +1,277 @@
+local ls = require("luasnip")
+local t = ls.text_node
+local i = ls.insert_node
+local rep = require("luasnip.extras").rep
+local fmta = require("luasnip.extras.fmt").fmta
+local latex_snippet = require("lqr471814.lib").latex_snippet
+
+local function s(opts, body)
+    opts.outside_latex = true
+    return latex_snippet(opts, body)
+end
+
+return {
+    -- inline mode math
+    s({ trig = "mk", snippetType = "autosnippet" }, fmta(
+        "$<>$",
+        { i(1) }
+    )),
+    -- display mode math
+    s({ trig = "dm", snippetType = "autosnippet" }, fmta(
+        [[
+        \[
+          <>
+        \]
+        ]],
+        { i(1) }
+    )),
+    -- aligned display mode math
+    s({ trig = "aligned" }, fmta(
+        [[
+        \[
+        \begin{aligned}
+          <>
+        \end{aligned}
+        \]
+        ]],
+        { i(1) }
+    )),
+
+    -- \begin \end
+    s({ trig = "\\b", snippetType = "autosnippet", all_zones_tex = true }, fmta(
+        [[
+        \begin{<>}
+          <>
+        \end{<>}
+        ]],
+        {
+            i(1),
+            i(2),
+            rep(1),
+        }
+    )),
+
+    -- bibliography
+    s({ trig = "bibliography" }, fmta([[
+        \usepackage[backend=biber,style=apa,doi=true,url=true]{biblatex}
+        \addbibresource{refs.bib}
+
+        \autocite{}
+
+        \section{References}
+        \printbibliography[heading=none]
+    ]], {})),
+
+    -- \documentclass
+    s({ trig = "article" }, fmta([[
+        \documentclass[a4paper, 12pt]{article}
+
+        \usepackage{myconfig}
+
+        \begin{document}
+
+        \title{<>}
+        \author{<>}
+        \maketitle
+        \tableofcontents
+
+        <>
+
+        \end{document}
+    ]], {
+        i(1),
+        i(2),
+        i(3),
+    })),
+
+    s({ trig = "standalone" }, fmta([[
+        \documentclass[border=1pt]{standalone}
+
+        \usepackage{myconfig}
+
+        \begin{document}
+
+        $
+            \begin{aligned}
+                <>
+            \end{aligned}
+        $
+
+        \end{document}
+    ]], {
+        i(1)
+    })),
+
+    s({ trig = "homework" }, fmta([[
+        \documentclass[a4paper, 12pt]{article}
+
+        \setlength{\parindent}{0pt}
+        \setcounter{secnumdepth}{0}
+        \usepackage{myconfig}
+
+        \begin{document}
+
+        <>
+
+        \end{document}
+    ]], {
+        i(1)
+    })),
+
+    s({ trig = "mla" }, fmta([[
+        \documentclass[a4paper, 12pt]{article}
+
+        \usepackage[utf8]{inputenc}
+        \usepackage[T1]{fontenc}
+        \usepackage[margin=1in]{geometry} % 1-inch margins on all sides
+        \usepackage{setspace}
+        \usepackage{indentfirst} % Indent the first paragraph of sections
+        \usepackage{mathptmx}
+
+        \doublespacing % Double space everything
+        \setlength{\parindent}{0.5in} % Standard MLA indent
+
+        \usepackage{fancyhdr}
+        \pagestyle{fancy}
+        \fancyhf{} % Clear all header/footer fields
+        \renewcommand{\headrulewidth}{0pt} % Remove the horizontal line
+        \rhead{Last Name \thepage} % Top right: Name and Page Number
+
+        \begin{document}
+
+        \noindent <> % Name \\
+        \noindent <> % Instructor \\
+        \noindent <> % Course \\
+        \noindent \today
+
+        <>
+
+        \end{document}
+    ]], {
+        i(1),
+        i(2),
+        i(3),
+        i(4),
+    })),
+
+    -- usepackage
+    s({ trig = "pkg", snippetType = "autosnippet" }, fmta(
+        "\\usepackage{<>}",
+        { i(1) }
+    )),
+
+    -- \sections
+    s({ trig = "!!", snippetType = "autosnippet" }, fmta(
+        "\\section{<>}",
+        { i(1) }
+    )),
+    s({ trig = "~!@", snippetType = "autosnippet" }, fmta(
+        [[
+            \stdbox{
+              \subsection{<>}
+              \vspace{1mm}
+              <>
+            }
+        ]],
+        { i(1), i(2) }
+    )),
+    s({ trig = "!@", snippetType = "autosnippet" }, fmta(
+        "\\subsection{<>}",
+        { i(1) }
+    )),
+    s({ trig = "~!#", snippetType = "autosnippet" }, fmta(
+        [[
+            \stdbox{
+              \subsubsection{<>}
+              \vspace{1mm}
+              <>
+            }
+        ]],
+        { i(1), i(2) }
+    )),
+    s({ trig = "!#", snippetType = "autosnippet" }, fmta(
+        "\\subsubsection{<>}",
+        { i(1) }
+    )),
+
+    -- vertical spacing
+    s({ trig = "vsp", snippetType = "autosnippet" }, fmta("\\vspace{<>}", { i(1) })),
+
+    -- emphasis
+    s({ trig = "*E", wordTrig = false, snippetType = "autosnippet" }, fmta("\\emph{<>}", { i(1) })),
+
+    -- item
+    s({ trig = "--", snippetType = "autosnippet" }, t("\\item")),
+
+    -- % (applies to both math and normal)
+    s({ trig = "%", wordTrig = false, snippetType = "autosnippet", all_zones_tex = true }, t("\\%")),
+
+    -- comment
+    s({ trig = "comment" }, t("% ")),
+
+    -- todos
+    s({ trig = "todo" }, t("% TODO: ")),
+
+    -- table
+    s({ trig = "table" }, fmta(
+        [[
+            \begin{table}[h]
+                \centering
+                \begin{tabular}{<>}
+                    \hline
+                    \textbf{<>} \\
+                    \hline
+                    <> \\
+                    \hline
+                \end{tabular}
+                \caption{<>}
+                \label{<>}
+            \end{table}
+        ]],
+        { i(1), i(2), i(3), i(4), i(5) }
+    )),
+
+    -- image
+    s({ trig = "image" }, fmta(
+        [[\includegraphics[width=\linewidth]{<>}]],
+        { i(1) }
+    )),
+
+    -- figure
+    s({ trig = "figure" }, fmta(
+        [[
+            \begin{figure}[<>]
+                \centering
+                \includegraphics[width=<>\textwidth]{<>}
+                \caption{<>}
+                \label{<>}
+            \end{figure}
+        ]],
+        { i(1), i(2), i(3), i(4), i(5) }
+    )),
+
+    -- dual figure
+    s({ trig = "dual figure" }, fmta(
+        [[
+            \begin{figure}[htbp]
+                \centering
+                \begin{subfigure}[b]{0.45\textwidth}
+                    \centering
+                    \includegraphics[width=\textwidth]{<>}
+                    \caption{<>}
+                    \label{<>}
+                \end{subfigure}
+                \hfill
+                \begin{subfigure}[b]{0.45\textwidth}
+                    \centering
+                    \includegraphics[width=\textwidth]{<>}
+                    \caption{<>}
+                    \label{<>}
+                \end{subfigure}
+                \caption{<>}
+                \label{<>}
+            \end{figure}
+        ]],
+        { i(1), i(2), i(3), i(4), i(5), i(6), i(7), i(8) }
+    )),
+}

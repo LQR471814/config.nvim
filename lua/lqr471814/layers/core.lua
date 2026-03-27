@@ -22,12 +22,20 @@ return {
 	require("lqr471814.plugins.localconf"),
 	-- notifications / etc...
 	require("lqr471814.plugins.snacks"),
+	-- progress / spinners
+	require("lqr471814.plugins.fidget"),
+	-- render ansi escape codes natively
+	require("lqr471814.plugins.log"),
+	-- formatting
+	require("lqr471814.plugins.conform"),
+	-- buffer management
+	require("lqr471814.plugins.buffers"),
 	-- rename html tags
-	{ "windwp/nvim-ts-autotag", event = { "BufReadPre", "BufNewFile" } },
+	{ "tronikelis/ts-autotag.nvim" },
 	-- pcre syntax
-	{ "othree/eregex.vim",      event = "VeryLazy" },
+	{ "othree/eregex.vim",         event = "VeryLazy" },
 	-- natural dates
-	{ "Gelio/cmp-natdat",       config = true },
+	{ "Gelio/cmp-natdat",          event = "VeryLazy", config = true },
 	-- make editing big files faster
-	{ "mireq/large_file",       config = true },
+	{ "mireq/large_file",          config = true },
 }
