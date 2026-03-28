@@ -11,7 +11,7 @@ local function enable_markdown_tablemode()
 	--- @type "off" | "hard" | "soft"
 	local wrapStatus
 
-	keymap.buffer_map("n", "<leader>tm", function()
+	keymap.overwrite_buffer_map("n", "<leader>tm", function()
 		enabled = not enabled
 		if enabled then
 			vim.cmd("TableModeEnable")
@@ -99,7 +99,7 @@ local function setup(buf)
 	-- bullets
 	keymap.buffer_map("n", "<leader>rl", "<Plug>(bullets-renumber)", "Renumber bullets.")
 
-	keymap.buffer_map("i", "<cr>", "<Plug>(bullets-newline-cr)")
+	keymap.overwrite_buffer_map("i", "<cr>", "<Plug>(bullets-newline-cr)")
 	keymap.buffer_map("n", "o", function()
 		vim.cmd("InsertNewBulletO")
 	end)
@@ -108,8 +108,8 @@ local function setup(buf)
 		vim.cmd("InsertNewBulletO")
 	end)
 	keymap.buffer_map("n", "<leader>d", "<Plug>(bullets-toggle-checkbox)", "Toggle checkbox.")
-	keymap.buffer_map("i", "<Tab>", "<C-o><Plug>(bullets-demote)", "De-indent bullet.")
-	keymap.buffer_map("i", "<S-Tab>", "<C-o><Plug>(bullets-promote)", "Indent bullet.")
+	keymap.overwrite_buffer_map("i", "<Tab>", "<C-o><Plug>(bullets-demote)", "De-indent bullet.")
+	keymap.overwrite_buffer_map("i", "<S-Tab>", "<C-o><Plug>(bullets-promote)", "Indent bullet.")
 
 	-- insert link
 	keymap.buffer_map("i", "<C-k>", function()
