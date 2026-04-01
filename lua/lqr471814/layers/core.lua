@@ -30,6 +30,8 @@ return {
 	require("lqr471814.plugins.conform"),
 	-- buffer management
 	require("lqr471814.plugins.buffers"),
+	-- icons
+	require("lqr471814.plugins.devicons"),
 	-- rename html tags
 	{ "tronikelis/ts-autotag.nvim" },
 	-- pcre syntax
