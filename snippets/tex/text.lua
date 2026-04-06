@@ -277,7 +277,7 @@ return {
 
     -- url
     s({ trig = "link" }, fmta([[
-        \url{<>}{<>}
+        \href{<>}{<>}
     ]], {
         i(1, "https://domain.com"),
         i(2, "text"),
