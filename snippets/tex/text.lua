@@ -274,4 +274,12 @@ return {
         ]],
         { i(1), i(2), i(3), i(4), i(5), i(6), i(7), i(8) }
     )),
+
+    -- url
+    s({ trig = "link" }, fmta([[
+        \url{<>}{<>}
+    ]], {
+        i(1, "https://domain.com"),
+        i(2, "text"),
+    })),
 }
