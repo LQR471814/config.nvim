@@ -255,14 +255,14 @@ return {
         [[
             \begin{figure}[htbp]
                 \centering
-                \begin{subfigure}[b]{0.45\textwidth}
+                \begin{subfigure}[t]{0.45\textwidth}
                     \centering
                     \includegraphics[width=\textwidth]{<>}
                     \caption{<>}
                     \label{<>}
                 \end{subfigure}
                 \hfill
-                \begin{subfigure}[b]{0.45\textwidth}
+                \begin{subfigure}[t]{0.45\textwidth}
                     \centering
                     \includegraphics[width=\textwidth]{<>}
                     \caption{<>}
