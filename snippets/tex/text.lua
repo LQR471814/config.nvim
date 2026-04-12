@@ -130,6 +130,7 @@ return {
 
         \doublespacing % Double space everything
         \setlength{\parindent}{0.5in} % Standard MLA indent
+        \setcounter{secnumdepth}{0} % Disable section numbers
 
         \usepackage{fancyhdr}
         \pagestyle{fancy}
