@@ -145,7 +145,7 @@ return {
     )),
 
     -- units
-    s({ trig = "\\deg", regTrig = true, wordTrig = false, snippetType = "autosnippet" }, fmta(
+    s({ trig = "([0-9]+)deg", regTrig = true, wordTrig = false, snippetType = "autosnippet" }, fmta(
         "<>^{\\circ}",
         { f(function(_, snip) return snip.captures[1] end) }
     )),
