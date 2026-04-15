@@ -5,6 +5,7 @@ return {
         require("nvim-surround").setup({
             -- disables the whitespace in front and back of the thing
             surrounds = {
+                ["<"] = false,
                 ["("] = false,
                 ["["] = false,
                 ["{"] = false,
