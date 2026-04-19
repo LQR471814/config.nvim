@@ -1,6 +1,7 @@
 return {
     {
         "ray-x/go.nvim",
+        version = "v0.11",
         ft = { "go", "gomod" },
         dependencies = {
             "neovim/nvim-lspconfig",
@@ -46,7 +47,7 @@ return {
         },
         config = function()
             -- disable lsp debug logging
-            vim.lsp.set_log_level("off")
+            vim.lsp.log.set_level("off")
 
             local lspconfig = require("lspconfig")
             local opts = {
