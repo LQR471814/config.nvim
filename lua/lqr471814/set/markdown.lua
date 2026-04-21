@@ -124,7 +124,7 @@ local function setup(buf)
 	enable_markdown_tablemode()
 
 	-- monkeypatch mdmath issues
-	monkeypatch_mdmath(buf)
+	-- monkeypatch_mdmath(buf)
 end
 
 vim.api.nvim_create_autocmd("BufDelete", {
