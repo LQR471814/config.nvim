@@ -45,7 +45,6 @@ keymap.map("v", "gp", paste_from_clipboard, "Paste from clipboard.")
 keymap.overwrite_map("n", "Q", "<nop>")
 vim.api.nvim_create_user_command("W", "w", {})
 
-keymap.overwrite_map({ "n", "v", "i", "x" }, "<C-z>", "<nop>")
 keymap.map("n", "<leader>w", "m'gwap`'", "Apply hard wrapping on current paragraph.")
 keymap.map("n", "<leader>pv", "<cmd>Oil<cr>", "Open file explorer.")
 
