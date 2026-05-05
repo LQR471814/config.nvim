@@ -201,6 +201,9 @@ return {
     -- emphasis
     s({ trig = "*E", wordTrig = false, snippetType = "autosnippet" }, fmta("\\emph{<>}", { i(1) })),
 
+    -- bold
+    s({ trig = "*B", wordTrig = false, snippetType = "autosnippet" }, fmta("\\textbf{<>}", { i(1) })),
+
     -- item
     s({ trig = "--", snippetType = "autosnippet" }, t("\\item")),
 
