@@ -3,16 +3,28 @@ local Wrap = require("lqr471814.lib.wrap")
 local Keymap = require("lqr471814.lib.keymap")
 
 local function latex_snippet(context, nodes, opts)
-	local cond = Mathzone.in_mathzone
+	local cond = context.condition
+
+	local guard = Mathzone.in_mathzone
 	if context.all_zones_tex then
-		cond = Mathzone.all_zones_tex
+		guard = Mathzone.all_zones_tex
 	elseif context.outside_latex then
-		cond = Mathzone.outside_mathzone_tex
+		guard = Mathzone.outside_mathzone_tex
 	end
 
+	local wrapped = function()
+		if not guard() then
+			return false
+		end
+		if cond ~= nil then
+			return cond()
+		end
+		return true
+	end
+	context.condition = wrapped
+	context.show_condition = wrapped
+
 	local ls = require("luasnip")
-	context.condition = cond
-	context.show_condition = cond
 	return ls.snippet(context, nodes, opts)
 end
 

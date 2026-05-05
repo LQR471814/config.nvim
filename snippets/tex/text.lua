@@ -4,6 +4,7 @@ local i = ls.insert_node
 local rep = require("luasnip.extras").rep
 local fmta = require("luasnip.extras.fmt").fmta
 local latex_snippet = require("lqr471814.lib").latex_snippet
+local mathzone = require("lqr471814.lib.mathzone")
 
 local function s(opts, body)
     opts.outside_latex = true
@@ -205,13 +206,19 @@ return {
     s({ trig = "*B", wordTrig = false, snippetType = "autosnippet" }, fmta("\\textbf{<>}", { i(1) })),
 
     -- item
-    s({ trig = "--", snippetType = "autosnippet" }, t("\\item")),
+    s({
+        trig = "--",
+        snippetType = "autosnippet",
+        condition = mathzone.in_latex_env({ "enumerate", "itemize" })
+    }, t("\\item")),
 
     -- % (applies to both math and normal)
-    s({ trig = "%", wordTrig = false, snippetType = "autosnippet", all_zones_tex = true }, t("\\%")),
-
-    -- comment
-    s({ trig = "comment" }, t("% ")),
+    s({
+        trig = "%",
+        wordTrig = false,
+        snippetType = "autosnippet",
+        all_zones_tex = true
+    }, t("\\%")),
 
     -- todos
     s({ trig = "todo" }, t("% TODO: ")),
