@@ -245,7 +245,7 @@ return {
     -- equation
     s({ trig = "equation" }, fmta(
         [[
-            \begin{figure}[<>]
+            \begin{figure}[htbp]
                 \centering
                 \begin{equation}\label{<>}
                     \captionsetup{labelformat=empty}
@@ -254,20 +254,20 @@ return {
                 \caption{<>}
             \end{figure}
         ]],
-        { i(1), i(2), i(3), i(4) }
+        { i(1), i(2), i(3) }
     )),
 
     -- image
     s({ trig = "image" }, fmta(
         [[
-            \begin{figure}[<>]
+            \begin{figure}[htbp]
                 \centering
                 \includegraphics[width=<>\textwidth]{<>}
                 \caption{<>}
                 \label{<>}
             \end{figure}
         ]],
-        { i(1), i(2), i(3), i(4), i(5) }
+        { i(1), i(2), i(3), i(4) }
     )),
 
     -- dual image
