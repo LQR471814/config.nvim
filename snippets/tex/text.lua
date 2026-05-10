@@ -242,14 +242,23 @@ return {
         { i(1), i(2), i(3), i(4), i(5) }
     )),
 
-    -- image
-    s({ trig = "image" }, fmta(
-        [[\includegraphics[width=\linewidth]{<>}]],
-        { i(1) }
+    -- equation
+    s({ trig = "equation" }, fmta(
+        [[
+            \begin{figure}[<>]
+                \centering
+                \begin{equation}\label{<>}
+                    \captionsetup{labelformat=empty}
+                    <>
+                \end{equation}
+                \caption{<>}
+            \end{figure}
+        ]],
+        { i(1), i(2), i(3), i(4) }
     )),
 
-    -- figure
-    s({ trig = "figure" }, fmta(
+    -- image
+    s({ trig = "image" }, fmta(
         [[
             \begin{figure}[<>]
                 \centering
@@ -261,8 +270,8 @@ return {
         { i(1), i(2), i(3), i(4), i(5) }
     )),
 
-    -- dual figure
-    s({ trig = "dual figure" }, fmta(
+    -- dual image
+    s({ trig = "dual image" }, fmta(
         [[
             \begin{figure}[htbp]
                 \centering
