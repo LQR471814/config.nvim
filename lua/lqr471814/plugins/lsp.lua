@@ -77,7 +77,8 @@ return {
                 -- },
                 ["nu-lint"] = {
                     cmd = { "nu-lint", "--lsp" },
-                    filetypes = { "nu" }
+                    filetypes = { "nu" },
+                    root_markers = { '.git' }
                 },
                 please = {},
 
