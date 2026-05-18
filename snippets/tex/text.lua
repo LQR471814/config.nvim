@@ -138,6 +138,7 @@ return {
         \fancyhf{} % Clear all header/footer fields
         \renewcommand{\headrulewidth}{0pt} % Remove the horizontal line
         \rhead{Last Name \thepage} % Top right: Name and Page Number
+        \setlength{\headheight}{0.5in}
 
         \begin{document}
 
