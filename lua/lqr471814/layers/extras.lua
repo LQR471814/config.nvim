@@ -20,6 +20,8 @@ return {
 	require("lqr471814.plugins.profile"),
 	-- lean proof-assistant
 	require("lqr471814.plugins.lean"),
+	-- neovim dev env
+	require("lqr471814.plugins.lazydev"),
 	-- support .fountain files
 	{ "kblin/vim-fountain", ft = "fountain" },
 }
