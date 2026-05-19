@@ -34,7 +34,11 @@ return {
                     ltex = {
                         language = "en-US",
                     },
-                    settings = {}
+                    settings = {
+                        ltex = {
+                            checkFrequency = "save"
+                        }
+                    }
                 },
                 ["nu-lint"] = {
                     cmd = { "nu-lint", "--lsp" },
