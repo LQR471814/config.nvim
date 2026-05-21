@@ -6,6 +6,10 @@ vim.g.mapleader = " "
 
 keymap.map("v", "gy", "\"+y", "Copy visual selection text to system clipboard.")
 keymap.map("n", "gyy", "\"+Y", "Copy current line to system clipboard.")
+keymap.map("n", "gp", [["+p]], "Paste from system clipboard after cursor.")
+keymap.map("n", "gP", [["+P]], "Paste from system clipboard before cursor.")
+keymap.map("x", "gp", [["_d"+p]], "Paste from system clipboard after cursor.")
+keymap.map("x", "gP", [["_d"+P]], "Paste from system clipboard before cursor.")
 
 keymap.map("n", "gyp", function()
     local dir = vim.fn.expand("%:p")
@@ -30,16 +34,6 @@ keymap.map("n", "gy'", function() -- add quotes to whatever is in the clipboard
     vim.fn.setreg("+", string.format([["%s"]], value:sub(0, #value - 1)))
     vim.notify("Quoted clipboard.")
 end, "Surround current clipboard content with quotes.")
-
-local function paste_from_clipboard()
-    local clipboard = vim.fn.getreg("+")
-    clipboard = clipboard:gsub("^[\t\n ]+", "")
-    clipboard = clipboard:gsub("[\t\n ]+$", "")
-    vim.api.nvim_paste(clipboard, false, -1)
-end
-
-keymap.map("n", "gp", paste_from_clipboard, "Paste from clipboard.")
-keymap.map("v", "gp", paste_from_clipboard, "Paste from clipboard.")
 
 -- avoid keybind typos
 keymap.overwrite_map("n", "Q", "<nop>")

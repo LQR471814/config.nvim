@@ -29,12 +29,12 @@ vim.opt.autoread = true
 vim.g.clipboard = {
     name = "wl-clipboard",
     copy = {
-        ["+"] = "wl-copy",
-        ["*"] = "wl-copy",
+        ["+"] = { "wl-copy", "--type", "text/plain;charset=utf-8" },
+        ["*"] = { "wl-copy", "--primary", "--type", "text/plain;charset=utf-8" },
     },
     paste = {
-        ["+"] = "wl-paste",
-        ["*"] = "wl-paste",
+        ["+"] = { "wl-paste", "--no-newline" },
+        ["*"] = { "wl-paste", "--primary", "--no-newline" },
     },
     cache_enabled = 0,
 }
