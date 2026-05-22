@@ -209,3 +209,6 @@ end, "Toggle diff splits.")
 keymap.map("n", "<leader>rn", function()
     require("ts-autotag").rename()
 end)
+
+-- turn off highlight-search
+keymap.map("n", "<Esc>", "<cmd>nohlsearch<cr>", "Close search highlights.")

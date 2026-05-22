@@ -12,7 +12,7 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
 vim.opt.scrolloff = 8
@@ -52,3 +52,4 @@ vim.g.vimtex_compiler_latexmk = {
 vim.g.vimtex_doc_enabled = false
 vim.g.vimtex_imaps_enabled = false
 vim.o.breakindent = true
+
