@@ -4,6 +4,7 @@ local i = ls.insert_node
 local rep = require("luasnip.extras").rep
 local fmta = require("luasnip.extras.fmt").fmta
 local latex_snippet = require("lqr471814.lib").latex_snippet
+local mathzone = require("lqr471814.lib.mathzone")
 
 local function s(opts, body)
     opts.outside_latex = true
@@ -130,12 +131,14 @@ return {
 
         \doublespacing % Double space everything
         \setlength{\parindent}{0.5in} % Standard MLA indent
+        \setcounter{secnumdepth}{0} % Disable section numbers
 
         \usepackage{fancyhdr}
         \pagestyle{fancy}
         \fancyhf{} % Clear all header/footer fields
         \renewcommand{\headrulewidth}{0pt} % Remove the horizontal line
         \rhead{Last Name \thepage} % Top right: Name and Page Number
+        \setlength{\headheight}{0.5in}
 
         \begin{document}
 
@@ -200,14 +203,23 @@ return {
     -- emphasis
     s({ trig = "*E", wordTrig = false, snippetType = "autosnippet" }, fmta("\\emph{<>}", { i(1) })),
 
+    -- bold
+    s({ trig = "*B", wordTrig = false, snippetType = "autosnippet" }, fmta("\\textbf{<>}", { i(1) })),
+
     -- item
-    s({ trig = "--", snippetType = "autosnippet" }, t("\\item")),
+    s({
+        trig = "--",
+        snippetType = "autosnippet",
+        condition = mathzone.in_latex_env({ "enumerate", "itemize" })
+    }, t("\\item")),
 
     -- % (applies to both math and normal)
-    s({ trig = "%", wordTrig = false, snippetType = "autosnippet", all_zones_tex = true }, t("\\%")),
-
-    -- comment
-    s({ trig = "comment" }, t("% ")),
+    s({
+        trig = "%",
+        wordTrig = false,
+        snippetType = "autosnippet",
+        all_zones_tex = true
+    }, t("\\%")),
 
     -- todos
     s({ trig = "todo" }, t("% TODO: ")),
@@ -231,38 +243,47 @@ return {
         { i(1), i(2), i(3), i(4), i(5) }
     )),
 
-    -- image
-    s({ trig = "image" }, fmta(
-        [[\includegraphics[width=\linewidth]{<>}]],
-        { i(1) }
+    -- equation
+    s({ trig = "equation" }, fmta(
+        [[
+            \begin{figure}[htbp]
+                \centering
+                \begin{equation}\label{<>}
+                    \captionsetup{labelformat=empty}
+                    <>
+                \end{equation}
+                \caption{<>}
+            \end{figure}
+        ]],
+        { i(1), i(2), i(3) }
     )),
 
-    -- figure
-    s({ trig = "figure" }, fmta(
+    -- image
+    s({ trig = "image" }, fmta(
         [[
-            \begin{figure}[<>]
+            \begin{figure}[htbp]
                 \centering
                 \includegraphics[width=<>\textwidth]{<>}
                 \caption{<>}
                 \label{<>}
             \end{figure}
         ]],
-        { i(1), i(2), i(3), i(4), i(5) }
+        { i(1), i(2), i(3), i(4) }
     )),
 
-    -- dual figure
-    s({ trig = "dual figure" }, fmta(
+    -- dual image
+    s({ trig = "dual image" }, fmta(
         [[
             \begin{figure}[htbp]
                 \centering
-                \begin{subfigure}[b]{0.45\textwidth}
+                \begin{subfigure}[t]{0.45\textwidth}
                     \centering
                     \includegraphics[width=\textwidth]{<>}
                     \caption{<>}
                     \label{<>}
                 \end{subfigure}
                 \hfill
-                \begin{subfigure}[b]{0.45\textwidth}
+                \begin{subfigure}[t]{0.45\textwidth}
                     \centering
                     \includegraphics[width=\textwidth]{<>}
                     \caption{<>}
@@ -274,4 +295,12 @@ return {
         ]],
         { i(1), i(2), i(3), i(4), i(5), i(6), i(7), i(8) }
     )),
+
+    -- url
+    s({ trig = "link" }, fmta([[
+        \href{<>}{<>}
+    ]], {
+        i(1, "https://domain.com"),
+        i(2, "text"),
+    })),
 }

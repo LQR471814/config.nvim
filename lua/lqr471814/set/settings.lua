@@ -12,7 +12,7 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
 vim.opt.scrolloff = 8
@@ -21,7 +21,7 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 vim.g.mapleader = " "
-vim.g.maplocalleader = "'"
+vim.g.maplocalleader = ","
 
 vim.opt.autoread = true
 
@@ -29,12 +29,12 @@ vim.opt.autoread = true
 vim.g.clipboard = {
     name = "wl-clipboard",
     copy = {
-        ["+"] = "wl-copy",
-        ["*"] = "wl-copy",
+        ["+"] = { "wl-copy", "--type", "text/plain;charset=utf-8" },
+        ["*"] = { "wl-copy", "--primary", "--type", "text/plain;charset=utf-8" },
     },
     paste = {
-        ["+"] = "wl-paste",
-        ["*"] = "wl-paste",
+        ["+"] = { "wl-paste", "--no-newline" },
+        ["*"] = { "wl-paste", "--primary", "--no-newline" },
     },
     cache_enabled = 0,
 }
@@ -52,3 +52,4 @@ vim.g.vimtex_compiler_latexmk = {
 vim.g.vimtex_doc_enabled = false
 vim.g.vimtex_imaps_enabled = false
 vim.o.breakindent = true
+

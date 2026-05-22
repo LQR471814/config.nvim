@@ -1,52 +1,15 @@
 return {
     {
-        "ray-x/go.nvim",
-        ft = { "go", "gomod" },
-        dependencies = {
-            "neovim/nvim-lspconfig",
-            "nvim-treesitter/nvim-treesitter",
-            "ray-x/guihua.lua"
-        },
-        config = function()
-            require("go").setup()
-
-            local format_sync_grp = vim.api.nvim_create_augroup("goimports", {})
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                pattern = "*.go",
-                callback = function()
-                    require("go.format").goimports()
-                end,
-                group = format_sync_grp,
-            })
-        end,
-        event = { "CmdlineEnter" },
-        build = ':lua require("go.install").update_all_sync()'
-    },
-    {
-        "folke/lazydev.nvim",
-        ft = "lua",
-        opts = {
-            library = {
-                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-                { path = "snacks.nvim",        words = { "Snacks" } },
-            },
-            integrations = {
-                cmp = false,
-                coq = false,
-                blink = true
-            },
-        },
-    },
-    {
         "neovim/nvim-lspconfig",
         event = "VeryLazy",
         dependencies = {
             "b0o/schemastore.nvim",
             "saghen/blink.cmp",
+            "jhofscheier/ltex-utils.nvim",
         },
         config = function()
             -- disable lsp debug logging
-            vim.lsp.set_log_level("off")
+            vim.lsp.log.set_level("off")
 
             local lspconfig = require("lspconfig")
             local opts = {
@@ -64,19 +27,23 @@ return {
                 nushell = {},
                 ast_grep = {},
                 pyright = {},
-                -- ltex_plus = {
-                --     ltex = {
-                --         language = "en-US",
-                --     },
-                --     settings = {
-                --         ltex = {
-                --             checkFrequency = "save"
-                --         }
-                --     }
-                -- },
+                ltex_plus = {
+                    on_attach = function(client, bufnr)
+                        require("ltex-utils").on_attach(bufnr)
+                    end,
+                    ltex = {
+                        language = "en-US",
+                    },
+                    settings = {
+                        ltex = {
+                            checkFrequency = "save"
+                        }
+                    }
+                },
                 ["nu-lint"] = {
                     cmd = { "nu-lint", "--lsp" },
-                    filetypes = { "nu" }
+                    filetypes = { "nu" },
+                    root_markers = { '.git' }
                 },
                 please = {},
 
@@ -301,6 +268,30 @@ return {
         end
     },
     {
+        "ray-x/go.nvim",
+        version = "v0.11",
+        ft = { "go", "gomod" },
+        dependencies = {
+            "neovim/nvim-lspconfig",
+            "nvim-treesitter/nvim-treesitter",
+            "ray-x/guihua.lua"
+        },
+        config = function()
+            require("go").setup()
+
+            local format_sync_grp = vim.api.nvim_create_augroup("goimports", {})
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                pattern = "*.go",
+                callback = function()
+                    require("go.format").goimports()
+                end,
+                group = format_sync_grp,
+            })
+        end,
+        event = { "CmdlineEnter" },
+        build = ':lua require("go.install").update_all_sync()'
+    },
+    {
         'dmmulroy/ts-error-translator.nvim',
         opts = {
             auto_attach = true,
@@ -314,5 +305,17 @@ return {
                 "vtsls",
             },
         },
+    },
+    {
+        "jhofscheier/ltex-utils.nvim",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+            "nvim-telescope/telescope.nvim",
+        },
+        opts = {
+            dictionary = {
+                use_vim_dict = true
+            }
+        }
     }
 }

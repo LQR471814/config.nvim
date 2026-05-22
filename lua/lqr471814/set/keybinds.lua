@@ -6,6 +6,10 @@ vim.g.mapleader = " "
 
 keymap.map("v", "gy", "\"+y", "Copy visual selection text to system clipboard.")
 keymap.map("n", "gyy", "\"+Y", "Copy current line to system clipboard.")
+keymap.map("n", "gp", [["+p]], "Paste from system clipboard after cursor.")
+keymap.map("n", "gP", [["+P]], "Paste from system clipboard before cursor.")
+keymap.map("x", "gp", [["_d"+p]], "Paste from system clipboard after cursor.")
+keymap.map("x", "gP", [["_d"+P]], "Paste from system clipboard before cursor.")
 
 keymap.map("n", "gyp", function()
     local dir = vim.fn.expand("%:p")
@@ -31,21 +35,10 @@ keymap.map("n", "gy'", function() -- add quotes to whatever is in the clipboard
     vim.notify("Quoted clipboard.")
 end, "Surround current clipboard content with quotes.")
 
-local function paste_from_clipboard()
-    local clipboard = vim.fn.getreg("+")
-    clipboard = clipboard:gsub("^[\t\n ]+", "")
-    clipboard = clipboard:gsub("[\t\n ]+$", "")
-    vim.api.nvim_paste(clipboard, false, -1)
-end
-
-keymap.map("n", "gp", paste_from_clipboard, "Paste from clipboard.")
-keymap.map("v", "gp", paste_from_clipboard, "Paste from clipboard.")
-
 -- avoid keybind typos
 keymap.overwrite_map("n", "Q", "<nop>")
 vim.api.nvim_create_user_command("W", "w", {})
 
-keymap.overwrite_map({ "n", "v", "i", "x" }, "<C-z>", "<nop>")
 keymap.map("n", "<leader>w", "m'gwap`'", "Apply hard wrapping on current paragraph.")
 keymap.map("n", "<leader>pv", "<cmd>Oil<cr>", "Open file explorer.")
 
@@ -216,3 +209,6 @@ end, "Toggle diff splits.")
 keymap.map("n", "<leader>rn", function()
     require("ts-autotag").rename()
 end)
+
+-- turn off highlight-search
+keymap.map("n", "<Esc>", "<cmd>nohlsearch<cr>", "Close search highlights.")

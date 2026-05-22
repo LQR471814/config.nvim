@@ -1,6 +1,20 @@
 local util = require("lqr471814.lib.util")
 local keymap = require("lqr471814.lib.keymap")
 
+--- @param envnames table
+local function in_latex_env(envnames)
+	local _, res = pcall(vim.fn["vimtex#delim#get_surrounding"], "env_tex")
+	for _, match in ipairs(res) do
+		local env = match.name
+		for _, target in ipairs(envnames) do
+			if target == env then
+				return true
+			end
+		end
+	end
+	return false
+end
+
 local function in_mathzone()
 	if vim.bo.filetype == "tex" then
 		return vim.fn["vimtex#syntax#in_mathzone"]() == 1
@@ -43,6 +57,11 @@ local function all_zones_tex()
 end
 
 return {
+	in_latex_env = function(envs)
+		return util.cache(20, function()
+			return in_latex_env(envs)
+		end)
+	end,
 	-- this caching mechanism is here so that mathzone checking does not need
 	-- to performed for every snippet that needs to be enabled on a mathzone
 	-- (since this function will be called for every snippet that is only
