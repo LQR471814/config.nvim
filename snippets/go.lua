@@ -22,4 +22,10 @@ return {
         }
 
     ]], { i(1) })),
+    s({ trig = "ifpanic", snippetType = "autosnippet" }, fmta([[
+        if err != nil {
+            panic(err)
+        }
+
+    ]], {})),
 }
