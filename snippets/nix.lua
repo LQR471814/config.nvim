@@ -100,4 +100,30 @@ return {
 		i(2, ""),
 		i(3, ""),
 	})),
+	s({ trig = "derivation" }, fmta([[
+		{
+		  stdenv,
+		}:
+
+		stdenv.mkDerivation {
+	 	  name = "<>";
+		  version = "<>";
+
+		  src = <>;
+
+		  buildInputs = [<>];
+		  nativeBuildInputs = [<>];
+
+		  buildPhase = ''<>'';
+		  installPhase = ''<>'';
+		}
+    ]], {
+		i(1, ""),
+		i(2, ""),
+		i(3, ""),
+		i(4, ""),
+		i(5, ""),
+		i(6, ""),
+		i(7, ""),
+	})),
 }
