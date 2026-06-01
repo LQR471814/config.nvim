@@ -106,7 +106,7 @@ return {
 		}:
 
 		stdenv.mkDerivation {
-	 	  name = "<>";
+		  name = "<>";
 		  version = "<>";
 
 		  src = <>;
