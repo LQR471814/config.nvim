@@ -16,7 +16,7 @@ return {
         }
 
     ]], { i(1) })),
-    s({ trig = "ifand", snippetType = "autosnippet" }, fmta([[
+    s({ trig = "ifthen", snippetType = "autosnippet" }, fmta([[
         if err != nil {
             <>
         }
