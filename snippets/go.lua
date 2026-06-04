@@ -28,4 +28,10 @@ return {
         }
 
     ]], {})),
+    s({ trig = "iftfat", snippetType = "autosnippet" }, fmta([[
+        if err != nil {
+            t.Fatal(err)
+        }
+
+    ]], {})),
 }
