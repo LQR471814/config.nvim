@@ -126,4 +126,26 @@ return {
 		i(6, ""),
 		i(7, ""),
 	})),
+	s({ trig = "flake-pkg" }, fmta([[
+		{
+		  inputs = {
+			self.submodules = true;
+			nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+		  };
+		  outputs =
+			{ self, nixpkgs }:
+			let
+			  system = "x86_64-linux";
+			  pkgs = import nixpkgs { inherit system; };
+			in
+			{
+			  packages.${system}.default = <>;
+
+			  apps.${system}.default = {
+				type = "app";
+				program = "${self.packages.${system}.default}/bin/<>";
+			  };
+			};
+		}
+	]])),
 }
