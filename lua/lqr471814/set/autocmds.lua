@@ -86,14 +86,14 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
-vim.api.nvim_create_autocmd("BufReadPost", {
-    pattern = { "*.nu" },
-    callback = function()
-        vim.defer_fn(function()
-            lib.wrap.set("soft", true)
-        end, 0)
-    end
-})
+-- vim.api.nvim_create_autocmd("BufReadPost", {
+--     pattern = { "*.nu" },
+--     callback = function()
+--         vim.defer_fn(function()
+--             lib.wrap.set("soft", true)
+--         end, 0)
+--     end
+-- })
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     pattern = "*.log",
