@@ -35,6 +35,11 @@ return {
                         args = { "--stdin" },
                         stdin = true,
                     },
+                    topiary_nu = {
+                        command = "topiary-nushell",
+                        args = { "format", "-l", "nu" },
+                        stdin = true,
+                    },
                 },
                 formatters_by_ft = {
                     typescript = jsopts,
@@ -44,10 +49,10 @@ return {
                         "latexindent",
                         lsp_format = "fallback"
                     },
-                    nushell = { "nufmt", stop_after_first = true, lsp_format = "fallback" },
+                    nu = { "topiary_nu" },
                     ["*"] = { "trim_whitespace" },
                 },
-                format_on_save = function(bufnr)
+                format_after_save = function(bufnr)
                     local ft = vim.bo[bufnr].filetype
                     if ft == "go" then
                         return nil
