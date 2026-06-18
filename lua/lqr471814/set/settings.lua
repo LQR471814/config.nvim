@@ -1,5 +1,6 @@
 vim.opt.nu = true
 vim.opt.relativenumber = true
+vim.opt.cursorline = true
 
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
@@ -52,4 +53,3 @@ vim.g.vimtex_compiler_latexmk = {
 vim.g.vimtex_doc_enabled = false
 vim.g.vimtex_imaps_enabled = false
 vim.o.breakindent = true
-
