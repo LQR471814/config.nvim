@@ -19,37 +19,98 @@ return {
                 deno = "deno"
             }
 
+            ---@class JSLspChoice
+            ---@field lsp JSLsp
+            ---@field priority integer
+
+            ---@type table<string, JSLspChoice>
+            local js_root_markers = {
+                ["deno.json"] = {
+                    lsp = "deno",
+                    priority = 2,
+                },
+                ["package.json"] = {
+                    lsp = "vtsls",
+                    priority = 3,
+                },
+                ["jsconfig.json"] = {
+                    lsp = "vtsls",
+                    priority = 1,
+                },
+                ["tsconfig.json"] = {
+                    lsp = "vtsls",
+                    priority = 1,
+                }
+            }
+
             ---@return string, JSLsp
             local function resolve_js_root(bufnr)
                 local path = vim.api.nvim_buf_get_name(bufnr)
 
-                local deno_path = lspconfig.util.root_pattern("deno.json")(path)
-                local node_path = lspconfig.util.root_pattern("package.json")(path)
+                -- we first take the set of paths that are the most specific
 
-                if not node_path and not deno_path then
-                    -- this is a single file, use cwd as root dir
+                ---@class PathEntry
+                ---@field path string
+                ---@field segment_count integer
+                ---@field choice JSLspChoice
+
+                ---@type PathEntry[]
+                local resolved = {}
+                for pattern, choice in pairs(js_root_markers) do
+                    local resolved_path = lspconfig.util.root_pattern(pattern)(path)
+                    if not resolved_path then
+                        goto continue
+                    end
+                    table.insert(resolved, {
+                        path = resolved_path,
+                        segment_count = #vim.split(resolved_path, "/", { trimempty = true }),
+                        choice = choice
+                    })
+                    ::continue::
+                end
+                table.sort(resolved, function(a, b)
+                    return a.segment_count < b.segment_count
+                end)
+
+                -- if nothing was resolved
+
+                if #resolved == 0 then
                     return vim.fn.getcwd(), "vtsls"
-                elseif not node_path then
-                    -- no package.json in ancestry, but deno.json is in ancestry
-                    return deno_path, "deno"
-                elseif not deno_path then
-                    -- no deno.json in ancestry, but package.json in ancestry
-                    return node_path, "vtsls"
                 end
 
-                local deno_segments = vim.split(deno_path, "/", { trimempty = true })
-                local node_segments = vim.split(node_path, "/", { trimempty = true })
+                -- we take the highest priority LSP from the set of most specific
 
-                -- if deno.json is closest ancestor, use deno
-                if #deno_segments > #node_segments then
-                    return deno_path, "deno"
+                ---@type PathEntry[]
+                local most_specific = {}
+                for _, entry in ipairs(resolved) do
+                    if #most_specific <= 0 then
+                        table.insert(most_specific, entry)
+                        goto continue
+                    end
+                    local prev = most_specific[#most_specific - 1]
+                    if prev.segment_count == entry.segment_count then
+                        table.insert(most_specific, entry)
+                    else
+                        break
+                    end
+                    ::continue::
                 end
-                -- if package.json is closest ancestor, use vtsls
-                if #deno_segments < #node_segments then
-                    return node_path, "vtsls"
+
+                ---@type JSLspChoice | nil
+                local chosen = nil
+                ---@type string | nil
+                local chosen_path = nil
+                for _, entry in ipairs(most_specific) do
+                    if chosen == nil or entry.choice.priority > chosen.priority then
+                        chosen = entry.choice
+                        chosen_path = entry.path
+                    end
                 end
-                -- if both deno.json and node.json are both present in closest ancestor, enable vtsls
-                return node_path, "vtsls"
+
+                assert(chosen, "chosen must be defined")
+                assert(chosen_path, "chosen_path must be defined")
+
+                return chosen_path, chosen.lsp
             end
 
             local opts = {
