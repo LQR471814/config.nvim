@@ -12,6 +12,46 @@ return {
             vim.lsp.log.set_level("off")
 
             local lspconfig = require("lspconfig")
+
+            ---@enum JSLsp
+            local js_lsp = {
+                vtsls = "vtsls",
+                deno = "deno"
+            }
+
+            ---@return string, JSLsp
+            local function resolve_js_root(bufnr)
+                local path = vim.api.nvim_buf_get_name(bufnr)
+
+                local deno_path = lspconfig.util.root_pattern("deno.json")(path)
+                local node_path = lspconfig.util.root_pattern("package.json")(path)
+
+                if not node_path and not deno_path then
+                    -- this is a single file, use cwd as root dir
+                    return vim.fn.getcwd(), "vtsls"
+                elseif not node_path then
+                    -- no package.json in ancestry, but deno.json is in ancestry
+                    return deno_path, "deno"
+                elseif not deno_path then
+                    -- no deno.json in ancestry, but package.json in ancestry
+                    return node_path, "vtsls"
+                end
+
+                local deno_segments = vim.split(deno_path, "/", { trimempty = true })
+                local node_segments = vim.split(node_path, "/", { trimempty = true })
+
+                -- if deno.json is closest ancestor, use deno
+                if #deno_segments > #node_segments then
+                    return deno_path, "deno"
+                end
+                -- if package.json is closest ancestor, use vtsls
+                if #deno_segments < #node_segments then
+                    return node_path, "vtsls"
+                end
+                -- if both deno.json and node.json are both present in closest ancestor, enable vtsls
+                return node_path, "vtsls"
+            end
+
             local opts = {
                 clangd = {
                     filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
@@ -79,59 +119,19 @@ return {
                 },
                 denols = {
                     root_dir = function(bufnr, on_dir)
-                        local path = vim.api.nvim_buf_get_name(bufnr)
-                        local denopath = lspconfig.util.root_pattern("deno.json")(path)
-                        local nodepath = lspconfig.util.root_pattern("package.json")(path)
-                        if not denopath then
-                            return
+                        local dir, lsp = resolve_js_root(bufnr)
+                        if lsp == js_lsp.deno then
+                            on_dir(dir)
                         end
-                        if not nodepath then
-                            on_dir(denopath)
-                            return
-                        end
-                        local denoparts = vim.split(denopath, "/", { trimempty = true })
-                        local nodeparts = vim.split(nodepath, "/", { trimempty = true })
-
-                        -- if both deno.json and node.json are both present in closest ancestor, enable denols
-                        if #denoparts == #nodeparts then
-                            on_dir(nodepath)
-                            return
-                        end
-                        -- if deno.json is closest ancestor, enable denols
-                        if #denoparts > #nodeparts then
-                            on_dir(nodepath)
-                            return
-                        end
-                        -- if package.json is closest ancestor, don't enable denols
                     end,
                     single_file_support = false,
                 },
                 vtsls = {
                     root_dir = function(bufnr, on_dir)
-                        local path = vim.api.nvim_buf_get_name(bufnr)
-                        local denopath = lspconfig.util.root_pattern("deno.json")(path)
-                        local nodepath = lspconfig.util.root_pattern("package.json")(path)
-                        if not nodepath then
-                            return
+                        local dir, lsp = resolve_js_root(bufnr)
+                        if lsp == js_lsp.vtsls then
+                            on_dir(dir)
                         end
-                        if not denopath then
-                            on_dir(nodepath)
-                            return
-                        end
-                        local denoparts = vim.split(denopath, "/", { trimempty = true })
-                        local nodeparts = vim.split(nodepath, "/", { trimempty = true })
-
-                        -- if both deno.json and node.json are both present in closest ancestor, enable vtsls
-                        if #denoparts == #nodeparts then
-                            on_dir(nodepath)
-                            return
-                        end
-                        -- if deno.json is closest ancestor, don't enable vtsls
-                        if #denoparts > #nodeparts then
-                            return
-                        end
-                        -- if package.json is closest ancestor, enable vtsls
-                        on_dir(nodepath)
                     end,
                     single_file_support = false,
                     settings = {
