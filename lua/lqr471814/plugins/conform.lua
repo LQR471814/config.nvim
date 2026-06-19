@@ -58,7 +58,8 @@ return {
                         return nil
                     end
                     return {
-                        lsp_format = "prefer",
+                        stop_after_first = true,
+                        lsp_format = "fallback",
                         timeout_ms = 500,
                     }
                 end
