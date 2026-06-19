@@ -5,7 +5,10 @@ return {
     build = ':TSUpdate',
     config = function()
         require("nvim-treesitter.configs").setup {
-            ensure_installed = {},
+            ensure_installed = {
+                -- jsdoc will not be automatically installed (if opening .js file)
+                "jsdoc"
+            },
             ignore_install = {},
             modules = {},
 
