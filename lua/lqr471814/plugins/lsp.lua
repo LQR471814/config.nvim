@@ -243,6 +243,10 @@ return {
                             validate = { enable = true },
                         }
                     }
+                },
+
+                hls = {
+                    filetypes = { 'haskell', 'lhaskell', 'cabal' },
                 }
             }
 
