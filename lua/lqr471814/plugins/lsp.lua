@@ -87,7 +87,7 @@ return {
                         table.insert(most_specific, entry)
                         goto continue
                     end
-                    local prev = most_specific[#most_specific - 1]
+                    local prev = most_specific[#most_specific]
                     if prev.segment_count == entry.segment_count then
                         table.insert(most_specific, entry)
                     else
