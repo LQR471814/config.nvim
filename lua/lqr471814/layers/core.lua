@@ -34,6 +34,8 @@ return {
 	require("lqr471814.plugins.devicons"),
 	-- qf list
 	require("lqr471814.plugins.quicker"),
+	-- hot reloading of files
+	require("lqr471814.plugins.hotreload"),
 	-- rename html tags
 	{ "tronikelis/ts-autotag.nvim" },
 	-- pcre syntax
