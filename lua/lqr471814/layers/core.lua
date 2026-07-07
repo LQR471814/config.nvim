@@ -3,7 +3,7 @@ return {
 	-- theme
 	require("lqr471814.plugins.theme"),
 	-- guess indentation config of a file
-	require('lqr471814.plugins.guess-indent'),
+	require("lqr471814.plugins.guess-indent"),
 	-- fancy undos
 	require("lqr471814.plugins.undotree"),
 	-- modern matchparen replacement
@@ -36,6 +36,8 @@ return {
 	require("lqr471814.plugins.quicker"),
 	-- hot reloading of files
 	require("lqr471814.plugins.hotreload"),
+	-- terminal
+	require("lqr471814.plugins.toggleterm"),
 	-- rename html tags
 	{ "tronikelis/ts-autotag.nvim" },
 	-- pcre syntax
