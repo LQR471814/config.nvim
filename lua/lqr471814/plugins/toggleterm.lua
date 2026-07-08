@@ -6,7 +6,7 @@ return {
 		require("toggleterm").setup({})
 
 		keymap.map("n", "<leader>pt", "<cmd>TermSelect<cr>", "Select a terminal.")
-		keymap.map("n", "<C-`>", "<cmd>ToggleTerm<cr>", "Toggle the in-built terminal.")
-		keymap.map("n", "<C-S-`>", "<cmd>TermNew<cr>", "Toggle the in-built terminal.")
+		keymap.overwrite_map("n", "<leader>tt", "<cmd>ToggleTerm<cr>", "Toggle the in-built terminal.")
+		keymap.map("n", "<leader>tn", "<cmd>TermNew<cr>", "Toggle the in-built terminal.")
 	end
 }

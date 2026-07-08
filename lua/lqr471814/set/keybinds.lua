@@ -186,9 +186,9 @@ keymap.map("n", "gqq", "gww", "Wrap lines.")
 keymap.map("v", "gq", "gw", "Wrap visual selection.")
 
 -- tabs
-keymap.map("n", "<leader>tn", "<cmd>tabnew<cr>", "New tab.")
-keymap.map("n", "<leader>tq", "<cmd>tabclose<cr>", "Close tab.")
-keymap.map("n", "<leader>to", "<cmd>tabonly<cr>", "Close all other tabs.")
+-- keymap.map("n", "<leader>tn", "<cmd>tabnew<cr>", "New tab.")
+-- keymap.map("n", "<leader>tq", "<cmd>tabclose<cr>", "Close tab.")
+-- keymap.map("n", "<leader>to", "<cmd>tabonly<cr>", "Close all other tabs.")
 
 -- to go to a specific tab use {N}gt
 -- to go to a next tab use gt
