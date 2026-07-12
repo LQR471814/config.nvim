@@ -12,18 +12,8 @@ return {
 		},
 	},
 	{
-		"Thiago4532/mdmath.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		ft = "markdown",
-		opts = {
-			filetypes = { "markdown" },
-			hide_on_insert = false,
-		}
-	},
-	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
 			"echasnovski/mini.icons",
 			"nvim-tree/nvim-web-devicons"
 		},

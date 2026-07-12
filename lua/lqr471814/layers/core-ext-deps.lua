@@ -1,7 +1,7 @@
 -- plugins that provide key functionality, but may require dependencies
 return {
-	-- AST parsing/syntax highlighting
-	require("lqr471814.plugins.treesitter"),
+	-- AST parsing/syntax highlighting management
+	require("lqr471814.plugins.tree-sitter-manager"),
 	-- tree sitter comments
 	require("lqr471814.plugins.comment"),
 	-- luasnip

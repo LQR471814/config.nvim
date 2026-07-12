@@ -334,17 +334,13 @@ return {
     },
     {
         "ray-x/go.nvim",
-        version = "v0.11",
-        ft = { "go", "gomod" },
         dependencies = {
             "neovim/nvim-lspconfig",
-            "nvim-treesitter/nvim-treesitter",
             "ray-x/guihua.lua"
         },
         config = function()
             require("go").setup()
-
-            local format_sync_grp = vim.api.nvim_create_augroup("goimports", {})
+            local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
             vim.api.nvim_create_autocmd("BufWritePre", {
                 pattern = "*.go",
                 callback = function()
@@ -354,6 +350,7 @@ return {
             })
         end,
         event = { "CmdlineEnter" },
+        ft = { "go", "gomod" },
         build = ':lua require("go.install").update_all_sync()'
     },
     {

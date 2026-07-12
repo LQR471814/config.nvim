@@ -21,13 +21,13 @@ local function init(config)
     if not config.minimal then
         modules = {
             require("lqr471814.layers.core"),
-            require("lqr471814.layers.keystone"),
+            require("lqr471814.layers.core-ext-deps"),
             require("lqr471814.layers.extras"),
         }
     else
         modules = {
             require("lqr471814.layers.core"),
-            require("lqr471814.layers.keystone"),
+            require("lqr471814.layers.core-ext-deps"),
         }
     end
 
