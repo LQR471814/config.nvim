@@ -31,7 +31,6 @@ return {
 				"xml",
 				"templ",
 				"php",
-				"mdx",
 
 				-- go.nvim requirements
 				"go",
