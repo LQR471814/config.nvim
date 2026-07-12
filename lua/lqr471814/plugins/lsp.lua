@@ -149,7 +149,7 @@ return {
                 please = {},
 
                 rust_analyzer = {},
-                ocamllsp = {},
+                -- ocamllsp = {},
                 julials = {},
                 nixd = {
                     cmd = { "nixd" },

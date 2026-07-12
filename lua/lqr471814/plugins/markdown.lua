@@ -50,7 +50,7 @@ return {
 						sign = false,
 					},
 					latex = {
-						enabled = false,
+						enabled = true,
 					},
 					html = {
 						enabled = false,
