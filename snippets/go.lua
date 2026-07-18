@@ -34,7 +34,7 @@ return {
         }
 
     ]], {})),
-    s({ trig = "errwrp", snippetType = "autosnippet" }, fmta([[
+    s({ trig = "errf", snippetType = "autosnippet" }, fmta([[
         err = fmt.Errorf("<>: %w", <>)
     ]], { i(1), i(2, "err") })),
 }
