@@ -53,3 +53,6 @@ vim.g.vimtex_compiler_latexmk = {
 vim.g.vimtex_doc_enabled = false
 vim.g.vimtex_imaps_enabled = false
 vim.o.breakindent = true
+
+-- lean
+vim.g.lean_config = { mappings = true }
