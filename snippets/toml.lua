@@ -4,8 +4,7 @@ local fmta = require("luasnip.extras.fmt").fmta
 
 return {
 	s({ trig = "pyright uv lsp" }, fmta([[
-		[tool.pyright]
-		venvPath = "."
-		venv = ".venv"
+		[tool.basedpyright]
+		typeCheckingMode = "standard"
     ]], {})),
 }

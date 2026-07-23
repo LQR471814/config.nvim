@@ -127,7 +127,7 @@ return {
                 marksman = {},
                 nushell = {},
                 ast_grep = {},
-                pyright = {},
+                basedpyright = {},
                 ltex_plus = {
                     on_attach = function(client, bufnr)
                         require("ltex-utils").on_attach(bufnr)
