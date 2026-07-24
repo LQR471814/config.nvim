@@ -86,9 +86,9 @@ default_fs_exclusion = { -- fs entries that should always be excluded
     '_Archived',
 }
 
-keymap.map("n", "<leader>n", function()
-    Snacks.picker.explorer()
-end)
+-- keymap.map("n", "<leader>n", function()
+--     Snacks.picker.explorer()
+-- end)
 keymap.map("n", "<leader>pr", function()
     Snacks.picker.smart({
         filter = { cwd = true }
