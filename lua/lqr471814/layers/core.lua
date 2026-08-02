@@ -38,6 +38,8 @@ return {
 	require("lqr471814.plugins.hotreload"),
 	-- terminal
 	require("lqr471814.plugins.toggleterm"),
+	-- indent markers
+	require('lqr471814.plugins.indent-blankline'),
 	-- rename html tags
 	{ "tronikelis/ts-autotag.nvim" },
 	-- pcre syntax
