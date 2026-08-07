@@ -22,8 +22,6 @@ return {
 	require("lqr471814.plugins.lean"),
 	-- neovim dev env
 	require("lqr471814.plugins.lazydev"),
-	-- sops
-	require("lqr471814.plugins.sops"),
 	-- support .fountain files
 	{ "kblin/vim-fountain", ft = "fountain" },
 }
