@@ -39,7 +39,9 @@ return {
 	-- terminal
 	require("lqr471814.plugins.toggleterm"),
 	-- indent markers
-	require('lqr471814.plugins.indent-blankline'),
+	require("lqr471814.plugins.indent-blankline"),
+	-- snipe
+	require("lqr471814.plugins.snipe"),
 	-- rename html tags
 	{ "tronikelis/ts-autotag.nvim" },
 	-- pcre syntax
