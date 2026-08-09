@@ -1,15 +1,75 @@
-return {
+local keymap = require("lqr471814.lib.keymap")
+local wrap = require("lqr471814.lib.wrap")
+
+local function bullets_mapping()
+	keymap.overwrite_buffer_map("n", "<leader>rl", "<Plug>(bullets-renumber)", "Renumber bullets.")
+
+	keymap.overwrite_buffer_map("i", "<cr>", "<Plug>(bullets-newline-cr)")
+	keymap.overwrite_buffer_map("n", "o", function()
+		vim.cmd("InsertNewBulletO")
+	end)
+	keymap.overwrite_buffer_map("n", "2o", function()
+		vim.cmd("InsertNewBulletO")
+		vim.cmd("InsertNewBulletO")
+	end)
+	keymap.overwrite_buffer_map("n", "<leader>d", "<Plug>(bullets-toggle-checkbox)", "Toggle checkbox.")
+
+	-- we let the action fn return string actions
+	keymap.opts.expr = true
+	keymap.overwrite_buffer_map("i", "<Tab>", function()
+		local line = vim.api.nvim_get_current_line()
+		if string.match(line, "^%s*-") ~= nil then
+			return "<C-o><Plug>(bullets-demote)"
+		end
+		return "<Plug>(Tabout)"
+	end, "De-indent bullet.")
+	keymap.overwrite_buffer_map("i", "<S-Tab>", function()
+		local line = vim.api.nvim_get_current_line()
+		if string.match(line, "^%s*-") ~= nil then
+			return "<C-o><Plug>(bullets-promote)"
+		end
+		return "<Plug>(TaboutBack)"
+	end, "Indent bullet.")
+	keymap.opts.expr = false
+end
+
+local plugins = {
 	-- this plugin already does lazy-loading by default, lazy-loading tends to
 	-- interfere with its functioning
-	{ "dhruvasagar/vim-table-mode" },
+	{
+		"dhruvasagar/vim-table-mode",
+		config = function()
+			local enabled = false
+
+			--- @type "off" | "hard" | "soft"
+			local wrapStatus
+
+			keymap.overwrite_buffer_map("n", "<leader>tm", function()
+				enabled = not enabled
+				if enabled then
+					vim.cmd("TableModeEnable")
+					vim.cmd("RenderMarkdown disable")
+					wrapStatus = wrap.status()
+					wrap.set("off")
+				else
+					vim.cmd("TableModeDisable")
+					vim.cmd("RenderMarkdown enable")
+					wrap.set(wrapStatus)
+				end
+			end)
+		end
+	},
 	{
 		"kaymmm/bullets.nvim",
 		commit = "cfc5c6038d6edcb93509ea7d96d9c8fe3dad5438",
 		ft = "markdown",
-		opts = {
-			outline_levels = { "num", "std-" },
-			mappings = false,
-		},
+		config = function()
+			require("Bullets").setup({
+				outline_levels = { "num", "std-" },
+				mappings = false,
+			})
+			bullets_mapping()
+		end
 	},
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
@@ -77,4 +137,9 @@ return {
 	--         end, { noremap = true, silent = true })
 	--     end
 	-- },
+}
+
+return {
+	plugins = plugins,
+	bullets_mapping = bullets_mapping
 }

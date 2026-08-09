@@ -13,7 +13,7 @@ return {
 	-- manipulate brackets
 	require("lqr471814.plugins.surround"),
 	-- auto close brackets
-	require("lqr471814.plugins.autoclose"),
+	require("lqr471814.plugins.autopairs"),
 	-- multi-cursors
 	require("lqr471814.plugins.multicursors"),
 	-- file explorer

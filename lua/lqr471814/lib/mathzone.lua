@@ -1,5 +1,6 @@
 local util = require("lqr471814.lib.util")
 local keymap = require("lqr471814.lib.keymap")
+local markdown = require("lqr471814.plugins.markdown")
 
 --- @param envnames table
 local function in_latex_env(envnames)
@@ -41,8 +42,7 @@ local function in_mathzone()
 			ls.jump(-1)
 		end)
 	else
-		keymap.overwrite_buffer_map("i", "<Tab>", "<C-o><Plug>(bullets-demote)")
-		keymap.overwrite_buffer_map("i", "<S-Tab>", "<C-o><Plug>(bullets-promote)")
+		markdown.bullets_mapping()
 	end
 
 	return res

@@ -14,6 +14,7 @@ return {
                 ["["] = { output = { left = "[", right = "]" } },
                 ["{"] = { output = { left = "{", right = "}" } },
                 ["<"] = { output = { left = "<", right = ">" } },
+                ["="] = { output = { left = "==", right = "==" } },
             },
 
             mappings = {
@@ -40,7 +41,7 @@ return {
         keymap.overwrite_map("n", "yss", "ys_", "Surround the whole line.")
 
         -- Visual S<new> => surround selection
-        keymap.unmap("x", "ys")
-        keymap.map("x", "S", [[:<C-u>lua MiniSurround.add('visual')<CR>]], "Surround the visual selection.")
+        keymap.unmap({ "v", "x" }, "ys")
+        keymap.overwrite_map({ "v", "x" }, "S", [[:<C-u>lua MiniSurround.add('visual')<CR>]], "Surround the visual selection.")
     end,
 }

@@ -5,7 +5,7 @@ return {
 	-- language server
 	require("lqr471814.plugins.lsp"),
 	-- markdown editing
-	require("lqr471814.plugins.markdown"),
+	require("lqr471814.plugins.markdown").plugins,
 	-- latex support
 	require("lqr471814.plugins.latex"),
 	-- treesitter walker

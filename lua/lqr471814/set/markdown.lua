@@ -5,66 +5,6 @@ local state = {
 	enabled = {}
 }
 
-local function enable_markdown_tablemode()
-	local enabled = false
-
-	--- @type "off" | "hard" | "soft"
-	local wrapStatus
-
-	keymap.overwrite_buffer_map("n", "<leader>tm", function()
-		enabled = not enabled
-		if enabled then
-			vim.cmd("TableModeEnable")
-			vim.cmd("RenderMarkdown disable")
-			wrapStatus = lib.wrap.status()
-			lib.wrap.set("off")
-		else
-			vim.cmd("TableModeDisable")
-			vim.cmd("RenderMarkdown enable")
-			lib.wrap.set(wrapStatus)
-		end
-	end)
-end
-
---- @param buf integer
-local function monkeypatch_mdmath(buf)
-	local timer = vim.uv.new_timer()
-	if not timer then
-		vim.notify("failed to create timer!", vim.log.levels.ERROR)
-		return
-	end
-
-	local active = false
-
-	local redraw = function()
-		vim.cmd("redraw")
-		if vim.opt.filetype:get() == "markdown" then
-			vim.opt_local.spell = not lib.in_mathzone()
-		end
-	end
-
-	local handler = function()
-		vim.uv.timer_stop(timer)
-		active = false
-		vim.schedule(redraw)
-	end
-
-	vim.api.nvim_create_autocmd({ "CursorMoved" }, {
-		buffer = buf,
-		callback = function()
-			if active then
-				vim.uv.timer_stop(timer)
-			end
-
-			active = true
-			local success = vim.uv.timer_start(timer, 200, 0, handler)
-			if not success then
-				active = false
-			end
-		end
-	})
-end
-
 --- @param buf integer
 local function setup(buf)
 	if state.enabled[buf] then
@@ -89,43 +29,19 @@ local function setup(buf)
 	vim.opt_local.breakat = " \\\t!@*-+;:,./?"
 
 	-- bold
-	keymap.buffer_map("v", "<C-b>", "2<Plug>(nvim-surround-visual)*", "Make visual selection bold.")
-	keymap.buffer_map("i", "<C-b>", "****<Left><Left>", "Create bold text.")
+	keymap.overwrite_buffer_map({ "x", "v" }, "<C-b>", "2:<C-u>lua MiniSurround.add('visual')<CR>*",
+		"Make visual selection bold.")
+	keymap.overwrite_buffer_map("i", "<C-b>", "****<Left><Left>", "Create bold text.")
+
+	-- italics (don't work because <Tab> and <C-i> typically mean the same thing for terminals)
+	-- keymap.overwrite_buffer_map({ "x", "v" }, "<C-i>", ":<C-u>lua MiniSurround.add('visual')<CR>*",
+	-- 	"Make visual selection italic.")
+	-- keymap.overwrite_buffer_map("i", "<C-i>", "**<Left>", "Create italic text.")
 
 	-- highlight
-	keymap.buffer_map("v", "<C-M-h>", "2<Plug>(nvim-surround-visual)=", "Highlight visual selection.")
-	keymap.buffer_map("i", "<C-M-h>", "====<Left><Left>", "Create highlighted text.")
-
-	-- bullets
-	keymap.buffer_map("n", "<leader>rl", "<Plug>(bullets-renumber)", "Renumber bullets.")
-
-	keymap.overwrite_buffer_map("i", "<cr>", "<Plug>(bullets-newline-cr)")
-	keymap.buffer_map("n", "o", function()
-		vim.cmd("InsertNewBulletO")
-	end)
-	keymap.buffer_map("n", "2o", function()
-		vim.cmd("InsertNewBulletO")
-		vim.cmd("InsertNewBulletO")
-	end)
-	keymap.buffer_map("n", "<leader>d", "<Plug>(bullets-toggle-checkbox)", "Toggle checkbox.")
-
-	-- we let the action fn return string actions
-	keymap.opts.expr = true
-	keymap.overwrite_buffer_map("i", "<Tab>", function()
-		local line = vim.api.nvim_get_current_line()
-		if string.match(line, "^%s*-") ~= nil then
-			return "<C-o><Plug>(bullets-demote)"
-		end
-		return "<Tab>"
-	end, "De-indent bullet.")
-	keymap.overwrite_buffer_map("i", "<S-Tab>", function()
-		local line = vim.api.nvim_get_current_line()
-		if string.match(line, "^%s*-") ~= nil then
-			return "<C-o><Plug>(bullets-promote)"
-		end
-		return "<S-Tab>"
-	end, "Indent bullet.")
-	keymap.opts.expr = false
+	keymap.overwrite_buffer_map({ "x", "v" }, "<C-h>", ":<C-u>lua MiniSurround.add('visual')<CR>=",
+		"Highlight visual selection.")
+	keymap.overwrite_buffer_map("i", "<C-h>", "====<Left><Left>", "Create highlighted text.")
 
 	-- insert link
 	keymap.buffer_map("i", "<C-k>", function()
@@ -135,12 +51,6 @@ local function setup(buf)
 		vim.api.nvim_put({ "[](" .. clipboard .. ")" }, "c", true, false)
 		vim.api.nvim_win_set_cursor(0, { pos[1], pos[2] + 1 })
 	end, "Insert link based on clipboard contents.")
-
-	-- table mode
-	enable_markdown_tablemode()
-
-	-- monkeypatch mdmath issues
-	-- monkeypatch_mdmath(buf)
 end
 
 vim.api.nvim_create_autocmd("BufDelete", {
