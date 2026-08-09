@@ -53,6 +53,25 @@ return {
             sources = {
                 default = { "natdat", "lazydev", "lsp", "path" },
                 providers = {
+                    markdown_path = {
+                        name = 'Path',
+                        module = 'blink.cmp.sources.path',
+
+                        transform_items = function(_, items)
+                            for _, item in ipairs(items) do
+                                if item.insertText then
+                                    item.insertText = item.insertText:gsub(' ', '%%20')
+                                end
+
+                                if item.textEdit and item.textEdit.newText then
+                                    item.textEdit.newText =
+                                        item.textEdit.newText:gsub(' ', '%%20')
+                                end
+                            end
+
+                            return items
+                        end,
+                    },
                     lazydev = {
                         name = "LazyDev",
                         module = "lazydev.integrations.blink",
@@ -63,6 +82,9 @@ return {
                         module = "blink.compat.source",
                     },
                 },
+                per_filetype = {
+                    markdown = { "natdat", "lsp", "markdown_path", "snippets" }
+                }
             },
         },
     },

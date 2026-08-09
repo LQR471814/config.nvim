@@ -4,7 +4,18 @@ local wrap = require("lqr471814.lib.wrap")
 local function bullets_mapping()
 	keymap.overwrite_buffer_map("n", "<leader>rl", "<Plug>(bullets-renumber)", "Renumber bullets.")
 
-	keymap.overwrite_buffer_map("i", "<cr>", "<Plug>(bullets-newline-cr)")
+	keymap.opts.expr = true
+	keymap.overwrite_buffer_map("i", "<cr>", function()
+		-- we set blink as a dependency to bullets so this works
+		local blink = require("blink.cmp")
+		local accepted = blink.accept({ index = 1 })
+		if accepted then
+			return ""
+		end
+		return "<Plug>(bullets-newline-cr)"
+	end)
+	keymap.opts.expr = false
+
 	keymap.overwrite_buffer_map("n", "o", function()
 		vim.cmd("InsertNewBulletO")
 	end)
@@ -61,6 +72,9 @@ local plugins = {
 	},
 	{
 		"kaymmm/bullets.nvim",
+		dependencies = {
+			"saghen/blink.cmp"
+		},
 		commit = "cfc5c6038d6edcb93509ea7d96d9c8fe3dad5438",
 		ft = "markdown",
 		config = function()
