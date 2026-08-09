@@ -113,14 +113,14 @@ local function setup(buf)
 	keymap.opts.expr = true
 	keymap.overwrite_buffer_map("i", "<Tab>", function()
 		local line = vim.api.nvim_get_current_line()
-		if string.match(line, "%s*-") ~= nil then
+		if string.match(line, "^%s*-") ~= nil then
 			return "<C-o><Plug>(bullets-demote)"
 		end
 		return "<Tab>"
 	end, "De-indent bullet.")
 	keymap.overwrite_buffer_map("i", "<S-Tab>", function()
 		local line = vim.api.nvim_get_current_line()
-		if string.match(line, "%s+-") ~= nil then
+		if string.match(line, "^%s*-") ~= nil then
 			return "<C-o><Plug>(bullets-promote)"
 		end
 		return "<S-Tab>"
