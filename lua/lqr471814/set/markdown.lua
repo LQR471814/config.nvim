@@ -108,8 +108,24 @@ local function setup(buf)
 		vim.cmd("InsertNewBulletO")
 	end)
 	keymap.buffer_map("n", "<leader>d", "<Plug>(bullets-toggle-checkbox)", "Toggle checkbox.")
-	keymap.overwrite_buffer_map("i", "<Tab>", "<C-o><Plug>(bullets-demote)", "De-indent bullet.")
-	keymap.overwrite_buffer_map("i", "<S-Tab>", "<C-o><Plug>(bullets-promote)", "Indent bullet.")
+
+	-- we let the action fn return string actions
+	keymap.opts.expr = true
+	keymap.overwrite_buffer_map("i", "<Tab>", function()
+		local line = vim.api.nvim_get_current_line()
+		if string.match(line, "%s*-") ~= nil then
+			return "<C-o><Plug>(bullets-demote)"
+		end
+		return "<Tab>"
+	end, "De-indent bullet.")
+	keymap.overwrite_buffer_map("i", "<S-Tab>", function()
+		local line = vim.api.nvim_get_current_line()
+		if string.match(line, "%s+-") ~= nil then
+			return "<C-o><Plug>(bullets-promote)"
+		end
+		return "<S-Tab>"
+	end, "Indent bullet.")
+	keymap.opts.expr = false
 
 	-- insert link
 	keymap.buffer_map("i", "<C-k>", function()
