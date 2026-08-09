@@ -78,7 +78,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "lisp", "nix", "nu", "haskell" },
+    pattern = { "lisp", "nix", "nu", "haskell", "markdown" },
     callback = function()
         vim.opt_local.tabstop = 2
         vim.opt_local.shiftwidth = 2
