@@ -22,6 +22,34 @@ return {
 						file = false,
 						current = true,
 					},
+					sources = {
+						files = {
+							hidden = true,
+							ignored = false,
+							exclude = {
+								".git",
+								".venv",
+								"node_modules",
+								".treesitter",
+								'*.fls',
+								'*.aux',
+								'*.fdb_latexmk',
+								'*.synctex.gz',
+								'*.pdf_tex',
+								'*.dvi',
+								'*.ps',
+								'*.bbl',
+								'*.bcf',
+								'*.blg',
+								'*.out',
+								'*.run.xml',
+								'*.xdv',
+								'*.vimtex',
+								'*.db',
+								"*_md_ltex.json"
+							}
+						}
+					}
 				},
 			})
 		vim.api.nvim_create_autocmd("FileType", {

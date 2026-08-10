@@ -63,29 +63,6 @@ end, "Open lazygit (git).")
 
 --- filesystem
 
-default_fs_exclusion = { -- fs entries that should always be excluded
-    ".git",
-    ".venv",
-    "node_modules",
-    ".treesitter",
-    '*.fls',
-    '*.aux',
-    '*.fdb_latexmk',
-    '*.synctex.gz',
-    '*.pdf_tex',
-    '*.dvi',
-    '*.ps',
-    '*.bbl',
-    '*.bcf',
-    '*.blg',
-    '*.out',
-    '*.run.xml',
-    '*.xdv',
-    '*.vimtex',
-    '*.db',
-    '_Archived',
-}
-
 -- keymap.map("n", "<leader>n", function()
 --     Snacks.picker.explorer()
 -- end)
@@ -98,13 +75,11 @@ keymap.map("n", "<leader>pf", function()
     Snacks.picker.files({
         hidden = true,
         ignored = false, -- Snacks handles excludes via the 'exclude' table or native 'fd' logic
-        exclude = default_fs_exclusion,
     })
 end, "Fuzzy-find files by filename.")
 keymap.map("n", "<leader>ps", function()
     Snacks.picker.grep({
         hidden = true,
-        exclude = default_fs_exclusion,
     })
 end, "Find files via text content.")
 

@@ -1,5 +1,6 @@
 return {
 	"stevearc/oil.nvim",
+	dir = "~/Code/lua/oil.nvim",
 	dependencies = {
 		"echasnovski/mini.icons",
 		"nvim-tree/nvim-web-devicons",
@@ -9,8 +10,16 @@ return {
 		require("oil").setup({
 			watch_for_changes = true,
 			skip_confirm_for_simple_edits = true,
+			lsp_file_methods = {
+				enabled = true,
+				timeout_ms = 1000,
+				autosave_changes = false,
+			},
 			view_options = {
-				show_hidden = true
+				show_hidden = true,
+				is_always_hidden = function(name, bufnr)
+					return name:match("_md_ltex%.json$")
+				end
 			}
 		})
 
