@@ -60,7 +60,7 @@ return {
 
                         transform_items = function(_, items)
                             for _, item in ipairs(items) do
-                                if item.client_name == "marksman" then
+                                if item.client_name == "markdown_oxide" then
                                     if item.insertText then
                                         item.insertText = item.insertText:gsub(' ', '%%20')
                                     end

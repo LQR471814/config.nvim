@@ -113,6 +113,9 @@ return {
                 return chosen_path, chosen.lsp
             end
 
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
+
             local opts = {
                 clangd = {
                     filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
@@ -124,7 +127,12 @@ return {
                 ruff = {},
                 gopls = {},
                 texlab = {},
-                marksman = {},
+                markdown_oxide = {
+                    cmd = { 'markdown-oxide' },
+                    filetypes = { 'markdown' },
+                    root_markers = { '.git', '.obsidian', '.moxide.toml' },
+                    capabilities = capabilities,
+                },
                 nushell = {},
                 ast_grep = {},
                 ty = {},
@@ -254,8 +262,8 @@ return {
             local blink = require("blink.cmp")
             for server, config in pairs(opts) do
                 config.capabilities = blink.get_lsp_capabilities(config.capabilities)
-                vim.lsp.enable(server)
                 vim.lsp.config(server, config)
+                vim.lsp.enable(server)
             end
 
             -- setup lsp keymapping
