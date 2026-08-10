@@ -23,7 +23,7 @@
   "large_file": { "branch": "main", "commit": "d9740134f80994d56f50e2931ba9307f49e420dc" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
   "lazydev.nvim": { "branch": "main", "commit": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d" },
-  "lean.nvim": { "branch": "main", "commit": "b2b6e0445c05f80f587af5cdb7ffad54bc513fe0" },
+  "lean.nvim": { "branch": "main", "commit": "3d8027a96ada0fe43bdd01403e1bd4a09d175448" },
   "log-highlight.nvim": { "branch": "main", "commit": "b2e00cfd41ca94338265a595f3f3f423d9f9322e" },
   "ltex-utils.nvim": { "branch": "main", "commit": "0f3d2dc24c074e89415a3e056b7c2479dc9191e8" },
   "mini.icons": { "branch": "main", "commit": "98faae31e9be1cc054ae63485e58ceb185efcad0" },
