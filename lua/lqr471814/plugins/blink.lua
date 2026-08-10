@@ -16,6 +16,7 @@ return {
             "Gelio/cmp-natdat",
         },
         event = "VeryLazy",
+        --- @type blink.cmp.Config
         opts = {
             keymap = {
                 preset = "none",
@@ -53,6 +54,27 @@ return {
             sources = {
                 default = { "natdat", "lazydev", "lsp", "path" },
                 providers = {
+                    markdown_lsp = {
+                        name = "LSP",
+                        module = 'blink.cmp.sources.lsp',
+
+                        transform_items = function(_, items)
+                            for _, item in ipairs(items) do
+                                if item.client_name == "marksman" then
+                                    if item.insertText then
+                                        item.insertText = item.insertText:gsub(' ', '%%20')
+                                    end
+
+                                    if item.textEdit and item.textEdit.newText then
+                                        item.textEdit.newText =
+                                            item.textEdit.newText:gsub(' ', '%%20')
+                                    end
+                                end
+                            end
+
+                            return items
+                        end,
+                    },
                     markdown_path = {
                         name = 'Path',
                         module = 'blink.cmp.sources.path',
@@ -83,7 +105,7 @@ return {
                     },
                 },
                 per_filetype = {
-                    markdown = { "natdat", "lsp", "markdown_path", "snippets" }
+                    markdown = { "natdat", "markdown_lsp", "markdown_path", "snippets" }
                 }
             },
         },
