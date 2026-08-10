@@ -135,16 +135,30 @@ return {
 		  outputs =
 			{ self, nixpkgs }:
 			let
-			  system = "x86_64-linux";
-			  pkgs = import nixpkgs { inherit system; };
+			  forAllSystems = nixpkgs.lib.genAttrs [
+				"x86_64-linux"
+				"aarch64-linux"
+				"x86_64-darwin"
+				"aarch64-darwin"
+			  ];
 			in
 			{
-			  packages.${system}.default = <>;
+			  packages = forAllSystems (
+				system:
+				let
+				  pkgs = import nixpkgs { inherit system; };
+				in
+				{
+				  default = <>;
+				}
+			  );
 
-			  apps.${system}.default = {
-				type = "app";
-				program = "${self.packages.${system}.default}/bin/<>";
-			  };
+			  apps = forAllSystems (system: {
+				default = {
+				  type = "app";
+				  program = "${self.packages.${system}.default}/bin/<>";
+				};
+			  });
 			};
 		}
 	]], {
