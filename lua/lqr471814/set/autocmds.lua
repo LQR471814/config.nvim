@@ -87,3 +87,15 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
         vim.bo.filetype = "log"
     end,
 })
+
+-- autosave after lsp rename
+vim.api.nvim_create_autocmd("LspRequest", {
+    callback = function(ev)
+        local req = ev.data.request
+        if req.type == "complete" and req.method == "textDocument/rename" then
+            vim.schedule(function()
+                vim.cmd("silent wall")
+            end)
+        end
+    end
+})
