@@ -1,7 +1,8 @@
 return {
     {
         'abecodes/tabout.nvim',
-        lazy = false,
+        event = 'InsertCharPre',
+        priority = 1000,
         config = function()
             require('tabout').setup({
                 tabkey = '<Tab>',              -- key to trigger tabout, set to an empty string to disable
@@ -28,8 +29,6 @@ return {
             "nvim-treesitter/nvim-treesitter",
             "L3MON4D3/LuaSnip",
         },
-        event = 'InsertCharPre', -- Set the event to 'InsertCharPre' for better compatibility
-        priority = 1000,
     },
     {
         'altermo/ultimate-autopair.nvim',

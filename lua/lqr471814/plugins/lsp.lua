@@ -382,6 +382,7 @@ return {
     },
     {
         "jhofscheier/ltex-utils.nvim",
+        event = "VeryLazy",
         dependencies = {
             "neovim/nvim-lspconfig",
             "nvim-telescope/telescope.nvim",
