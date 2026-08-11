@@ -1,6 +1,15 @@
 local keymap = require("lqr471814.lib.keymap")
 local wrap = require("lqr471814.lib.wrap")
 
+---@param line string
+local function line_startswith_bullet(line)
+	return string.match(line, "^%s*-") ~= nil
+		or string.match(line, "^%s*%*") ~= nil
+		or string.match(line, "^%s*%+") ~= nil
+		or string.match(line, "^%s*%d+%.") ~= nil
+		or string.match(line, "^%s*%d+%)") ~= nil
+end
+
 local function bullets_mapping()
 	keymap.overwrite_buffer_map("n", "<leader>rl", "<Plug>(bullets-renumber)", "Renumber bullets.")
 
@@ -29,14 +38,14 @@ local function bullets_mapping()
 	keymap.opts.expr = true
 	keymap.overwrite_buffer_map("i", "<Tab>", function()
 		local line = vim.api.nvim_get_current_line()
-		if string.match(line, "^%s*-") ~= nil then
+		if line_startswith_bullet(line) then
 			return "<C-o><Plug>(bullets-demote)"
 		end
 		return "<Plug>(Tabout)"
 	end, "De-indent bullet.")
 	keymap.overwrite_buffer_map("i", "<S-Tab>", function()
 		local line = vim.api.nvim_get_current_line()
-		if string.match(line, "^%s*-") ~= nil then
+		if line_startswith_bullet(line) ~= nil then
 			return "<C-o><Plug>(bullets-promote)"
 		end
 		return "<Plug>(TaboutBack)"
