@@ -1,6 +1,5 @@
 return {
 	"stevearc/oil.nvim",
-	dir = "~/Code/lua/oil.nvim",
 	dependencies = {
 		"echasnovski/mini.icons",
 		"nvim-tree/nvim-web-devicons",
