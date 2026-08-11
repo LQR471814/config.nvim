@@ -8,7 +8,7 @@ local function bullets_mapping()
 	keymap.overwrite_buffer_map("i", "<cr>", function()
 		-- we set blink as a dependency to bullets so this works
 		local blink = require("blink.cmp")
-		local accepted = blink.accept({ index = 1 })
+		local accepted = blink.accept()
 		if accepted then
 			return ""
 		end
