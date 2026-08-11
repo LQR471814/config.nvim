@@ -61,11 +61,11 @@ return {
                         transform_items = function(_, items)
                             for _, item in ipairs(items) do
                                 if item.client_name == "markdown_oxide" then
-                                    if item.insertText and item.insertText:match("^\\[\\[") then
+                                    if item.insertText and item.insertText:match("\n") == nil then
                                         item.insertText = item.insertText:gsub(' ', '%%20')
                                     end
 
-                                    if item.textEdit and item.textEdit.newText and item.textEdit.newText:match("^\\[\\[") then
+                                    if item.textEdit and item.textEdit.newText and item.textEdit.newText:match("\n") == nil then
                                         item.textEdit.newText =
                                             item.textEdit.newText:gsub(' ', '%%20')
                                     end
