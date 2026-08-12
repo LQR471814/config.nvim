@@ -22,18 +22,7 @@ return {
                 preset = "none",
 
                 ["<C-space>"] = {
-                    function(cmp)
-                        cmp.show({
-                            providers = {
-                                "natdat",
-                                "lazydev",
-                                "lsp",
-                                "path",
-                                "snippets",
-                                "buffer"
-                            }
-                        })
-                    end,
+                    "show",
                     "show_documentation",
                     "hide_documentation"
                 },
@@ -58,16 +47,20 @@ return {
                         name = "LSP",
                         module = 'blink.cmp.sources.lsp',
 
-                        transform_items = function(_, items)
+                        transform_items = function(ctx, items)
                             for _, item in ipairs(items) do
-                                if item.client_name == "markdown_oxide" then
-                                    if item.insertText and item.insertText:match("\n") == nil then
+                                if item.client_name == "marksman" then
+                                    if item.insertText then
                                         item.insertText = item.insertText:gsub(' ', '%%20')
                                     end
 
-                                    if item.textEdit and item.textEdit.newText and item.textEdit.newText:match("\n") == nil then
+                                    if item.textEdit and item.textEdit.newText then
                                         item.textEdit.newText =
                                             item.textEdit.newText:gsub(' ', '%%20')
+                                    end
+
+                                    if item.textEditText then
+                                        item.textEditText = item.textEditText:gsub(' ', '%%20')
                                     end
                                 end
                             end

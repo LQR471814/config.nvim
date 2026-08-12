@@ -127,11 +127,8 @@ return {
                 ruff = {},
                 gopls = {},
                 texlab = {},
-                markdown_oxide = {
-                    cmd = { 'markdown-oxide' },
-                    filetypes = { 'markdown' },
-                    root_markers = { '.git', '.obsidian', '.moxide.toml' },
-                    capabilities = capabilities,
+                marksman = {
+                    root_markers = { '.marksman.toml', '.git' },
                 },
                 nushell = {},
                 ast_grep = {},
