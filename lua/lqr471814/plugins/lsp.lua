@@ -146,11 +146,12 @@ return {
                         }
                     }
                 },
-                ["nu-lint"] = {
-                    cmd = { "nu-lint", "--lsp" },
-                    filetypes = { "nu" },
-                    root_markers = { '.git' }
-                },
+                -- NOTE: removed because too flaky
+                -- ["nu-lint"] = {
+                --     cmd = { "nu-lint", "--lsp" },
+                --     filetypes = { "nu" },
+                --     root_markers = { '.git' }
+                -- },
                 please = {},
 
                 rust_analyzer = {},
