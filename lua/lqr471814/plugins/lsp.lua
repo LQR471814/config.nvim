@@ -153,6 +153,30 @@ return {
                 --     root_markers = { '.git' }
                 -- },
                 please = {},
+                sqls = {
+                    ---@return vim.lsp.rpc.Client
+                    cmd = function(dispatchers, config)
+                        local cmd = { "sqls" }
+
+                        if config.root_dir then
+                            local local_config = vim.fs.joinpath(config.root_dir, ".sqls.yml")
+                            if not vim.uv.fs_stat(local_config) then
+                                local_config = vim.fs.joinpath(config.root_dir, ".sqls.yaml")
+                                if not vim.uv.fs_stat(local_config) then
+                                    local_config = ""
+                                end
+                            end
+
+                            if local_config ~= "" then
+                                vim.list_extend(cmd, { "-config", local_config })
+                            end
+                        end
+
+                        return vim.lsp.rpc.start(cmd, dispatchers)
+                    end,
+                    filetypes = { "sql" },
+                    root_markers = { ".sqls.yml", ".sqls.yaml" }
+                },
 
                 rust_analyzer = {},
                 -- ocamllsp = {},
