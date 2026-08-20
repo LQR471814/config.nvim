@@ -80,6 +80,7 @@ end, "Fuzzy-find files by filename.")
 keymap.map("n", "<leader>ps", function()
     Snacks.picker.grep({
         hidden = true,
+        ignored = false, -- Snacks handles excludes via the 'exclude' table or native 'fd' logic
     })
 end, "Find files via text content.")
 

@@ -2,6 +2,30 @@ return {
 	"folke/snacks.nvim",
 	priority = 1000,
 	config = function()
+		local excluded_files_for_search = {
+			".git",
+			".venv",
+			".markdowndb",
+			"node_modules",
+			".treesitter",
+			'*.fls',
+			'*.aux',
+			'*.fdb_latexmk',
+			'*.synctex.gz',
+			'*.pdf_tex',
+			'*.dvi',
+			'*.ps',
+			'*.bbl',
+			'*.bcf',
+			'*.blg',
+			'*.out',
+			'*.run.xml',
+			'*.xdv',
+			'*.vimtex',
+			'*.db',
+			"*_md_ltex.json",
+		}
+
 		require("snacks").setup(
 		---@type snacks.Config
 			{
@@ -23,31 +47,15 @@ return {
 						current = true,
 					},
 					sources = {
+						grep = {
+							hidden = true,
+							ignored = false,
+							exclude = excluded_files_for_search,
+						},
 						files = {
 							hidden = true,
 							ignored = false,
-							exclude = {
-								".git",
-								".venv",
-								"node_modules",
-								".treesitter",
-								'*.fls',
-								'*.aux',
-								'*.fdb_latexmk',
-								'*.synctex.gz',
-								'*.pdf_tex',
-								'*.dvi',
-								'*.ps',
-								'*.bbl',
-								'*.bcf',
-								'*.blg',
-								'*.out',
-								'*.run.xml',
-								'*.xdv',
-								'*.vimtex',
-								'*.db',
-								"*_md_ltex.json"
-							}
+							exclude = excluded_files_for_search
 						}
 					}
 				},
