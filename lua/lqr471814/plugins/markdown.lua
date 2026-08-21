@@ -57,8 +57,10 @@ local plugins = {
 	-- this plugin already does lazy-loading by default, lazy-loading tends to
 	-- interfere with its functioning
 	{
-		"dhruvasagar/vim-table-mode",
+		'Kicamon/markdown-table-mode.nvim',
 		config = function()
+			require('markdown-table-mode').setup()
+
 			local enabled = false
 
 			--- @type "off" | "hard" | "soft"
@@ -67,12 +69,12 @@ local plugins = {
 			keymap.overwrite_map("n", "<leader>tm", function()
 				enabled = not enabled
 				if enabled then
-					vim.cmd("TableModeEnable")
+					vim.cmd("Mtm")
 					vim.cmd("RenderMarkdown disable")
 					wrapStatus = wrap.status()
 					wrap.set("off")
 				else
-					vim.cmd("TableModeDisable")
+					vim.cmd("Mtm")
 					vim.cmd("RenderMarkdown enable")
 					wrap.set(wrapStatus)
 				end

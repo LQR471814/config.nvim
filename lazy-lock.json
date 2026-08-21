@@ -26,6 +26,7 @@
   "lean.nvim": { "branch": "main", "commit": "3d8027a96ada0fe43bdd01403e1bd4a09d175448" },
   "log-highlight.nvim": { "branch": "main", "commit": "b2e00cfd41ca94338265a595f3f3f423d9f9322e" },
   "ltex-utils.nvim": { "branch": "main", "commit": "0f3d2dc24c074e89415a3e056b7c2479dc9191e8" },
+  "markdown-table-mode.nvim": { "branch": "main", "commit": "0b768b58ec45afb7cb091175e837b7f5461663af" },
   "mini.icons": { "branch": "main", "commit": "98faae31e9be1cc054ae63485e58ceb185efcad0" },
   "mini.surround": { "branch": "main", "commit": "8d5d0c5aa92449368ac251e85451d79d8f69d296" },
   "multicursor.nvim": { "branch": "1.0", "commit": "704b99f10a72cc05d370cfeb294ff83412a8ab55" },
