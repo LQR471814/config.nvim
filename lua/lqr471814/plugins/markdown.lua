@@ -64,7 +64,7 @@ local plugins = {
 			--- @type "off" | "hard" | "soft"
 			local wrapStatus
 
-			keymap.overwrite_buffer_map("n", "<leader>tm", function()
+			keymap.overwrite_map("n", "<leader>tm", function()
 				enabled = not enabled
 				if enabled then
 					vim.cmd("TableModeEnable")
@@ -133,7 +133,7 @@ local plugins = {
 						sign = false,
 					},
 					latex = {
-						enabled = true,
+						enabled = false,
 					},
 					html = {
 						enabled = false,
@@ -145,6 +145,8 @@ local plugins = {
 			)
 		end
 	},
+	-- lazy loading already done, no need to add
+	{ "jannis-baum/vivify.vim" }
 
 	-- sc-im support
 	-- {
@@ -160,6 +162,7 @@ local plugins = {
 	--         end, { noremap = true, silent = true })
 	--     end
 	-- },
+
 }
 
 return {

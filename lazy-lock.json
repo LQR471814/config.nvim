@@ -55,5 +55,6 @@
   "vim-fountain": { "branch": "master", "commit": "4464261ce6f173e5c2dab54b34a2860102c27d25" },
   "vim-matchup": { "branch": "master", "commit": "5e3c4a3274a9766aee520caebb52572c007fc4f8" },
   "vim-table-mode": { "branch": "master", "commit": "bb025308a45c67c7c8f0763ba37bc2ee3f534df0" },
-  "vimtex": { "branch": "master", "commit": "a5568d902cc20a76bb8ef70743f0157ec2e79ded" }
+  "vimtex": { "branch": "master", "commit": "a5568d902cc20a76bb8ef70743f0157ec2e79ded" },
+  "vivify.vim": { "branch": "main", "commit": "cd4e0b8ebfd8c824ba98736790e33b0d1f820bbc" }
 }
