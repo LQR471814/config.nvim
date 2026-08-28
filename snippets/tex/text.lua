@@ -7,7 +7,7 @@ local latex_snippet = require("lqr471814.lib").latex_snippet
 local mathzone = require("lqr471814.lib.mathzone")
 
 local function s(opts, body)
-    opts.outside_latex = true
+    opts.in_tex_and_outside_mathzone = true
     return latex_snippet(opts, body)
 end
 
@@ -39,7 +39,7 @@ return {
     )),
 
     -- \begin \end
-    s({ trig = "\\b", snippetType = "autosnippet", all_zones_tex = true }, fmta(
+    s({ trig = "\\b", snippetType = "autosnippet", in_tex = true }, fmta(
         [[
         \begin{<>}
           <>
@@ -218,7 +218,7 @@ return {
         trig = "%",
         wordTrig = false,
         snippetType = "autosnippet",
-        all_zones_tex = true
+        in_tex = true
     }, t("\\%")),
 
     -- todos

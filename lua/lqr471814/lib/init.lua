@@ -6,10 +6,12 @@ local function latex_snippet(context, nodes, opts)
 	local cond = context.condition
 
 	local guard = Mathzone.in_mathzone
-	if context.all_zones_tex then
-		guard = Mathzone.all_zones_tex
-	elseif context.outside_latex then
-		guard = Mathzone.outside_mathzone_tex
+	if context.outside_mathzone then
+		guard = Mathzone.outside_mathzone
+	elseif context.in_tex then
+		guard = Mathzone.in_tex
+	elseif context.in_tex_and_outside_mathzone then
+		guard = Mathzone.in_tex_and_outside_mathzone
 	end
 
 	local wrapped = function()
