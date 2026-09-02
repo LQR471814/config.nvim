@@ -39,4 +39,5 @@ return {
     s({ trig = [[\Sigma]], snippetType = "autosnippet", outside_mathzone = true }, t("Σ")),
     s({ trig = [[\gamma]], snippetType = "autosnippet", outside_mathzone = true }, t("γ")),
     s({ trig = [[\omega]], snippetType = "autosnippet", outside_mathzone = true }, t("ω")),
+    s({ trig = [[\phi]], snippetType = "autosnippet", outside_mathzone = true }, t("φ")),
 }
