@@ -24,9 +24,11 @@ return {
         ]],
         { i(1) }
     )),
+    s({ trig = [[\trans]], snippetType = "autosnippet", outside_mathzone = true }, t("▸")),
     s({ trig = [[\to]], snippetType = "autosnippet", outside_mathzone = true }, t("→")),
     s({ trig = [[\neg]], snippetType = "autosnippet", outside_mathzone = true }, t("¬")),
     s({ trig = [[\and]], snippetType = "autosnippet", outside_mathzone = true }, t("∧")),
+    s({ trig = [[\or]], snippetType = "autosnippet", outside_mathzone = true }, t("∨")),
     s({ trig = [[\exi]], snippetType = "autosnippet", outside_mathzone = true }, t("∃")),
     s({ trig = [[\in]], snippetType = "autosnippet", outside_mathzone = true }, t("∈")),
     s({ trig = [[\leq]], snippetType = "autosnippet", outside_mathzone = true }, t("≤")),
