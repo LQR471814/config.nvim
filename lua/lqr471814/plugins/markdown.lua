@@ -148,7 +148,12 @@ local plugins = {
 		end
 	},
 	-- lazy loading already done, no need to add
-	{ "jannis-baum/vivify.vim" }
+	{
+		"jannis-baum/vivify.vim",
+		config = function()
+			vim.g.vivify_instant_refresh = 0
+		end
+	}
 
 	-- sc-im support
 	-- {
