@@ -67,9 +67,12 @@ end, "Open lazygit (git).")
 --     Snacks.picker.explorer()
 -- end)
 keymap.map("n", "<leader>pf", function()
-    Snacks.picker.smart({
+    Snacks.picker.files({
         filter = { cwd = true }
     })
+    -- Snacks.picker.smart({
+    --     filter = { cwd = true }
+    -- })
 end, "Fuzzy-find files by filename.")
 keymap.map("n", "<leader>ps", function()
     Snacks.picker.grep({
