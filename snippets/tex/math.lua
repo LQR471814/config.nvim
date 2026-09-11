@@ -126,7 +126,7 @@ return {
 
     -- vector component form
     s({ trig = "<>", snippetType = "autosnippet" }, fmta(
-        "\\langle <> \\rangle",
+        "\\langle{<>}\\rangle",
         { i(1) }
     )),
 
