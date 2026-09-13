@@ -79,11 +79,16 @@ local function paste_clipboard_image()
 		error({ code = 4, "Failed to read clipboard image" })
 	end
 
-	local row = vim.api.nvim_win_get_cursor(0)[1]
 	local link = string.format("![](assets/%s)", filename)
+	vim.api.nvim_put({ link }, "c", true, true)
 
-	vim.api.nvim_buf_set_lines(0, row, row, false, { link })
-	vim.api.nvim_win_set_cursor(0, { row + 1, 0 })
+    local pos = vim.api.nvim_win_get_cursor(0)
+    vim.api.nvim_win_set_cursor(0, {
+        pos[1],
+        pos[2] - #link + 3,
+    })
+
+    vim.cmd("startinsert")
 end
 
 --- @param buf integer
