@@ -147,6 +147,9 @@ return {
     -- math double bold
     s({ trig = "*B", wordTrig = false, snippetType = "autosnippet" }, fmta("\\mathbb{<>}", { i(1) })),
 
+    -- math cursive
+    s({ trig = "*C", wordTrig = false, snippetType = "autosnippet" }, fmta("\\mathcal{<>}", { i(1) })),
+
     -- del
     s({ trig = "del" }, t("\\nabla")),
 
