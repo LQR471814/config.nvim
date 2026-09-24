@@ -15,7 +15,6 @@ local function mime_to_image_ext(mime)
 	}
 	local format
 	for _, candidate in ipairs(formats) do
-		print(string.format("'%s' = '%s'", candidate.mime, mime))
 		if candidate.mime == mime then
 			format = candidate
 			break
@@ -42,7 +41,6 @@ local function paste_clipboard_image()
 
 	local format
 	for type in string.gmatch(types, "[^\n]+") do
-		print(type)
 		format = mime_to_image_ext(type)
 	end
 	if not format then
