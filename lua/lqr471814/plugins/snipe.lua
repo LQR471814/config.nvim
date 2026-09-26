@@ -10,6 +10,10 @@ return {
 				desc = "Open Snipe buffer menu"
 			}
 		},
-		opts = {}
+		opts = {
+			ui = {
+				position = "cursor",
+			},
+		}
 	},
 }
