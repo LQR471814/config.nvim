@@ -3,7 +3,12 @@ local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
 local fmta = require("luasnip.extras.fmt").fmta
-local s = require("lqr471814.lib").latex_snippet
+local latex_snippet = require("lqr471814.lib").latex_snippet
+
+local function s(opts, body)
+    opts.in_tex_and_inside_mathzone = true
+    return latex_snippet(opts, body)
+end
 
 return {
     -- set notation {}

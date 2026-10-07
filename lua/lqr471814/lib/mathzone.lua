@@ -52,6 +52,10 @@ local function in_tex_and_outside_mathzone()
 	return vim.bo.filetype == "tex" and (not in_mathzone())
 end
 
+local function in_tex_and_inside_mathzone()
+	return vim.bo.filetype == "tex" and in_mathzone()
+end
+
 local function in_tex()
 	return vim.bo.filetype == "tex"
 end
@@ -70,6 +74,7 @@ return {
 	outside_mathzone = util.cache(20, function ()
 		return not in_mathzone()
 	end),
+	in_tex_and_inside_mathzone = util.cache(20, in_tex_and_inside_mathzone),
 	in_tex_and_outside_mathzone = util.cache(20, in_tex_and_outside_mathzone),
 	in_tex = util.cache(20, in_tex),
 }

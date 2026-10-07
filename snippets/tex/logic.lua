@@ -1,6 +1,11 @@
 local ls = require("luasnip")
-local s = require("lqr471814.lib").latex_snippet
 local t = ls.text_node
+local latex_snippet = require("lqr471814.lib").latex_snippet
+
+local function s(opts, body)
+    opts.in_tex_and_inside_mathzone = true
+    return latex_snippet(opts, body)
+end
 
 local mapping = {
     fa = "forall",

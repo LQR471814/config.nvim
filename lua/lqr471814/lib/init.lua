@@ -10,6 +10,8 @@ local function latex_snippet(context, nodes, opts)
 		guard = Mathzone.outside_mathzone
 	elseif context.in_tex then
 		guard = Mathzone.in_tex
+	elseif context.in_tex_and_inside_mathzone then
+		guard = Mathzone.in_tex_and_inside_mathzone
 	elseif context.in_tex_and_outside_mathzone then
 		guard = Mathzone.in_tex_and_outside_mathzone
 	end

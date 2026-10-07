@@ -65,10 +65,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "markdown" },
-    callback = function()
+    callback = function(args)
         vim.opt_local.tabstop = 3
         vim.opt_local.shiftwidth = 3
         vim.opt_local.expandtab = true
+        vim.treesitter.start(args.buf, "latex")
     end
 })
 
