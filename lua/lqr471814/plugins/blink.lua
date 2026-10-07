@@ -41,7 +41,7 @@ return {
                 preset = "luasnip"
             },
             sources = {
-                default = { "natdat", "lazydev", "lsp", "path" },
+                default = { "natdat", "lazydev", "lsp", "path", "snippets" },
                 providers = {
                     markdown_lsp = {
                         name = "LSP",
@@ -98,7 +98,7 @@ return {
                     },
                 },
                 per_filetype = {
-                    markdown = { "natdat", "markdown_lsp", "markdown_path", "snippets" }
+                    markdown = { "natdat", "markdown_lsp", "markdown_path", "snippets" },
                 }
             },
         },
