@@ -24,6 +24,8 @@ return {
 	require("lqr471814.plugins.lazydev"),
 	-- darkman (requires golang and linux desktop)
 	require("lqr471814.plugins.darkman"),
+	-- activitywatch
+	require("lqr471814.plugins.aw-watcher"),
 	-- support .fountain files
 	{ "kblin/vim-fountain", ft = "fountain" },
 }
