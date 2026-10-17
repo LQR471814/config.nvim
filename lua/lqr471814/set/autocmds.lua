@@ -74,7 +74,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "lisp", "nix", "nu", "haskell", "cpp" },
+    pattern = { "lisp", "nix", "nu", "haskell", "cpp", "c" },
     callback = function()
         vim.opt_local.tabstop = 2
         vim.opt_local.shiftwidth = 2
