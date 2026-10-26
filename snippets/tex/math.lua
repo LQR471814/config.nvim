@@ -149,6 +149,9 @@ return {
     -- sqrt
     s({ trig = "sqrt", snippetType = "autosnippet" }, fmta("\\sqrt{<>}", { i(1) })),
 
+    -- math single bold
+    s({ trig = "*b", wordTrig = false, snippetType = "autosnippet" }, fmta("\\mathbf{<>}", { i(1) })),
+
     -- math double bold
     s({ trig = "*B", wordTrig = false, snippetType = "autosnippet" }, fmta("\\mathbb{<>}", { i(1) })),
 
