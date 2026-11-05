@@ -1,6 +1,12 @@
 return {
 	"j-hui/fidget.nvim",
 	version = "*",
-	opts = {},
+	opts = {
+		progress = {
+			ignore = {
+				"ltex_plus"
+			}
+		}
+	},
 	config = true
 }
