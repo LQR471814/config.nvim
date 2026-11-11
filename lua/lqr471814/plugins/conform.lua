@@ -40,14 +40,19 @@ return {
                         args = { "format", "-l", "nu" },
                         stdin = true,
                     },
+                    tex_fmt = {
+                        command = "tex-fmt",
+                        args = { "-l", "73", "--stdin" },
+                        stdin = true
+                    }
                 },
                 formatters_by_ft = {
                     typescript = jsopts,
                     typescriptreact = jsopts,
                     javascript = jsopts,
                     tex = {
-                        "latexindent",
-                        lsp_format = "fallback"
+                        "tex_fmt",
+                        lsp_format = "never"
                     },
                     nu = { "topiary_nu" },
                     ["*"] = { "trim_whitespace" },
