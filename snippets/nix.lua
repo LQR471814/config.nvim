@@ -46,38 +46,30 @@ return {
 		}
 	]], {})),
 	s({ trig = "flake-shell" }, fmta([[
-		{
-		  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-		  outputs =
-			{ self, nixpkgs }:
-			let
-			  system = "x86_64-linux";
-			  pkgs = import nixpkgs {
-				inherit system;
-			  };
-			in
-			{
-			  devShells.${system}.default =
-				let
-				  libs = with pkgs; [ ];
-				in
-				pkgs.mkShell {
-				  name = "devenv";
-				  buildInputs = libs;
-				  nativeBuildInputs =
-					(with pkgs; [
-					  pkg-config
-					  <>
-					]);
-
-				  LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath libs}:$LD_LIBRARY_PATH";
-
-				  shellHook = ''
-					echo "Devshell activated."
-				  '';
-				};
-			};
-		}
+        {
+          inputs = {
+            flake-parts.url = "github:hercules-ci/flake-parts";
+            nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+          };
+          outputs =
+            inputs@{ self, nixpkgs, flake-parts }:
+            flake-parts.lib.mkFlake {inherit inputs;} {
+              systems = [
+                "aarch64-darwin"
+                "aarch64-linux"
+                "x86_64-darwin"
+                "x86_64-linux"
+              ];
+              perSystem = {
+                system,
+                pkgs,
+                ...
+              }:
+              {
+                devShells.default = <>;
+              }
+            }
+        }
 	]], { i(1) })),
 	s({ trig = "shell" }, fmta([[
 		{
@@ -127,42 +119,31 @@ return {
 		i(7, ""),
 	})),
 	s({ trig = "flake-pkg" }, fmta([[
-		{
-		  inputs = {
-			# self.submodules = true;
-			nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-		  };
-		  outputs =
-			{ self, nixpkgs }:
-			let
-			  forAllSystems = nixpkgs.lib.genAttrs [
-				"x86_64-linux"
-				"aarch64-linux"
-				"x86_64-darwin"
-				"aarch64-darwin"
-			  ];
-			in
-			{
-			  packages = forAllSystems (
-				system:
-				let
-				  pkgs = import nixpkgs { inherit system; };
-				in
-				{
-				  default = <>;
-				}
-			  );
-
-			  apps = forAllSystems (system: {
-				default = {
-				  type = "app";
-				  program = "${self.packages.${system}.default}/bin/<>";
-				};
-			  });
-			};
-		}
+        {
+          inputs = {
+            flake-parts.url = "github:hercules-ci/flake-parts";
+            nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+          };
+          outputs =
+            inputs@{ self, nixpkgs, flake-parts }:
+            flake-parts.lib.mkFlake {inherit inputs;} {
+              systems = [
+                "aarch64-darwin"
+                "aarch64-linux"
+                "x86_64-darwin"
+                "x86_64-linux"
+              ];
+              perSystem = {
+                system,
+                pkgs,
+                ...
+              }:
+              {
+                packages.default = <>;
+              }
+            }
+        }
 	]], {
 		i(1, ""),
-		i(2, ""),
 	})),
 }
