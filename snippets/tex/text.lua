@@ -203,6 +203,9 @@ return {
     -- emphasis
     s({ trig = "*E", wordTrig = false, snippetType = "autosnippet" }, fmta("\\emph{<>}", { i(1) })),
 
+    -- code
+    s({ trig = "*C", wordTrig = false, snippetType = "autosnippet" }, fmta("\\verb|<>|", { i(1) })),
+
     -- bold
     s({ trig = "*B", wordTrig = false, snippetType = "autosnippet" }, fmta("\\textbf{<>}", { i(1) })),
 
