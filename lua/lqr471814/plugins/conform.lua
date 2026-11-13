@@ -1,7 +1,7 @@
 return {
     -- improve formatters
     {
-        'stevearc/conform.nvim',
+        "stevearc/conform.nvim",
         event = { "BufWritePre" },
         cmd = { "ConformInfo" },
         keys = {

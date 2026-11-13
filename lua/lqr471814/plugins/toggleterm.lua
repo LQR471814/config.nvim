@@ -1,5 +1,5 @@
 return {
-	'akinsho/toggleterm.nvim',
+	"akinsho/toggleterm.nvim",
 	version = "9a88eae817ef395952e08650b3283726786fb5fb",
 	config = function()
 		local keymap = require("lqr471814.lib.keymap")

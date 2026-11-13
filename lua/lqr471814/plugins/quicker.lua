@@ -1,5 +1,5 @@
 return {
-	'stevearc/quicker.nvim',
+	"stevearc/quicker.nvim",
 	ft = "qf",
 	config = function()
 		local keymap = require("lqr471814.lib.keymap")

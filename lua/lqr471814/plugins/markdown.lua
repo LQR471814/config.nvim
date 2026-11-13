@@ -57,9 +57,9 @@ local plugins = {
 	-- this plugin already does lazy-loading by default, lazy-loading tends to
 	-- interfere with its functioning
 	{
-		'Kicamon/markdown-table-mode.nvim',
+		"Kicamon/markdown-table-mode.nvim",
 		config = function()
-			require('markdown-table-mode').setup()
+			require("markdown-table-mode").setup()
 
 			local enabled = false
 

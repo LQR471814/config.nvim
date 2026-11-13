@@ -128,7 +128,7 @@ return {
                 gopls = {},
                 texlab = {},
                 marksman = {
-                    root_markers = { '.marksman.toml', '.git' },
+                    root_markers = { ".marksman.toml", ".git" },
                 },
                 nushell = {},
                 ast_grep = {},
@@ -276,7 +276,7 @@ return {
                 },
 
                 hls = {
-                    filetypes = { 'haskell', 'lhaskell', 'cabal' },
+                    filetypes = { "haskell", "lhaskell", "cabal" },
                 }
             }
 
@@ -388,7 +388,7 @@ return {
         build = ':lua require("go.install").update_all_sync()'
     },
     {
-        'dmmulroy/ts-error-translator.nvim',
+        "dmmulroy/ts-error-translator.nvim",
         opts = {
             auto_attach = true,
             servers = {

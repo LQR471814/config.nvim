@@ -1,15 +1,15 @@
 return {
 	{
-		'0xferrous/ansi.nvim',
+		"0xferrous/ansi.nvim",
 		config = function()
-			require('ansi').setup({
+			require("ansi").setup({
 				auto_enable = true, -- Auto-enable for configured filetypes
-				filetypes = { 'log', 'ansi' }, -- Filetypes to auto-enable
+				filetypes = { "log", "ansi" }, -- Filetypes to auto-enable
 			})
 		end
 	},
 	{
-		'fei6409/log-highlight.nvim',
+		"fei6409/log-highlight.nvim",
 		opts = {},
 	},
 }

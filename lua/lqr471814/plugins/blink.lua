@@ -45,22 +45,22 @@ return {
                 providers = {
                     markdown_lsp = {
                         name = "LSP",
-                        module = 'blink.cmp.sources.lsp',
+                        module = "blink.cmp.sources.lsp",
 
                         transform_items = function(ctx, items)
                             for _, item in ipairs(items) do
                                 if item.client_name == "marksman" then
                                     if item.insertText then
-                                        item.insertText = item.insertText:gsub(' ', '%%20')
+                                        item.insertText = item.insertText:gsub(" ", "%%20")
                                     end
 
                                     if item.textEdit and item.textEdit.newText then
                                         item.textEdit.newText =
-                                            item.textEdit.newText:gsub(' ', '%%20')
+                                            item.textEdit.newText:gsub(" ", "%%20")
                                     end
 
                                     if item.textEditText then
-                                        item.textEditText = item.textEditText:gsub(' ', '%%20')
+                                        item.textEditText = item.textEditText:gsub(" ", "%%20")
                                     end
                                 end
                             end
@@ -69,18 +69,18 @@ return {
                         end,
                     },
                     markdown_path = {
-                        name = 'Path',
-                        module = 'blink.cmp.sources.path',
+                        name = "Path",
+                        module = "blink.cmp.sources.path",
 
                         transform_items = function(_, items)
                             for _, item in ipairs(items) do
                                 if item.insertText then
-                                    item.insertText = item.insertText:gsub(' ', '%%20')
+                                    item.insertText = item.insertText:gsub(" ", "%%20")
                                 end
 
                                 if item.textEdit and item.textEdit.newText then
                                     item.textEdit.newText =
-                                        item.textEdit.newText:gsub(' ', '%%20')
+                                        item.textEdit.newText:gsub(" ", "%%20")
                                 end
                             end
 
