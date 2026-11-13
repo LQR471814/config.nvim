@@ -168,10 +168,19 @@ return {
         "\\section{<>}",
         { i(1) }
     )),
-    s({ trig = "~!@", snippetType = "autosnippet" }, fmta(
+    s({ trig = "example" }, fmta(
         [[
             \stdbox{
-              \subsection{<>}
+              \textbf{Example}
+              \vspace{1mm}
+              <>
+            }
+        ]],
+        { i(1) })),
+    s({ trig = "\\stdbox", snippetType = "autosnippet" }, fmta(
+        [[
+            \stdbox{
+              \textbf{<>}
               \vspace{1mm}
               <>
             }
@@ -181,16 +190,6 @@ return {
     s({ trig = "!@", snippetType = "autosnippet" }, fmta(
         "\\subsection{<>}",
         { i(1) }
-    )),
-    s({ trig = "~!#", snippetType = "autosnippet" }, fmta(
-        [[
-            \stdbox{
-              \subsubsection{<>}
-              \vspace{1mm}
-              <>
-            }
-        ]],
-        { i(1), i(2) }
     )),
     s({ trig = "!#", snippetType = "autosnippet" }, fmta(
         "\\subsubsection{<>}",
