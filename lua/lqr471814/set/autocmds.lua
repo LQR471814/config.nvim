@@ -29,25 +29,6 @@ vim.api.nvim_create_autocmd("FileType", {
     command = "wincmd L"
 })
 
--- vim.api.nvim_create_autocmd("BufWriteCmd", {
---     pattern = "oil://*",
---     callback = function(ev)
---         -- Before oil writes (which includes renames), check for edited buffers
---         for _, buf in ipairs(api.nvim_list_bufs()) do
---             if api.nvim_buf_is_loaded(buf) then
---                 local fname = api.nvim_buf_get_name(buf)
---                 if fname ~= "" and api.nvim_buf_get_option(buf, "modified") then
---                     -- Write that buffer first
---                     api.nvim_buf_call(buf, function() vim.cmd("write") end)
---                 end
---             end
---         end
---         -- After that, let oil continue with its mutation write
---     end,
---     -- ensure this runs before oil’s own write handler
---     desc = "Write modified buffers before oil rename"
--- })
-
 vim.api.nvim_create_autocmd("BufEnter", {
     pattern = {
         "learn.zybooks.com*.txt",
@@ -81,15 +62,6 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt_local.expandtab = true
     end
 })
-
--- vim.api.nvim_create_autocmd("BufReadPost", {
---     pattern = { "*.nu" },
---     callback = function()
---         vim.defer_fn(function()
---             lib.wrap.set("soft", true)
---         end, 0)
---     end
--- })
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     pattern = "*.log",

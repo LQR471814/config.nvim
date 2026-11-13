@@ -2,6 +2,7 @@ require("lqr471814.set.settings")
 require("lqr471814.set.autocmds")
 require("lqr471814.set.keybinds")
 require("lqr471814.set.markdown")
+require("lqr471814.set.latex")
 
 -- local function measure_typing_latency()
 -- 	local uv = vim.loop
