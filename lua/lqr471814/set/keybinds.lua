@@ -1,4 +1,5 @@
 local keymap = require("lqr471814.lib.keymap")
+local util = require("lqr471814.lib.util")
 
 vim.g.mapleader = " "
 
@@ -74,6 +75,35 @@ keymap.map("n", "<leader>pf", function()
     --     filter = { cwd = true }
     -- })
 end, "Fuzzy-find files by filename.")
+
+keymap.map("n", "<leader>pr", function()
+    -- directory of the file currently being edited
+    local current_dir = vim.fn.expand("%:p:h")
+    Snacks.picker.files({
+        filter = { cwd = true },
+        confirm = function(picker, item)
+            picker:close()
+            if not item then
+                return
+            end
+            -- absolute path of the picked file
+            local target = item.file
+            if not target:match("^/") then
+                target = vim.fs.joinpath(picker:cwd(), target)
+            end
+            target = vim.fn.fnamemodify(target, ":p")
+            -- compute path of target relative to the current file's directory,
+            -- using ".." for ancestor directories
+            local rel = util.relpath(
+                vim.fn.fnamemodify(current_dir, ":p"),
+                target
+            )
+            -- insert the relative path under the cursor
+            vim.api.nvim_put({ rel }, "c", true, true)
+        end,
+    })
+end, "Insert relative path to a picked file under the cursor.")
+
 keymap.map("n", "<leader>ps", function()
     Snacks.picker.grep({
         hidden = true,
