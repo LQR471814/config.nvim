@@ -172,7 +172,6 @@ return {
         [[
             \stdbox{
               \textbf{Example}
-              \vspace{1mm}
               <>
             }
         ]],
@@ -181,7 +180,6 @@ return {
         [[
             \stdbox{
               \textbf{<>}
-              \vspace{1mm}
               <>
             }
         ]],
