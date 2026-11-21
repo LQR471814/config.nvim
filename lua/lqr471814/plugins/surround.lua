@@ -15,6 +15,26 @@ return {
                 ["{"] = { output = { left = "{", right = "}" } },
                 ["<"] = { output = { left = "<", right = ">" } },
                 ["="] = { output = { left = "==", right = "==" } },
+                ["b"] = {
+                    input = { '%[%[().-()%]%]' },
+                    output = { left = "[[", right = "]]" }
+                },
+                ["p"] = {
+                    input = { [[%\left%(().-()%\right%)]] },
+                    output = { left = "\\left(", right = "\\right)" }
+                },
+                ["s"] = {
+                    input = { [=[%\left%[().-()%\right%]]=] },
+                    output = { left = "\\left[", right = "\\right]" }
+                },
+                ["c"] = {
+                    input = { [[%\left%\{().-()%\right%\}]] },
+                    output = { left = "\\left\\{", right = "\\right\\}" }
+                },
+                ["f"] = {
+                    input = { [[%\lfloor{().-()%\rfloor}]] },
+                    output = { left = "\\lfloor{", right = "}\\rfloor" }
+                },
             },
 
             mappings = {
@@ -42,6 +62,7 @@ return {
 
         -- Visual S<new> => surround selection
         keymap.unmap({ "v", "x" }, "ys")
-        keymap.overwrite_map({ "v", "x" }, "S", [[:<C-u>lua MiniSurround.add('visual')<CR>]], "Surround the visual selection.")
+        keymap.overwrite_map({ "v", "x" }, "S", [[:<C-u>lua MiniSurround.add('visual')<CR>]],
+            "Surround the visual selection.")
     end,
 }
